@@ -1,7 +1,7 @@
 # Final-Project
 
 
-Hagai Hen
-Sappir Bohbot
-Bar Goldenberg
+Hagai Hen <br>
+Sappir Bohbot <br>
+Bar Goldenberg <br>
 Elad Sezenayev
