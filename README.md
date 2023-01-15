@@ -1,6 +1,5 @@
 # Final-Project
 
-<centre>
 <img src="https://github.com/HagaiHen/Final-Project/blob/main/Logo.jpeg">
 
 
