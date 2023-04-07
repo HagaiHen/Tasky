@@ -1,8 +1,7 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-// Your web app's Firebase configuration
+import firebase from 'firebase/app';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcVj1J67q5uoSo1bSpMKZIgOxUvbQezb8",
@@ -16,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Function to handle user login
-const loginUser = async (email, password) => {
+const signIn = async (email, password) => {
     try {
       // Sign in user with email and password
       const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
@@ -25,7 +24,7 @@ const loginUser = async (email, password) => {
       const idToken = await userCredential.user.getIdToken();
   
       // Send token to server with a POST request
-      const response = await fetch('/api/login', {
+      const response = await fetch('/api/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
