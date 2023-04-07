@@ -24,7 +24,7 @@ const signIn = async (email, password) => {
       const idToken = await userCredential.user.getIdToken();
   
       // Send token to server with a POST request
-      const response = await fetch('/api/signin', {
+      const response = await fetch('/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const signIn = async (email, password) => {
 // TODO: if the method is login - generate a token with firebase auth client sdk and send it to the server
 //       the server will verify the token and return a ok response or an error
 export async function submitAuthForm(formType, formData) {
-    const res = await fetch(`http://localhost:5000/api/${formType}`, {
+    const res = await fetch(`http://localhost:5000/auth/${formType}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

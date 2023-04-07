@@ -1,5 +1,6 @@
 class Company {
-    constructor(name, teams = [], manager = null, logo = null, website = null) {
+    constructor(name, teams = [], manager = null, logo = null, website = null, id = null) {
+      this.id = id;
       this.name = name;
       this.teams = teams;
       this.manager = manager;

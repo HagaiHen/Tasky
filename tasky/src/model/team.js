@@ -1,5 +1,6 @@
 class Team {
-    constructor(name, teamLead = null, members = [], tasks = []) {
+    constructor(name, teamLead = null, members = [], tasks = [], id = null) {
+      this.id = id;
       this.name = name;
       this.teamLead = teamLead;
       this.members = members;
