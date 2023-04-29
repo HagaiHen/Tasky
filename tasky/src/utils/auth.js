@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import firebase from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -13,12 +13,13 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 // Function to handle user login
-const signIn = async (email, password) => {
+export const signIn = async (email, password) => {
     try {
       // Sign in user with email and password
-      const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
   
       // Get user token
       const idToken = await userCredential.user.getIdToken();
@@ -34,14 +35,16 @@ const signIn = async (email, password) => {
   
       if (response.ok) {
         // Handle successful login on the server
-        console.log('Login successful!');
+        return idToken;
       } else {
         // Handle unsuccessful login on the server
         console.error('Login failed!');
+        return false;
       }
     } catch (error) {
       // Handle error
       console.error('Error during login:', error.message);
+      return false;
     }
 };
   

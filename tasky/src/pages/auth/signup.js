@@ -34,7 +34,6 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const token = await submitAuthForm('signup', {email: data.get('email'),password: data.get('password')});
-    // TODO: handle token and redirect to dashboard
   };
 
   return (

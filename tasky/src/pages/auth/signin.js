@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { submitAuthForm } from '../../utils/auth';
+import { signIn } from '../../utils/auth';
 
 function Copyright(props) {
   return (
@@ -34,7 +34,8 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const token = await submitAuthForm('signin', {email: data.get('email'),password: data.get('password')});
+    const token = await signIn(data.get('email'), data.get('password'));
+    console.log(token);
     // TODO: handle token and redirect to dashboard
   };
 

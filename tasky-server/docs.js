@@ -2,7 +2,7 @@
 import { db } from "./server.js";
 import express from "express";
 
-
+// Create a new express router instance
 export const docsRouter = express.Router();
 
 
@@ -11,11 +11,28 @@ docsRouter.get('/tasks/getAllTasks', async (req, res) => {
     try {
       const snapshot = await db.collection('tasks').get();
       const tasks = snapshot.docs.map(doc => doc.data());
-      tasks.forEach(task => task.id = doc.id);
+      tasks.forEach((task, index) => task.id = snapshot.docs[index].id);
       res.json(tasks);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Failed to retrieve tasks.' });
+    }
+});
+
+// GET route to retrieve a single task
+docsRouter.get('/tasks/:taskId', async (req, res) => {
+    try {
+      const taskId = req.params.taskId;
+      const taskSnapshot = await db.collection('tasks').doc(taskId).get();
+      if (!taskSnapshot.exists) {
+        res.status(404).json({ error: 'Task not found.' });
+      }
+      const task = taskSnapshot.data();
+      task.id = taskSnapshot.id;
+      res.json(task);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to retrieve task.' });
     }
 });
 
@@ -60,6 +77,18 @@ docsRouter.delete('/tasks/:taskId', async (req, res) => {
 
 
 
+// Retrieve all users
+docsRouter.get('/getAllUsers', async (req, res) => {
+  try {
+    const snapshot = await admin.firestore().collection('users').get();
+    const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 // User Routes
 // Create a new user
 docsRouter.post('/createNewUser', async (req, res) => {
@@ -71,7 +100,23 @@ docsRouter.post('/createNewUser', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  });
+});
+
+// Retrieve a user by id
+docsRouter.get('/users/:userId', async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const userSnapshot = await admin.firestore().collection('users').doc(userId).get();
+      if (!userSnapshot.exists) {
+        res.status(404).json({ error: 'User not found.' });
+      }
+      const user = userSnapshot.data();
+      user.id = userSnapshot.id;
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+});
   
 // Update an existing user
 docsRouter.put('/users/:userId', async (req, res) => {
@@ -96,16 +141,3 @@ docsRouter.delete('/users/:userId', async (req, res) => {
     }
 });
   
-  // Retrieve all users
-docsRouter.get('/getAllUsers', async (req, res) => {
-    try {
-      const snapshot = await admin.firestore().collection('users').get();
-      const users = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      res.status(200).json(users);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-});
-
-
-

@@ -11,6 +11,7 @@ admin.initializeApp({
   });
 
 export const db = admin.firestore();
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
