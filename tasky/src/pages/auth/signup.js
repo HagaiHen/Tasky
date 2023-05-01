@@ -12,7 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { submitAuthForm } from '../../utils/auth';
+import { submitFirstSignup } from '../../utils/auth';
+import Router from 'next/router'
 
 function Copyright(props) {
   return (
@@ -33,9 +34,18 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const token = await submitAuthForm('signup', {email: data.get('email'),password: data.get('password')});
-  };
+    const res = await submitFirstSignup({email: data.get('email'),password: data.get('password')});
 
+    // push the user to the dashboard page
+    if (!res.success) {
+      alert(res.error);
+    }
+    else {
+      Router.push({ pathname: '/dashboard', query: { token: res.token } }); 
+    }
+    
+
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

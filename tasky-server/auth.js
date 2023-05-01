@@ -16,10 +16,11 @@ authRouter.post('/signup', async (req, res) => {
         password,
       });
       console.log('new user created: ' + userRecord.uid);
-      res.status(201).json({ message: 'User created successfully' });
+      // send user token to client
+      res.status(201).json({ message: 'User created successfully' , uid: userRecord.uid});
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Something went wrong' });
+      res.status(500).json({ message: 'Something went wrong', error: error });
     }
 });
 
@@ -35,10 +36,13 @@ authRouter.post('/signin', async (req, res) => {
     const { token } = req.body;
     console.log('new user try to login: ' + token);
     const decodedToken = await admin.auth().verifyIdToken(token);
+    if (!decodedToken) {
+      throw new Error('Invalid token');
+    }
     console.log('new user logged in: ' + decodedToken.uid);
     res.status(200).json({ message: 'User logged in successfully' });
   } catch (error) {
     console.error(error);
-    res.status(401).json({ message: 'Invalid credentials' });
+    res.status(401).json({ message: 'tasky server: Invalid credentials.' + error });
   }
 });
