@@ -4,10 +4,18 @@ import { SideContainer, Title } from "./styles";
 const sprints = [
   {
     project: "TAS",
+    sprintNum: 0,
+    start: "--",
+    end: "--",
+    open: true,
+    isBacklog: true
+  },
+  {
+    project: "TAS",
     sprintNum: 1,
     start: "18/04/23",
     end: "03/05/23",
-    open: true,
+    open: false,
   },
   {
     project: "TAS",
@@ -50,67 +58,12 @@ const sprints = [
     start: "18/04/23",
     end: "03/05/23",
     open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 8,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 9,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 10,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 11,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 12,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 13,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 14,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 15,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
+  }
 ];
-const SideBar = () => {
+const SideBar = (props) => {
   const [click, onClick] = useState(true);
   const sprintClicked = (sprintNum) => {
+    props.selectSprint(sprintNum);
     sprints.forEach((sprint)=>{
         if(sprint.sprintNum === sprintNum){
             sprint.open=true;
@@ -128,10 +81,11 @@ const SideBar = () => {
         <DataCard
           project={sprint.project}
           sprint={sprint.sprintNum}
-          start="18/04/23"
-          end="03/05/23"
+          start={sprint.start}
+          end={sprint.end}
           open={sprint.open}
           onClick={sprintClicked}
+          isBacklog={sprint.isBacklog}
         />
       ))}
     </SideContainer>

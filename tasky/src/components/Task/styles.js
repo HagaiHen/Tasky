@@ -18,7 +18,6 @@ export const TaskContainer = styled.div`
   background-color: #4b4747;
   margin-top: 5px;
   margin-bottom: 5px;
-  z-index: 1;
   align-items: center;
 `;
 

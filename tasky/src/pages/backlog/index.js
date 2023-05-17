@@ -1,15 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, ContentContainer } from './styles'
 import Header from '../../components/Header/Header'
 import SideBar from '@/components/SideBar/SideBar'
 import Tasks from '@/components/Tasks/Tasks'
 const Backlog = () => {
+  const [selectedSprint, setSelectedSprint] = useState(0);
+  const renderSelectedSprint = (sprint) => {
+    setSelectedSprint(sprint);
+  }
   return (
     <Container>
       <Header />
       <ContentContainer>
-        <SideBar />
-          <Tasks />
+        <SideBar selectSprint={renderSelectedSprint}/>
+        <Tasks selectedSprint={selectedSprint}/>
       </ContentContainer>
     </Container>
   );

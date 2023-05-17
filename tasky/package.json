@@ -10,9 +10,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/joy": "^5.0.0-alpha.78",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-modal": "^3.16.1",
     "styled-components": "^5.3.9"
   },
   "devDependencies": {

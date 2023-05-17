@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MainContainer,
   Title,
@@ -11,17 +11,23 @@ import {
 import Image from "next/image";
 import Task from "@/components/Task/Task";
 
-const Tasks = () => {
+const Tasks = (props) => {
+  useEffect(()=>{
+    setTasks(taskList.filter((task) => task.Sprint === props.selectedSprint));
+  },[props.selectedSprint]);
+
   const [query, setQuery] = useState("");
   const typeOneTask = {
-    Description: "Make Wallpaper dsajdksajkiu",
+    Description: "Make Wallpaper",
     Priority: "red",
-    Assignee: ["Bar", "Sappir", "Elad", "Hagai"],
+    Assignee: "Bar",
+    Sprint: 1
   };
   const typeTwoTask = {
-    Description: "Make  Great",
+    Description: "Make Other Stuff",
     Priority: "green",
-    Assignee: ["Bar", "Sappir", "Elad", "Hagai"],
+    Assignee: "Hagai",
+    Sprint: 2
   };
   const taskList = [
     typeOneTask,
@@ -43,7 +49,7 @@ const Tasks = () => {
 
   const onSearch = (event) => {
     if (!event.target.value) {
-      setTasks(taskList);
+      setTasks(taskList.filter((task)=>(task.Sprint === props.selectedSprint)));
     } else {
       setTasks(
         tasks.filter(
@@ -54,7 +60,9 @@ const Tasks = () => {
       );
     }
   };
-  const [tasks, setTasks] = useState(taskList);
+  const [tasks, setTasks] = useState(
+    taskList.filter((task) => (task.Sprint === props.selectedSprint))
+  );
   return (
     <MainContainer>
       <Title>Backlog</Title>
@@ -62,14 +70,14 @@ const Tasks = () => {
         <SearchTask
           placeholder="Search backlog"
           onChange={onSearch}
-        ></SearchTask>
+        />
         <Image
           src="./Search.svg"
           width={15}
           height={15}
           style={{ marginLeft: "-2%", marginTop: "0.6%", cursor: "pointer" }}
           onClick={() => {
-            setTasks(tasks.filter((task) => task.Description.includes(query)));
+            setTasks(onSearch);
           }}
         />
         <CreateTaskButton>

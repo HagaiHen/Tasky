@@ -4,34 +4,60 @@ import Image from 'next/image'
 
 const DataCard = (props) => {
     if(props.open){
-         return (
-            <OpenedCardContainer>
-                <TextContainer>
-                    <Title>{`${props.project} - Sprint ${props.sprint}`}</Title>
-                    <InfoContainer>
-                    <Info>{`Start: ${props.start}`}</Info>
-                    <Info>{`End: ${props.end}`}</Info>
-                    </InfoContainer>
-                </TextContainer>
-                <Image
-                    src={"./RightArrow.svg"}
-                    width={9}
-                    height={18}
-                    style={{ marginLeft: 80 }}
-                />
-            </OpenedCardContainer>
-         )
+         return !props.isBacklog ? (
+           <OpenedCardContainer>
+             <TextContainer>
+               <Title>{`${props.project} - Sprint ${props.sprint}`}</Title>
+               <InfoContainer>
+                 <Info>{`Start: ${props.start}`}</Info>
+                 <Info>{`End: ${props.end}`}</Info>
+               </InfoContainer>
+             </TextContainer>
+             <Image
+               src={"./RightArrow.svg"}
+               width={9}
+               height={18}
+               style={{ marginLeft: 80 }}
+             />
+           </OpenedCardContainer>
+         ) : (
+           <OpenedCardContainer>
+             <TextContainer>
+               <Title>{`Backlog`}</Title>
+               <InfoContainer>
+                 <Info>{`${props.project}'s Tasks`}</Info>
+               </InfoContainer>
+             </TextContainer>
+             <Image
+               src={"./RightArrow.svg"}
+               width={9}
+               height={18}
+               style={{ marginLeft: 80 }}
+             />
+           </OpenedCardContainer>
+         );
     }else{
-        return (
-          <ClosedCardContainer onClick={()=>{props.onClick(props.sprint)}}>
+        return !props.isBacklog ? (
+          <ClosedCardContainer
+            onClick={() => {
+              props.onClick(props.sprint);
+            }}
+          >
             <TextContainer>
               <Title>{`${props.project} - Sprint ${props.sprint}`}</Title>
             </TextContainer>
-            <Image
-              src={"./DownArrow.svg"}
-              width={12}
-              height={21}
-            />
+            <Image src={"./DownArrow.svg"} width={12} height={21} />
+          </ClosedCardContainer>
+        ) : (
+          <ClosedCardContainer
+            onClick={() => {
+              props.onClick(props.sprint);
+            }}
+          >
+            <TextContainer>
+              <Title>{`Backlog`}</Title>
+            </TextContainer>
+            <Image src={"./DownArrow.svg"} width={12} height={21} />
           </ClosedCardContainer>
         );
     }
