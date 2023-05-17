@@ -58,14 +58,60 @@ const sprints = [
     end: "03/05/23",
     open: false,
   },
-
-
+  {
+    project: "TAS",
+    sprintNum: 9,
+    start: "18/04/23",
+    end: "03/05/23",
+    open: false,
+  },
+  {
+    project: "TAS",
+    sprintNum: 10,
+    start: "18/04/23",
+    end: "03/05/23",
+    open: false,
+  },
+  {
+    project: "TAS",
+    sprintNum: 11,
+    start: "18/04/23",
+    end: "03/05/23",
+    open: false,
+  },
+  {
+    project: "TAS",
+    sprintNum: 12,
+    start: "18/04/23",
+    end: "03/05/23",
+    open: false,
+  },
+  {
+    project: "TAS",
+    sprintNum: 13,
+    start: "18/04/23",
+    end: "03/05/23",
+    open: false,
+  },
+  {
+    project: "TAS",
+    sprintNum: 14,
+    start: "18/04/23",
+    end: "03/05/23",
+    open: false,
+  },
+  {
+    project: "TAS",
+    sprintNum: 15,
+    start: "18/04/23",
+    end: "03/05/23",
+    open: false,
+  },
 ];
 const SideBar = () => {
   const [click, onClick] = useState(true);
   const sprintClicked = (sprintNum) => {
     sprints.forEach((sprint)=>{
-        console.log('HEH');
         if(sprint.sprintNum === sprintNum){
             sprint.open=true;
             console.log(sprint.sprintNum, sprintNum);

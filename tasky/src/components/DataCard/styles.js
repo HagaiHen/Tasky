@@ -7,11 +7,11 @@ export const ClosedCardContainer = styled.button`
   width: 80%;
   border-style: solid;
   border-color: transparent;
-  text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 5%;
+  align-items: center;
+  margin-top: 20px;
   :hover{
     cursor: pointer;
     background-color: #999999;
@@ -30,6 +30,7 @@ export const OpenedCardContainer = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   margin-top: 5%;
 `;
 
@@ -37,24 +38,26 @@ export const OpenedCardContainer = styled.button`
 export const Title = styled.h2`
   color: black;
   margin-top: 3%;
+  margin-left: 7px;
   font-family: sans-serif;
 `;
 
-export const Info = styled.h4`
+export const Info = styled.text`
   color: black;
-  margin-top: -10%; 
   font-family: sans-serif;
-  margin-right: 25%;
-  font-weight: 400;
+  font-weight: 600;
 `;
 
 export const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
 `
 
 export const InfoContainer = styled.div`
     display: flex;
     flex-direction: column; 
-    margin-top: 30%;
+    align-items: flex-start;
+    margin-left: 10px;
 `

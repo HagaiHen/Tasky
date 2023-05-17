@@ -19,7 +19,7 @@ const DropDown = (props) => {
           isOpen(!open);
         }}
       >
-        <Description style={{ marginTop: "3%" }}>{chosen}</Description>
+        <Description>{chosen}</Description>
       </ChosenItem>
       {open && (
         <ChoosingList list={props.list}>
@@ -27,7 +27,8 @@ const DropDown = (props) => {
             <>
               <ListItem
                 onClick={() => {
-                  setChosen("IN PROGRESS");
+                  setChosen(item);
+                  isOpen(false);
                 }}
               >
                 <Description style={{ marginTop: "3%" }}>

@@ -4,7 +4,12 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 24;
-  flex: 4;
+  width: 80%;
+  margin-left: 20%;
+  height: 80%
+  overflow: scroll;
+  margin-bottom: 3%;
+
 `;
 
 export const Title = styled.h1`
@@ -22,6 +27,7 @@ export const TaskContainer = styled.div`
   width: 96%;
   height: 80%;
   align-self: center;
+  overflow: scroll;
 `;
 export const SearchTask = styled.input`
   background-color: #d9d9d9;
@@ -37,6 +43,7 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 70px;
+  margin-top: 2%;
 `;
 
 export const CreateTaskButton = styled.div`
@@ -47,6 +54,8 @@ export const CreateTaskButton = styled.div`
   border-color: transparent;
   border-radius: 10px;
   margin-left: 68%;
+  /* margin-top: 2%; */
+  /* margin-bottom: 20%; */
   display: flex;
   flex-direction: row;
   :hover {

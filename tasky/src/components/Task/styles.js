@@ -10,42 +10,45 @@ export const TaskContainer = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 15px;
-  width: 94%;
-  height: 6%;
+  /* width: 95%;
+   */
+  width: 1100px;
+  height: 40px;
   align-self: center;
   background-color: #4b4747;
-  margin-top: 1%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  z-index: 1;
+  align-items: center;
 `;
 
 export const Priority = styled.div`
     width: 15px;
     height: 15px;
     border-radius: 100px;
-    background-color: ${colors.green}; 
-    margin-top: 0.75%;
-    margin-left: 1%;
+    background-color: ${(props) => (colors[props.color])}; 
+    margin-left: 10px;
+    
 `;
 
 export const Title = styled.h3`
   color: #A3A1A1;
   font-family: sans-serif;
-  margin-top: 0.5%;
-  margin-left: 1%;
+  margin-left: 30px;
 `;
 
-export const Description = styled.h4`
+export const Description = styled.h4.attrs(props=> ({
+  size: props.size
+}))`
   color: white;
-  font-family: sans-serif;
-  margin-top: 0.6%;
-  margin-left: 4%;
+  font-family: sans-serif; 
   font-weight: 400;
 `;
 
 export const Spacer = styled.div`
   background-color: #9b9b9b;
-  width: 0.2%;
+  width: 2px;
   height: 100%;
-  margin-left: 5%;
 `;
 
 export const TitleMid = styled.h3`
@@ -56,13 +59,12 @@ export const TitleMid = styled.h3`
 `;
 
 export const ChosenItem = styled.div`
-  width: 16%;
-  height: 80%;
-  margin-top: 0.3%;
+  width: 150px;
+  height:  10px;
   background-color: #a3a1a1;
-  margin-left: 10px;
   border-radius: 6px;
   text-align: center;
+
 `;
 
 
@@ -99,7 +101,27 @@ export const ListSpacer = styled.div`
   align-self: center;
   background-color: #4b4747;
 `;
-
-export const ListDescription = styled.h2`
-  
+export const DescriptionContainer = styled.div`
+  width: 180px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 30px;
 `
+export const Selected = styled.div`
+  background-color: #a3a1a1;
+  border-radius: 6px;
+  height: 30px;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  margin-right: 40px;
+`;
+
+export const StatusText = styled.h4`
+  color: white;
+  font-family: sans-serif;
+`;

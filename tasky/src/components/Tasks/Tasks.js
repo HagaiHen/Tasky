@@ -1,21 +1,75 @@
-import React from 'react';
-import { MainContainer, Title, SearchTask, SearchContainer, CreateTaskButton, ButtonTitle, TaskContainer} from './styles';
-import Image from 'next/image';
-import Task from '@/components/Task/Task';
+import React, { useState } from "react";
+import {
+  MainContainer,
+  Title,
+  SearchTask,
+  SearchContainer,
+  CreateTaskButton,
+  ButtonTitle,
+  TaskContainer,
+} from "./styles";
+import Image from "next/image";
+import Task from "@/components/Task/Task";
 
 const Tasks = () => {
+  const [query, setQuery] = useState("");
+  const typeOneTask = {
+    Description: "Make Wallpaper dsajdksajkiu",
+    Priority: "red",
+    Assignee: ["Bar", "Sappir", "Elad", "Hagai"],
+  };
+  const typeTwoTask = {
+    Description: "Make  Great",
+    Priority: "green",
+    Assignee: ["Bar", "Sappir", "Elad", "Hagai"],
+  };
+  const taskList = [
+    typeOneTask,
+    typeOneTask,
+    typeOneTask,
+    typeOneTask,
+    typeTwoTask,
+    typeTwoTask,
+    typeOneTask,
+    typeTwoTask,
+    typeTwoTask,
+    typeTwoTask,
+    typeTwoTask,
+    typeTwoTask,
+    typeTwoTask,
+    typeTwoTask,
+    typeTwoTask,
+  ];
+
+  const onSearch = (event) => {
+    if (!event.target.value) {
+      setTasks(taskList);
+    } else {
+      setTasks(
+        tasks.filter(
+          (task) =>
+            task.Description.includes(event.target.value) ||
+            task.Description.toLowerCase().includes(event.target.value)
+        )
+      );
+    }
+  };
+  const [tasks, setTasks] = useState(taskList);
   return (
     <MainContainer>
       <Title>Backlog</Title>
       <SearchContainer>
-        <SearchTask placeholder="Search backlog"></SearchTask>
+        <SearchTask
+          placeholder="Search backlog"
+          onChange={onSearch}
+        ></SearchTask>
         <Image
           src="./Search.svg"
           width={15}
           height={15}
           style={{ marginLeft: "-2%", marginTop: "0.6%", cursor: "pointer" }}
           onClick={() => {
-            console.log("HI");
+            setTasks(tasks.filter((task) => task.Description.includes(query)));
           }}
         />
         <CreateTaskButton>
@@ -29,18 +83,16 @@ const Tasks = () => {
         </CreateTaskButton>
       </SearchContainer>
       <TaskContainer>
-        <Task color="green" />
-        <Task color="green" />
-        <Task color="green" />
-        <Task color="green" />
-        <Task color="green" />
-        <Task color="green" />
-        <Task color="green" />
-        <Task color="green" />
-        
+        {tasks.map((task) => (
+          <Task
+            color={task.Priority}
+            assignee={task.Assignee}
+            description={task.Description}
+          />
+        ))}
       </TaskContainer>
     </MainContainer>
   );
-}
+};
 
-export default Tasks
+export default Tasks;

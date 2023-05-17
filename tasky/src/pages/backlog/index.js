@@ -9,7 +9,7 @@ const Backlog = () => {
       <Header />
       <ContentContainer>
         <SideBar />
-        <Tasks />
+          <Tasks />
       </ContentContainer>
     </Container>
   );

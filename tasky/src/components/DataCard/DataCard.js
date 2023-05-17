@@ -17,7 +17,7 @@ const DataCard = (props) => {
                     src={"./RightArrow.svg"}
                     width={9}
                     height={18}
-                    style={{ marginLeft: 80, marginTop: "15%" }}
+                    style={{ marginLeft: 80 }}
                 />
             </OpenedCardContainer>
          )
@@ -29,9 +29,8 @@ const DataCard = (props) => {
             </TextContainer>
             <Image
               src={"./DownArrow.svg"}
-              width={9}
-              height={18}
-              style={{ marginLeft: 80, marginTop: "3%" }}
+              width={12}
+              height={21}
             />
           </ClosedCardContainer>
         );
