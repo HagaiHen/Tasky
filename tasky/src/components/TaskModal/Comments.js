@@ -36,9 +36,9 @@ export default function TextareaValidator() {
 
   return (
     <FormControl>
-      <FormLabel>Add Your comment</FormLabel>
+      <FormLabel style={{color: 'white'}}>Add Your comment</FormLabel>
       <Textarea
-        placeholder="Type something hereâ€¦"
+        placeholder="Type something here"
         minRows={3}
         value={comment}
         onChange={(event) => setComment(event.target.value)}
@@ -122,7 +122,7 @@ export default function TextareaValidator() {
               key={index}
               style={{
                 marginTop: "10px",
-                backgroundColor: "lightblue",
+                backgroundColor: "#212121",
                 padding: "10px",
                 borderRadius: "4px",
                 boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
@@ -137,20 +137,24 @@ export default function TextareaValidator() {
               />
               <span
                 style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
+                  whiteSpace: "pre-wrap",
+                  overflow: "auto",
+                  flexDirection: "column",
+                  // textOverflow: "ellipsis"
                   flex: 1,
                   marginRight: "10px",
+                  fontFamily: "sans-serif",
+                  color: "white",
                 }}
               >
                 {commentItem.comment}
               </span>
               <span
                 style={{
-                  color: "black",
+                  color: "white",
                   fontSize: "12px",
                   alignSelf: "flex-end",
+                  fontFamily: "sans-serif",
                 }}
               >
                 {commentItem.timestamp}

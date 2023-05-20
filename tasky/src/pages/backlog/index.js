@@ -3,19 +3,22 @@ import { Container, ContentContainer } from './styles'
 import Header from '../../components/Header/Header'
 import SideBar from '@/components/SideBar/SideBar'
 import Tasks from '@/components/Tasks/Tasks'
+import { ModalProvider } from "styled-react-modal";
 const Backlog = () => {
   const [selectedSprint, setSelectedSprint] = useState(0);
   const renderSelectedSprint = (sprint) => {
     setSelectedSprint(sprint);
   }
   return (
-    <Container>
-      <Header />
-      <ContentContainer>
-        <SideBar selectSprint={renderSelectedSprint}/>
-        <Tasks selectedSprint={selectedSprint}/>
-      </ContentContainer>
-    </Container>
+    <ModalProvider>
+      <Container>
+        <Header />
+        <ContentContainer>
+          <SideBar selectSprint={renderSelectedSprint} />
+          <Tasks selectedSprint={selectedSprint} />
+        </ContentContainer>
+      </Container>
+    </ModalProvider>
   );
 }
 

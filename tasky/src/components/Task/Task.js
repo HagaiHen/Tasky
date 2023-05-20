@@ -10,18 +10,19 @@ import {
   DescriptionContainer,
 } from "./styles";
 import Image from "next/image";
-import Modal from "react-modal";
-import Comments from "./Comments";
+import Comments from "../TaskModal/Comments";
+import { touchRippleClasses } from "@mui/material";
+import TaskModal from "../TaskModal/TaskModal";
 
 const Task = (props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const toggleModal = () => {
+    setIsOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+     setIsOpen(false);
   };
 
   const formatDescription = (desc) => {
@@ -31,7 +32,7 @@ const Task = (props) => {
     return desc;
   };
   return (
-    <TaskContainer onClick={()=>{openModal()}}>
+    <TaskContainer onClick={toggleModal}>
       <Priority color={props.color} />
       <Title>TAS - 1</Title>
       <DescriptionContainer>
@@ -59,37 +60,12 @@ const Task = (props) => {
           console.log("delete");
         }}
       />
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={()=>{closeModal()}}
-        // Other modal props and styles...
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          },
-          content: {
-            width: "500px",
-            height: "300px",
-            margin: "auto",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "white",
-          },
-        }}
-        contentLabel="Task Modal"
-      >
-        {/* Modal content */}
-        <h3>Modal Title</h3>
-        <p style={{ whiteSpace: "nowrap" }}>Add the Task description here...</p>
-
-        <Comments />
-
-        <button onClick={()=>{closeModal()}} style={{ marginTop: "10px" }}>
-          Close
-        </button>
-      </Modal>
+      <TaskModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        description={props.description}
+        priority={props.color}
+      />
     </TaskContainer>
   );
 };

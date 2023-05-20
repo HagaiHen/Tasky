@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Modal from "styled-react-modal";
 
 const colors = {
   red: "#f87777",
@@ -19,28 +20,30 @@ export const TaskContainer = styled.div`
   margin-top: 5px;
   margin-bottom: 5px;
   align-items: center;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const Priority = styled.div`
-    width: 15px;
-    height: 15px;
-    border-radius: 100px;
-    background-color: ${(props) => (colors[props.color])}; 
-    margin-left: 10px;
-    
+  width: 15px;
+  height: 15px;
+  border-radius: 100px;
+  background-color: ${(props) => colors[props.color]};
+  margin-left: 10px;
 `;
 
 export const Title = styled.h3`
-  color: #A3A1A1;
+  color: #a3a1a1;
   font-family: sans-serif;
   margin-left: 30px;
 `;
 
-export const Description = styled.h4.attrs(props=> ({
-  size: props.size
+export const Description = styled.h4.attrs((props) => ({
+  size: props.size,
 }))`
   color: white;
-  font-family: sans-serif; 
+  font-family: sans-serif;
   font-weight: 400;
 `;
 
@@ -51,7 +54,7 @@ export const Spacer = styled.div`
 `;
 
 export const TitleMid = styled.h3`
-  color: #A3A1A1;
+  color: #a3a1a1;
   font-family: sans-serif;
   margin-top: 0.5%;
   margin-left: 4%;
@@ -59,13 +62,11 @@ export const TitleMid = styled.h3`
 
 export const ChosenItem = styled.div`
   width: 150px;
-  height:  10px;
+  height: 10px;
   background-color: #a3a1a1;
   border-radius: 6px;
   text-align: center;
-
 `;
-
 
 export const ListItem = styled.div`
   width: 100%;
@@ -78,9 +79,10 @@ export const ListItem = styled.div`
     background-color: #717171;
   }
 `;
+
 export const ChoosingList = styled.div`
   width: 16%;
-  height: ${(props)=>((props.list.length*100)+'%')};
+  height: ${(props) => props.list.length * 100 + "%"};
   overflow: auto;
   background-color: #a3a1a1;
   margin-left: -16%;
@@ -107,7 +109,7 @@ export const DescriptionContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-left: 30px;
-`
+`;
 export const Selected = styled.div`
   background-color: #a3a1a1;
   border-radius: 6px;
@@ -124,3 +126,4 @@ export const StatusText = styled.h4`
   color: white;
   font-family: sans-serif;
 `;
+
