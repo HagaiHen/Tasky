@@ -13,7 +13,7 @@ Before running the Django server, make sure you have the following prerequisites
 
 1. Clone this repository to your local machine using the following command:
 
-2. Create a virtual environment to isolate the project dependencies: `python -m venv venv`
+2. Create a virtual environment to isolate the project dependencies: ```python -m venv venv```
  
 3. Activate the virtual environment:
 - For Windows:
