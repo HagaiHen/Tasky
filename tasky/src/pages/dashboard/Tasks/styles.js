@@ -65,6 +65,22 @@ export const CreateTaskButton = styled.div`
   }
 `;
 
+export const CreateSprintButton = styled.div`
+  background-color: #bdff51;
+  width: 12%;
+  height: 4%;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 10px;
+  margin-left: 40%;
+  display: flex;
+  flex-direction: row;
+  :hover {
+    cursor: pointer;
+    background-color: #729639;
+  }
+`;
+
 export const ButtonTitle = styled.h4`
   color: black;
   font-family: sans-serif;

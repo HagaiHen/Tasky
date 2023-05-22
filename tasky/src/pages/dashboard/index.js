@@ -12,13 +12,18 @@ export default function Dashboard() {
   const renderSelectedSprint = (sprint) => {
     setSelectedSprint(sprint);
   }
+
+  const [selectedSprintStart, setSelectedSprintStart] = useState(false);
+  const renderSelectedSprintStart = (sprint) => {
+    setSelectedSprintStart(sprint);
+  }
     return (
         <ModalProvider>
           <Container>
             <Header />
             <ContentContainer>
-              <SideBar selectSprint={renderSelectedSprint} />
-              <Tasks selectedSprint={selectedSprint}/>
+              <SideBar selectSprint={renderSelectedSprint} isStart={renderSelectedSprintStart}/>
+              <Tasks selectedSprint={selectedSprint} isStart={selectedSprintStart}/>
             </ContentContainer>
           </Container>
         </ModalProvider>

@@ -8,7 +8,8 @@ const sprints = [
     start: "--",
     end: "--",
     open: true,
-    isBacklog: true
+    isBacklog: true,
+    isStart: false
   },
   {
     project: "GAN",
@@ -16,6 +17,7 @@ const sprints = [
     start: "18/04/23",
     end: "03/05/23",
     open: false,
+    isStart: false
   },
   {
     project: "CI/CD",
@@ -23,6 +25,7 @@ const sprints = [
     start: "18/04/23",
     end: "03/05/23",
     open: false,
+    isStart: true
   },
   {
     project: "Embedded",
@@ -30,6 +33,7 @@ const sprints = [
     start: "18/04/23",
     end: "03/05/23",
     open: false,
+    isStart: true
   }
 ];
 const SideBar = (props) => {
@@ -39,6 +43,7 @@ const SideBar = (props) => {
     sprints.forEach((sprint)=>{
         if(sprint.sprintNum === sprintNum){
             sprint.open=true;
+            props.isStart(sprint.isStart);
             console.log(sprint.sprintNum, sprintNum);
         }else{
             sprint.open=false;
@@ -58,6 +63,7 @@ const SideBar = (props) => {
           open={sprint.open}
           onClick={sprintClicked}
           isBacklog={sprint.isBacklog}
+          isStart={sprint.isStart}
         />
       ))}
     </SideContainer>

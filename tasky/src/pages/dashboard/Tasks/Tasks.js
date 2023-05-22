@@ -7,6 +7,7 @@ import {
   CreateTaskButton,
   ButtonTitle,
   TaskContainer,
+  CreateSprintButton,
 } from "./styles";
 import Image from "next/image";
 import Task from "../Task/Task";
@@ -93,6 +94,7 @@ const Tasks = (props) => {
   const [tasks, setTasks] = useState(
     taskList.filter((task) => (task.Sprint === props.selectedSprint))
   );
+  console.log("start", props.isStart);
 
   if (props.selectedSprint === -1) {
   return (
@@ -104,6 +106,7 @@ const Tasks = (props) => {
     </MainContainer>
   );
         } else {
+          if (props.isStart) {
           return (
             <MainContainer>
               <Title>Backlog</Title>
@@ -145,6 +148,59 @@ const Tasks = (props) => {
               </TaskContainer>
             </MainContainer>
           );
+                } else {
+                  return (
+                    <MainContainer>
+                      <Title>Backlog</Title>
+                      <SearchContainer>
+                        <SearchTask
+                          placeholder="Search backlog"
+                          onChange={onSearch}
+                        />
+                        <Image
+                          src="./Search.svg"
+                          width={15}
+                          height={15}
+                          style={{ marginLeft: "-2%", marginTop: "0.6%", cursor: "pointer" }}
+                          onClick={() => {
+                            setTasks(onSearch);
+                          }}
+                        />
+                        <CreateTaskButton>
+                          <Image
+                            src="./Plus.svg"
+                            width={15}
+                            height={15}
+                            style={{ marginTop: "4%", marginLeft: "4%" }}
+                          />
+                          <ButtonTitle>Create Task</ButtonTitle>
+                        </CreateTaskButton>
+                      </SearchContainer>
+                      <TaskContainer>
+                        {tasks.map((task) => (
+                          <Task
+                            color={task.Priority}
+                            assignee={task.Assignee}
+                            description={task.Description}
+                            status={task.Status}
+                            nick={task.Nick}
+                            taskNum={task.TaskNum}
+                          />
+                        ))}
+                      </TaskContainer>
+                      <CreateSprintButton>
+                          <Image
+                            src="./Plus.svg"
+                            width={15}
+                            height={15}
+                            style={{ marginTop: "4%", marginLeft: "4%" }}
+                          />
+                          <ButtonTitle>Start Sprint</ButtonTitle>
+                        </CreateSprintButton>
+                                            </MainContainer>
+                    
+                  );
+                }
         };
         }
 
