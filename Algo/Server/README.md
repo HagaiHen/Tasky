@@ -1,6 +1,6 @@
 # Django Server
 
-This repository contains a Django server that you can run locally for development or testing purposes.
+This repository contains a Django server that you can run locally.
 
 ## Prerequisites
 
