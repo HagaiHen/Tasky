@@ -11,7 +11,7 @@ import {
   Description,
 } from "./styles";
 import Image from "next/image";
-import DescriptionInput from '../DescriptionInput/DescriptionInput'
+import DescriptionInput from '../../../components/DescriptionInput/DescriptionInput'
 import Comments from './Comments'
 const TaskModal = (props) => {
   return (
@@ -39,9 +39,6 @@ const TaskModal = (props) => {
           </TitleContainer>
           <Description>Description</Description>
           <DescriptionInput description={props.description} />
-          <div style={{overflow: 'auto', height: '350px', width: '100%'}}>
-            <Comments />
-          </div>
         </TaskInfoContainer>
         <TaskParamsContainer></TaskParamsContainer>
       </DataContainer>

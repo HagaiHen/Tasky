@@ -9,6 +9,7 @@ import {
   TaskContainer,
   CreateSprintButton,
 } from "./styles";
+import CreateTaskModal from '../CreateTaskModal/CreateTaskModal';
 import Image from "next/image";
 import Task from "../Task/Task";
 
@@ -77,6 +78,17 @@ const Tasks = (props) => {
     typeTwoThree,
     typeThreeTask,
   ];
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    console.log("click");
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+     setIsOpen(false);
+  };
 
   const onSearch = (event) => {
     if (!event.target.value) {
@@ -166,7 +178,7 @@ const Tasks = (props) => {
                             setTasks(onSearch);
                           }}
                         />
-                        <CreateTaskButton>
+                        <CreateTaskButton onClick={toggleModal}>
                           <Image
                             src="./Plus.svg"
                             width={15}
@@ -174,6 +186,12 @@ const Tasks = (props) => {
                             style={{ marginTop: "4%", marginLeft: "4%" }}
                           />
                           <ButtonTitle>Create Task</ButtonTitle>
+                          <CreateTaskModal
+                          isOpen={isOpen}
+                          closeModal={closeModal}
+                          description={props.description}
+                          priority={props.color}
+                        />
                         </CreateTaskButton>
                       </SearchContainer>
                       <TaskContainer>
