@@ -29,6 +29,9 @@ python -m venv venv
   ```
 
 4. Install the project dependencies
-5. To start the Django server, use the following command: `python manage.py runserver`
+5. To start the Django server, use the following command:
+```
+python manage.py runserver
+```
 The server will start running at `http://localhost:8000/`. You can access it in your web browser to interact with the application.
 
