@@ -1,4 +1,4 @@
-// Defines an asynchronous function named postMessage 
+// Defines an asynchronous function named postMessage
 // that sends a POST request to a specific path on a local server
 export const postMessage = async (path, body) => {
   let data = false; // Variable to store the response data, initialized as false
@@ -7,7 +7,7 @@ export const postMessage = async (path, body) => {
 
   try {
     // Send a POST request to the specified path on the local server
-      data = await fetch(`http://localhost:5000/api/${path}`, {
+    data = await fetch(`http://localhost:5000/api/${path}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -32,7 +32,7 @@ export const postMessage = async (path, body) => {
   }
 };
 
-// Defines an asynchronous function named 
+// Defines an asynchronous function named
 // getMessage that sends a GET request to a specific path on a local server
 export const getMessage = async (path) => {
   try {
