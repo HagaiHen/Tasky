@@ -12,12 +12,10 @@ import {
   ButtonTitle,
 } from "./styles";
 import Image from "next/image";
-import DescriptionInput from '../../../components/DescriptionInput/DescriptionInput'
-import Comments from './Comments'
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Checkbox, ListItemText } from '@mui/material';
-
+import { postMessage } from '../../../utils/auth';
 
 const rate = [
   {
@@ -42,31 +40,24 @@ const rate = [
   },
 ];
 
-const tasks = [
+const teamMates = [
   {
-    label: "Tas - 1",
     value: 1,
+    label: "Bar",
   },
   {
-    label: "TAS - 2",
     value: 2,
+    label: "Sappir",
   },
   {
-    label: "TAS - 3",
     value: 3,
+    label: "Elad",
   },
   {
-    label: "TAS - 4",
     value: 4,
-  },
-  {
-    label: "TAS - 5",
-    value: 5,
+    label: "Hagai",
   },
 ];
-
-
-
 
 const TaskModal = (props) => {
   const [selectedValues, setSelectedValues] = useState([]);
@@ -120,15 +111,35 @@ const TaskModal = (props) => {
     setTaskRskRed(event.target.value);
   };
 
-  const handleAddTask = () => {
-    console.log("taskTitle: ", taskTitle);
-    console.log("taskDesc: ", taskDesc);
-    console.log("task bus val: ", taskBusVal);
-    console.log("taskDev eff: ", taskDevEff);
-    console.log("taskRisk Reduction: ", taskRskRed);
-    console.log("taskUrg: ", taskUrg);
-    console.log("taskDep: ", selectedValues);
-    
+  const [taskAssignee, setTaskAssignee] = useState('');
+
+  const handleTaskAssigneeChange = (event) => {
+    setTaskAssignee(event.target.value);
+  };
+
+    const handleAddTask = async () => {
+
+      // Create a task object with the desired properties
+      const task = {
+        title: taskTitle,
+        description: taskDesc,
+        businessValue: taskBusVal,
+        developmentEfforts: taskDevEff,
+        riskReduction: taskRskRed,
+        Urgency: taskUrg,
+        Dependencies: selectedValues,
+        Assignee: taskAssignee,
+      };
+  
+      try {
+        const response = await postMessage('task/createTask', task);
+        console.log('Response:', response);
+        // Process the response as needed
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle the error gracefully
+      }
+      
     // clear all data
 
     setSelectedValues([]);
@@ -138,6 +149,8 @@ const TaskModal = (props) => {
     setTaskBusVal('');
     setTaskDevEff('');
     setTaskRskRed('');
+    setTaskAssignee('');
+    
   };
 
   return (
@@ -265,7 +278,7 @@ const TaskModal = (props) => {
           ))}
         </TextField>
       </div>
-      <div style={{width: '50%', display: 'flex', gap: '10px', marginLeft: '25%' }}>
+      <div style={{display: 'flex', gap: '10px'}}>
       <TextField
         id="outlined-select-dep"
         select
@@ -295,6 +308,25 @@ const TaskModal = (props) => {
           </MenuItem>
         ))}
       </TextField>
+
+      <TextField
+          id="outlined-select-assign"
+          select
+          label="Assignee"
+          color="warning"
+          style={{ flex: 1, marginBottom: '10px' }}
+          InputLabelProps={{
+            style: { color: 'grey'},
+          }}
+          value={taskAssignee}
+          onChange={handleTaskAssigneeChange}
+        >
+          {teamMates.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
       </div>
         <AddTaskButton onClick={handleAddTask}>
         <Image
