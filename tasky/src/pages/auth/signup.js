@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { submitFirstSignup } from '../../utils/auth';
+import { submitFirstSignup } from '../../utils/controller';
 import Router from 'next/router'
 
 function Copyright(props) {
