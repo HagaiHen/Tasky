@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { submitFirstSignup } from '../../utils/controller';
+import { submitFirstSignup } from '../../utils/consts';
 import Router from 'next/router'
 
 function Copyright(props) {
@@ -34,7 +34,7 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const res = await submitFirstSignup({email: data.get('email'),password: data.get('password')});
+    const res = await controllerSignUp({email: data.get('email'),password: data.get('password')});
 
     // push the user to the dashboard page
     if (!res.success) {

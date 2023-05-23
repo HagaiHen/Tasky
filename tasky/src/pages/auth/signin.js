@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { signIn } from '../../utils/controller';
+import { controllerSignIn } from '@/controller/auth';
 import Router from 'next/router'
 
 function Copyright(props) {
@@ -30,18 +30,18 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const res = await signIn(data.get('email'), data.get('password'));
+    const res = await controllerSignIn(props.app, data.get('email'), data.get('password'));
 
     if (!res.success) {
       alert(res.error);
     }
     else {
-      Router.push({ pathname: '/dashboard', query: { token: res.token } }); 
+      Router.push({ pathname: '/backlog', query: { token: res.token } }); 
     }};
 
   return (
