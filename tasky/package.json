@@ -10,15 +10,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mui/joy": "^5.0.0-alpha.78",
     "next": "13.2.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-modal": "^3.16.1",
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
+    "@atlaskit/inline-edit": "^12.3.2",
+    "@atlaskit/textarea": "^4.6.2",
+    "@atlaskit/textfield": "^5.4.2",
+    "@atlaskit/theme": "^12.5.3",
+    "@atlaskit/tokens": "^1.4.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.13",
-    "firebase": "^9.19.1"
+    "babel-plugin-styled-components": "^2.1.1",
+    "firebase": "^9.19.1",
+    "styled-react-modal": "^3.0.1"
   }
 }
