@@ -2,18 +2,17 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-
 const firebaseConfig = {
-  apiKey: "AIzaSyCcVj1J67q5uoSo1bSpMKZIgOxUvbQezb8",
-  authDomain: "tasky-525d6.firebaseapp.com",
-  projectId: "tasky-525d6",
-  storageBucket: "tasky-525d6.appspot.com",
-  messagingSenderId: "933733351523",
-  appId: "1:933733351523:web:d5ce986d9b62466686b856"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID
 };
 
 // TODO: save server url in a more mnner that can be changed easily
-export const SERVERURL = 'http://localhost:5000';
+export const SERVERURL = process.env.SERVER;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
