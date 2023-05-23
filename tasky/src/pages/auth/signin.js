@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { signIn } from '../../utils/auth';
+import { signIn } from '../../utils/controller';
 import Router from 'next/router'
 
 function Copyright(props) {
