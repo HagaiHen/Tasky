@@ -18,7 +18,7 @@ const Task = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
-    setIsOpen(true);
+    setIsOpen(!isOpen);
   };
 
   const closeModal = () => {
@@ -62,7 +62,7 @@ const Task = (props) => {
       />
       <TaskModal
         isOpen={isOpen}
-        closeModal={closeModal}
+        closeModal={toggleModal}
         description={props.description}
         priority={props.color}
       />

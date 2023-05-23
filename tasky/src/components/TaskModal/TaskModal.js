@@ -17,8 +17,6 @@ const TaskModal = (props) => {
   return (
     <TaskModalStyled
       isOpen={props.isOpen}
-      onBackgroundClick={props.closeModal}
-      onEscapeKeydown={props.closeModal}
     >
       <CloseContainer>
         <Image
@@ -26,9 +24,7 @@ const TaskModal = (props) => {
           width={30}
           height={30}
           style={{ marginRight: "10px", cursor: "pointer" }}
-          onClick={() => {
-            props.closeModal();
-          }}
+          onClick={props.closeModal}
         />
       </CloseContainer>
       <DataContainer>

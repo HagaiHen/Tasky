@@ -96,6 +96,7 @@ const Tasks = (props) => {
             color={task.Priority}
             assignee={task.Assignee}
             description={task.Description}
+            key={Math.random()}
           />
         ))}
       </TaskContainer>
