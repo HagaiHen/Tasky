@@ -69,6 +69,29 @@ export const Priority = styled.div`
   margin-left: 10px;
 `;
 
+export const AddTaskButton = styled.div`
+  background-color: #bdff51;
+  width: 20%;
+  height: 8%;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 10px;
+  margin-left: 40%;
+  display: flex;
+  flex-direction: row;
+  :hover {
+    cursor: pointer;
+    background-color: #729639;
+  }
+`;
+
+export const ButtonTitle = styled.h4`
+  color: black;
+  font-family: sans-serif;
+  margin-top: 3%;
+  margin-left: 9%;
+`;
+
 export const TitleContainer = styled.div`
     display: flex;
     flex-direction: row;

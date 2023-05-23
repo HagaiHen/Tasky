@@ -45,7 +45,7 @@ const Tasks = (props) => {
     Sprint: 3,
     Status: "IN PROGRESS",
     Nick: "GAN",
-    TaskNum: "2"
+    TaskNum: "3"
   };
 
   const typeTwoThree = {
@@ -55,7 +55,7 @@ const Tasks = (props) => {
     Sprint: 9,
     Status: "IN REVIEW",
     Nick: "EMB",
-    TaskNum: "3"
+    TaskNum: "4"
   };
   const taskList = [
     typeOneTask,
@@ -103,6 +103,7 @@ const Tasks = (props) => {
       );
     }
   };
+
   const [tasks, setTasks] = useState(
     taskList.filter((task) => (task.Sprint === props.selectedSprint))
   );
@@ -189,6 +190,7 @@ const Tasks = (props) => {
                           <CreateTaskModal
                           isOpen={isOpen}
                           closeModal={closeModal}
+                          taskList={tasks}
                           description={props.description}
                           priority={props.color}
                         />
