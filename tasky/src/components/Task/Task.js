@@ -19,10 +19,7 @@ const Task = (props) => {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
-  };
-
-  const closeModal = () => {
-     setIsOpen(false);
+    console.log("in toggle Modal");
   };
 
   const formatDescription = (desc) => {
@@ -31,42 +28,45 @@ const Task = (props) => {
     }
     return desc;
   };
+
   return (
-    <TaskContainer onClick={toggleModal}>
-      <Priority color={props.color} />
-      <Title>TAS - 1</Title>
-      <DescriptionContainer>
-        <Description size={props.description.length}>
-          {formatDescription(props.description)}
-        </Description>
-      </DescriptionContainer>
-      <Spacer />
-      <Title>Status: </Title>
-      <Selected>
-        <StatusText>{"IN PROGRESS"}</StatusText>
-      </Selected>
-      <Spacer />
-      <Title>Assignee: </Title>
-      <Selected>
-        <StatusText>{"Bar Goldenberg"}</StatusText>
-      </Selected>
-      <Spacer />
-      <Image
-        src={"./Trash.svg"}
-        width={20}
-        height={20}
-        style={{ alignSelf: "center", marginLeft: "33px" }}
-        onClick={() => {
-          console.log("delete");
-        }}
-      />
+    <div>
+      <TaskContainer onClick={toggleModal}>
+        <Priority color={props.color} />
+        <Title>TAS - 1</Title>
+        <DescriptionContainer>
+          <Description size={props.description.length}>
+            {formatDescription(props.description)}
+          </Description>
+        </DescriptionContainer>
+        <Spacer />
+        <Title>Status: </Title>
+        <Selected>
+          <StatusText>{"IN PROGRESS"}</StatusText>
+        </Selected>
+        <Spacer />
+        <Title>Assignee: </Title>
+        <Selected>
+          <StatusText>{"Bar Goldenberg"}</StatusText>
+        </Selected>
+        <Spacer />
+        <Image
+          src={"./Trash.svg"}
+          width={20}
+          height={20}
+          style={{ alignSelf: "center", marginLeft: "33px" }}
+          onClick={() => {
+            console.log("delete");
+          }}
+        />
+      </TaskContainer>
       <TaskModal
         isOpen={isOpen}
-        closeModal={toggleModal}
+        toggleModal={toggleModal}
         description={props.description}
         priority={props.color}
       />
-    </TaskContainer>
+    </div>
   );
 };
 

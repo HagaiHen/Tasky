@@ -44,6 +44,8 @@ export const TaskParamsContainer = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
+    align-items: center;
+    justify-content: space-evenly;
 `
 export const CloseContainer = styled.div`
     display: flex;
