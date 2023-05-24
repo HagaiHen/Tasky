@@ -12,10 +12,18 @@ import {
 import CreateTaskModal from '../CreateTaskModal/CreateTaskModal';
 import Image from "next/image";
 import Task from "../Task/Task";
+import {getMessage, postMessage} from '../../../utils/auth';
+
 
 const Tasks = (props) => {
   useEffect(()=>{
+    // taskList.forEach((t) => console.log("s", t.Sprint));
+    // console.log("Hello:", taskList[0].Sprint);
+    // taskList.forEach((t) => console.log("h", t.Sprint));
+    // console.log("props", props);
     setTasks(taskList.filter((task) => task.Sprint === props.selectedSprint));
+    // console.log("yay");
+    // console.log("tasks: ", tasks);
   },[props.selectedSprint]);
 
   const [query, setQuery] = useState("");
@@ -57,32 +65,26 @@ const Tasks = (props) => {
     Nick: "EMB",
     TaskNum: "4"
   };
-  const taskList = [
-    typeOneTask,
-    typeOneTask,
-    typeOneTask,
-    typeOneTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeOneTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoThree,
-    typeTwoThree,
-    typeTwoThree,
-    typeTwoThree,
-    typeTwoThree,
-    typeTwoThree,
-    typeThreeTask,
-  ];
+
+
+  const [taskList, SetTaskList] = useState([]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const _taskList = await getMessage('task/getAllTasks');
+        SetTaskList(_taskList);
+        console.log("taskList:", taskList);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
-    console.log("click");
     setIsOpen(true);
   };
 
@@ -91,8 +93,10 @@ const Tasks = (props) => {
   };
 
   const onSearch = (event) => {
+    console.log("yay");
     if (!event.target.value) {
       setTasks(taskList.filter((task)=>(task.Sprint === props.selectedSprint)));
+      
     } else {
       setTasks(
         tasks.filter(
@@ -107,7 +111,8 @@ const Tasks = (props) => {
   const [tasks, setTasks] = useState(
     taskList.filter((task) => (task.Sprint === props.selectedSprint))
   );
-  console.log("start", props.isStart);
+
+  // console.log("tasks", tasks);
 
   if (props.selectedSprint === -1) {
   return (
@@ -152,9 +157,10 @@ const Tasks = (props) => {
                   <Task
                     color={task.Priority}
                     assignee={task.Assignee}
-                    description={task.Description}
+                    description={task.description}
                     status={task.Status}
                     nick={task.Nick}
+                    title={task.title}
                     taskNum={task.TaskNum}
                   />
                 ))}
@@ -201,9 +207,10 @@ const Tasks = (props) => {
                           <Task
                             color={task.Priority}
                             assignee={task.Assignee}
-                            description={task.Description}
+                            description={task.description}
                             status={task.Status}
                             nick={task.Nick}
+                            title={task.title}
                             taskNum={task.TaskNum}
                           />
                         ))}

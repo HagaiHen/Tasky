@@ -36,8 +36,8 @@ const Task = (props) => {
       <Priority color={props.color} />
       <Title>{props.nick} - {props.taskNum}</Title>
       <DescriptionContainer>
-        <Description size={props.description.length}>
-          {formatDescription(props.description)}
+        <Description size={props.title.length}>
+          {formatDescription(props.title)}
         </Description>
       </DescriptionContainer>
       <Spacer />

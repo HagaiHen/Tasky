@@ -42,19 +42,19 @@ const rate = [
 
 const teamMates = [
   {
-    value: 1,
+    value: "Bar",
     label: "Bar",
   },
   {
-    value: 2,
+    value: "Sappir",
     label: "Sappir",
   },
   {
-    value: 3,
+    value: "Elad",
     label: "Elad",
   },
   {
-    value: 4,
+    value: "Hagai",
     label: "Hagai",
   },
 ];
@@ -129,6 +129,8 @@ const TaskModal = (props) => {
         Urgency: taskUrg,
         Dependencies: selectedValues,
         Assignee: taskAssignee,
+        Status: "TO DO",
+        Sprint: 8,
       };
   
       try {
