@@ -1,34 +1,50 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import React from "react";
+import Select from "react-select";
+import { DropDownContainer, ParamType } from "./styles";
 
-export default function DropDownMenu(props) {
-  const [age, setAge] = React.useState('');
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
+const DropDownMenu = (props) => {
+  const getListOptions = () => {
+    if(!props.title){
+        return [
+          { value: 0, label: "TO DO" },
+          { value: 0, label: "SELECTED FOR DEVELOPMENT" },
+          { value: 0, label: "IN PROGRESS" },
+          { value: 0, label: "IN REVIEW" },
+          { value: 0, label: "IN TESTING" },
+          { value: 0, label: "DONE" },
+        ];
+    }
+    switch(props.title){
+        case "Assignee":
+            return []
+        default:
+            return [
+              { value: 1, label: "1" },
+              { value: 2, label: "2" },
+              { value: 3, label: "3" },
+              { value: 4, label: "4" },
+              { value: 5, label: "5" }
+            ];
+    }
+  }
   return (
-    <Box sx={{ width: '200px' , borderColor: 'white', borderWidth: '3px', borderStyle: 'solid', borderRadius: '10px' }}>
-      <FormControl fullWidth variant="standard" >
-        <InputLabel id="demo-simple-select-label" sx={{marginLeft: '10px', color: 'white'}}>{props.selected}</InputLabel>
+    <DropDownContainer>
+      <ParamType>{props.title}</ParamType>
+      <div style={{ marginTop: "10px" }}>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Assignee"
-          onChange={handleChange}
-          sx={{color: 'white', theme: 'light'}}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+            fontFamily: 'sans-serif',
+            }),
+          }}
+          options={getListOptions()}
+          defaultValue={getListOptions()[0]}
+        />
+      </div>
+    </DropDownContainer>
   );
-}
+};
+
+export default DropDownMenu;

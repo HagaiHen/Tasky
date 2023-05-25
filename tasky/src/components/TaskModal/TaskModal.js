@@ -9,11 +9,19 @@ import {
   TitleContainer,
   Priority,
   Description,
+  ParamContainer,
+  ParamTitle,
+  ParamLine,
+  DescriptionContainer,
+  ProgressTitle,
+  ProgressContainer
 } from "./styles";
 import Image from "next/image";
 import DescriptionInput from '../DescriptionInput/DescriptionInput'
+import TitleInput from '../DescriptionInput/TitleInput'
 import Comments from './Comments'
 import DropDownMenu from "../DropDownMenu/dropDownMenu";
+import MultiDropDown from "../DropDownMenu/multDropDown";
 const TaskModal = (props) => {
   return (
     <TaskModalStyled isOpen={props.isOpen}>
@@ -32,31 +40,34 @@ const TaskModal = (props) => {
             <Priority color={props.priority} />
             <Title>TAS - 1</Title>
           </TitleContainer>
-          <Description>Description</Description>
+          <DescriptionContainer color={props.priority}>
+            <Description>TITLE</Description>
+          </DescriptionContainer>
+          <TitleInput title="This is the tasks title" />
+          <DescriptionContainer color={props.priority}>
+            <Description>DESCRIPTION</Description>
+          </DescriptionContainer>
           <DescriptionInput description={props.description} />
           <div style={{ overflow: "auto", height: "350px", width: "100%" }}>
             <Comments />
           </div>
         </TaskInfoContainer>
         <TaskParamsContainer>
-          <div>
-            <Description>Assignee</Description>
-            <DropDownMenu selected="Bar Goldenberg" />
-          </div>
-          <div>
-            <Description>Assignee</Description>
-            <DropDownMenu selected="Bar Goldenberg" />
-          </div>
-          <div>
-            <Description>Assignee</Description>
-            <DropDownMenu selected="Bar Goldenberg" />
-          </div>
-          <div>
-            <Description>Assignee</Description>
-            <DropDownMenu selected="Bar Goldenberg" />
-          </div>
-          
-          {/* <DropDownMenu selected="Bar Goldenberg" /> */}
+          <ProgressContainer color={props.priority}>
+            <ProgressTitle>PROGRESS</ProgressTitle>
+            <ParamLine color={props.priority} />
+            <DropDownMenu />
+          </ProgressContainer>
+          <ParamContainer color={props.priority}>
+            <ProgressTitle>PARAMETERS</ProgressTitle>
+            <ParamLine color={props.priority} />
+            <MultiDropDown title="Dependencies"/>
+            <DropDownMenu title="Assignee" />
+            <DropDownMenu title="Urgency" />
+            <DropDownMenu title="Buisness value" />
+            <DropDownMenu title="Dev effort" />
+            <DropDownMenu title="Risk Reduction" />
+          </ParamContainer>
         </TaskParamsContainer>
       </DataContainer>
     </TaskModalStyled>
