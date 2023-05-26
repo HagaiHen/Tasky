@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const CalContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   background-color: #4b4747;
   flex: 1;
   border: 1px solid black;
@@ -14,8 +15,8 @@ export const CalContainer = styled.div`
 
 export const ContainerRaw = styled.div`
   display: flex;
-  position: absolute;
   flex-direction: raw;
+  justify-content: start;
   width: 100%;
   height: 100%;
 `;
@@ -42,5 +43,7 @@ export const DataBox = styled.div`
   background-color: #e1e1e1;
   border-radius: 8px;
   padding: 16px;
+  margin-right: 10px;
+  margin-left: 10px;
 `;
 

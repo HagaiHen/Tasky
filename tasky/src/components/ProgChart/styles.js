@@ -5,7 +5,7 @@ export const CalContainer = styled.div`
   // position: absolute;
   flex-direction: column;
   background-color: #4b4747;
-  flex:2;
+  flex: 0.5;
   border: 1px solid black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-right: 10px;

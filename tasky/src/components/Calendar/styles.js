@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const CalContainer = styled.div`
   display: flex;
-  // position: absolute;
   flex-direction: column;
   background-color: #4b4747;
   flex: 1;
@@ -38,10 +37,12 @@ justify-content: center;
 `
 
 export const DataBox = styled.div`
-  width: 200px;
+  width: 100px;
   height: 150px;
   background-color: #e1e1e1;
   border-radius: 8px;
   padding: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
