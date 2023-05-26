@@ -36,7 +36,11 @@ const DropDownMenu = (props) => {
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
-            fontFamily: 'sans-serif',
+              fontFamily: "sans-serif",
+            }),
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              fontFamily: "sans-serif",
             }),
           }}
           options={getListOptions()}

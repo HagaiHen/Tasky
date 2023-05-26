@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { DropDownContainer, ParamType } from "./styles";
-
+import makeAnimated from "react-select/animated";
 const MultiDropDown = (props) => {
   const options = [
     {
@@ -17,6 +17,7 @@ const MultiDropDown = (props) => {
       label: "TAS - 3",
     },
   ];
+  const animatedComponents = makeAnimated();
   return (
     <DropDownContainer>
       <ParamType>{props.title}</ParamType>
@@ -28,8 +29,13 @@ const MultiDropDown = (props) => {
               ...baseStyles,
               fontFamily: "sans-serif",
             }),
+            option: (baseStyles, state) => ({
+                ...baseStyles,
+                fontFamily: "sans-serif"
+            })
           }}
           options={options}
+          components={animatedComponents}
         />
       </div>
     </DropDownContainer>
