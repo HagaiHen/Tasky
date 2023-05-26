@@ -1,37 +1,30 @@
-import * as React from 'react';
-import  {useState} from 'react';
-import { CalContainer } from './styles';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import * as React from "react";
+import { useState } from "react";
+import { CalContainer } from "./styles";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
+const dayjs = require("dayjs");
+const Calendar = (props) => {
 
-const Calendar = ({ onDateReceived }) => {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    onDateReceived(date); // Call the prop function with the selected date
-  };
-
-  const [Date, setdDate] = useState(null);
   const handleDate = (date) => {
-    setdDate(date);
-    handleDateChange(date)
+    setSelectedDate(date);
+    props.onDateReceived(date);
   };
-  
+
   return (
     <CalContainer>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <StaticDatePicker
-              orientation="portrait" 
-              value={Date}
-              onChange={handleDate}
-            />
-        </LocalizationProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <StaticDatePicker
+          orientation="portrait"
+          value={selectedDate}
+          onChange={handleDate}
+        />
+      </LocalizationProvider>
     </CalContainer>
-    
   );
-}
-
+};
 
 export default Calendar;
