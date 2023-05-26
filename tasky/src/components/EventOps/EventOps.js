@@ -12,12 +12,8 @@ const EventOps = () => {
       <ContainerRaw>
         <DataBox>Create Event</DataBox>
         <DataBox>Update Event</DataBox>
+        <DataBox>Delete Event</DataBox>
       </ContainerRaw>
-      <ContainerRaw>
-        <DataBox>Create Event</DataBox>
-        <DataBox>Update Event</DataBox>
-      </ContainerRaw>
-      
         
     </Container>
     

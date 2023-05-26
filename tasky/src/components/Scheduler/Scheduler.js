@@ -45,7 +45,7 @@ const Scheduler = (props) => {
   useEffect(() => {
     // This function will be called whenever myVariable changes
     _setDate(props.date);
-    console.log("[Scheduler] useEffect activate, Date:", _date);
+    console.log("[Scheduler] useEffect activate, Date:", props.date);
     // handleDateChange();
   }, [props.date]);
 
@@ -60,7 +60,6 @@ const Scheduler = (props) => {
     return(
       <MainContainer>
         <Title> Daily Scheduler </Title>
-        <Title>{_date}</Title>
         <SepLine />
         <TasksTaskContainr>
           <TaskContainer>
