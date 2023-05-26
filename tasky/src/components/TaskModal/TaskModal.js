@@ -21,7 +21,7 @@ import DescriptionInput from '../DescriptionInput/DescriptionInput'
 import TitleInput from '../DescriptionInput/TitleInput'
 import Comments from './Comments'
 import DropDownMenu from "../DropDownMenu/dropDownMenu";
-import MultiDropDown from "../DropDownMenu/multDropDown";
+import MultiDropDown from "../DropDownMenu/multiDropDown";
 const TaskModal = (props) => {
   return (
     <TaskModalStyled isOpen={props.isOpen}>
@@ -61,12 +61,14 @@ const TaskModal = (props) => {
           <ParamContainer color={props.priority}>
             <ProgressTitle>PARAMETERS</ProgressTitle>
             <ParamLine color={props.priority} />
-            <MultiDropDown title="Dependencies"/>
-            <DropDownMenu title="Assignee" />
-            <DropDownMenu title="Urgency" />
-            <DropDownMenu title="Buisness value" />
-            <DropDownMenu title="Dev effort" />
-            <DropDownMenu title="Risk Reduction" />
+            <div style={{ overflow: "auto" }}>
+              <MultiDropDown title="Dependencies" />
+              <DropDownMenu title="Assignee" />
+              <DropDownMenu title="Urgency" />
+              <DropDownMenu title="Buisness value" />
+              <DropDownMenu title="Dev effort" />
+              <DropDownMenu title="Risk Reduction" />
+            </div>
           </ParamContainer>
         </TaskParamsContainer>
       </DataContainer>

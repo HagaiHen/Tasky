@@ -96,8 +96,8 @@ export const ParamContainer = styled.div`
     props.color ? colors[props.color] : colors.green};
   border-style: solid;
   padding: 10px 30px 10px;
-  overflow: auto;
   height: 30rem;
+  overflow: auto;
 `;
 export const ProgressContainer = styled.div`
   display: flex;

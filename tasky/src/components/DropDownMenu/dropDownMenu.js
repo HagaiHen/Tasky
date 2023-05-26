@@ -8,16 +8,22 @@ const DropDownMenu = (props) => {
     if(!props.title){
         return [
           { value: 0, label: "TO DO" },
-          { value: 0, label: "SELECTED FOR DEVELOPMENT" },
-          { value: 0, label: "IN PROGRESS" },
-          { value: 0, label: "IN REVIEW" },
-          { value: 0, label: "IN TESTING" },
-          { value: 0, label: "DONE" },
+          { value: 1, label: "SELECTED FOR DEVELOPMENT" },
+          { value: 2, label: "IN PROGRESS" },
+          { value: 3, label: "IN REVIEW" },
+          { value: 4, label: "IN TESTING" },
+          { value: 5, label: "DONE" },
         ];
     }
     switch(props.title){
         case "Assignee":
-            return []
+            return [
+              { value: 1, label: "Bar Goldenberg" },
+              { value: 2, label: "Hagai Hen" },
+              { value: 3, label: "Sappir Bohbot" },
+              { value: 4, label: "Elad Sez" },
+              { value: 5, label: "Other person" },
+            ];
         default:
             return [
               { value: 1, label: "1" },

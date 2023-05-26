@@ -19,7 +19,7 @@ export const postMessage = async (path, body) => {
     if (data) {
       // If the response is received successfully (i.e., data is truthy)
       // Try parsing the response data as JSON
-      return data.json().catch((err) => {
+      return await data.json().catch((err) => {
         console.log(
           `error in parsing json ${data.statusText}, error: ${err.message}`
         );
@@ -48,7 +48,7 @@ export const getMessage = async (path) => {
     if (data) {
       // If the response is received successfully (i.e., data is truthy)
       // Try parsing the response data as JSON
-      return data.json().catch((err) => {
+      return await data.json().catch((err) => {
         console.log(`error in parsing json ${data}, error: ${err.message}`);
         return null; // Return null if parsing fails
       });
