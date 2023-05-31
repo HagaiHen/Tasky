@@ -164,14 +164,13 @@ export const getUsers = async () => {
 // Defines an asynchronous function named postMessage 
 // that sends a POST request to a specific path on a local server
 export const postMessage = async (path, body) => {
-  
   let data = false; // Variable to store the response data, initialized as false
   let payload = JSON.stringify(body); // Convert the request body to a JSON string
   const url = `http://localhost:5000/api/${path}`;
 
   try {
     // Send a POST request to the specified path on the local server
-      data = await fetch(url, {
+      const result = await fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -179,13 +178,13 @@ export const postMessage = async (path, body) => {
       },
       body: payload // Include the JSON payload in the request body
       });
-      if (data.ok) {
+      if (result.ok) {
         // Check if the response was successful
-        const jsonData = await data.json(); // Await the JSON parsing
+        const jsonData = await result.json(); // Await the JSON parsing
         // console.log("[PostMessage] JSON Data:", jsonData);
         return jsonData;
       } else {
-        console.log("[PostMessage] Error:", data.statusText);
+        console.log("[PostMessage] Error:", result.statusText);
         return null;
       }
   } catch (err) {

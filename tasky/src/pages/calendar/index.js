@@ -51,7 +51,9 @@ const CalendarPage = () => {
         <ContentContainer>
           <ProgChart />
           <EventOps 
+            date={date}
             uid={testUid}
+            events={events}
           />
         </ContentContainer>
       </Container>
