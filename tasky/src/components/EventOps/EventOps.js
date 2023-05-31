@@ -2,17 +2,16 @@ import * as React from 'react';
 import  {useState} from 'react';
 import { Container, ContainerRaw } from './styles';
 import { DataBox } from '../Calendar/styles';
+import EventButton from '../EventButton/EventButton';
 
 
-const EventOps = () => {
+const EventOps = (params) => {
+  const userId = params.uid;
 
-  
   return (
     <Container>
       <ContainerRaw>
-        <DataBox>Create Event</DataBox>
-        <DataBox>Update Event</DataBox>
-        <DataBox>Delete Event</DataBox>
+        <EventButton uid={userId}/>
       </ContainerRaw>
         
     </Container>

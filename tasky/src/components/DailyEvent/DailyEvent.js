@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import {EventContainer, Title} from './styles'
+import {EventContainer, Title, TitleHour} from './styles'
 
 
 const DailyEvent = (props) => {
-
     return (
         <EventContainer>
-            <Title>{props.description}</Title>
+            <TitleHour>{props.Hour}</TitleHour>
+            <Title>{props.Description}</Title>
         </EventContainer>
     );
 }

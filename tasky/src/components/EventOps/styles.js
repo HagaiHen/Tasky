@@ -18,7 +18,7 @@ export const ContainerRaw = styled.div`
   flex-direction: raw;
   justify-content: space-evenly;
   width: 100%;
-  height: 100%;
+  height: 50%;
 `;
 
 export const ContentContainer = styled.div`

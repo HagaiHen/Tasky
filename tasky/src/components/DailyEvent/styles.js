@@ -32,7 +32,13 @@ export const Priority = styled.div`
 `;
 
 export const Title = styled.h3`
-  color: #a3a1a1;
+  color: #ddd;
+  font-family: sans-serif;
+  margin-left: 30px;
+`;
+
+export const TitleHour = styled.h3`
+  color: #ccc;
   font-family: sans-serif;
   margin-left: 30px;
 `;
