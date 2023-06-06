@@ -9,16 +9,22 @@ import Stack from "@mui/material/Stack";
 import { postMessage, getMessage } from "@/utils/docs";
 
 const EventButton = (params) => {
-  const [open, setOpen] = useState(false);
+  const [openEventsDialog, setOpenEventsDialog] = useState(false);
+  const [openTask, setOpenTask] = useState(false);
   const [isDelete, setIsDelete] = useState(false); // Flag to indicate delete operation
+
+  const handleMyTasks = () =>{
+    setOpenTask(true);
+  }
 
   const handleUpdateEvent = (isDelete) => {
     setIsDelete(isDelete); // Set the delete flag
-    setOpen(true);
+    setOpenEventsDialog(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenEventsDialog(false);
+    setOpenTask(false);
   };
 
   // Helper function to validate the date format
@@ -36,7 +42,7 @@ const EventButton = (params) => {
     if (isDelete) {
       await deleteEvent(data);
       setIsDelete(false);
-      setOpen(false);
+      setOpenEventsDialog(false);
     } else {
       const newDescription = prompt("Enter new description:", data.Description);
       let newDate = prompt("Enter new date (yyyy-mm-dd):", data.Date);
@@ -78,7 +84,7 @@ const EventButton = (params) => {
       // Update operation
       await updateEvent(data);
     }
-    setOpen(false);
+    setOpenEventsDialog(false);
   };
 
   const deleteEvent = async (data) => {
@@ -131,7 +137,7 @@ const EventButton = (params) => {
         <Button
           variant="contained"
           sx={{ bgcolor: "silver", width: "150px", color: "#4b4747" }}
-          onClick={() => handleUpdateEvent(true)} // Pass true for delete operation
+          onClick={() => handleUpdateEvent(true)} 
         >
           Delete Event
         </Button>
@@ -150,7 +156,7 @@ const EventButton = (params) => {
             color: "#4b4747",
             ml: "25px",
           }}
-          onClick={copyEvent}
+          onClick={handleMyTasks}
         >
           My Tasks
         </Button>
@@ -163,7 +169,7 @@ const EventButton = (params) => {
         </Button>
       </ButtonGroup>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={openEventsDialog} onClose={handleClose}>
         <DialogTitle>
         {isDelete ? "Select Event to Delete" : "Select Event to Update"}
         </DialogTitle>
@@ -183,6 +189,33 @@ const EventButton = (params) => {
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
+
+      <Dialog
+      open={openTask}
+      onClose={handleClose}
+      PaperProps={{ sx: { bgcolor: "#4b4747" } }} // Set dialog background color
+    >
+      <DialogTitle>My Tasks</DialogTitle>
+      <DialogContent>
+        <Stack spacing={1} justifyContent="start">
+          {params.tasks.map((task) => (
+            <Button
+              key={task.id}
+              sx={{ color: "white" }} // Set text color to black
+            >
+              {task.data.status === 1 && "BackLog: "}
+              {task.data.status === 2 && "To Do: "}
+              {task.data.status === 3 && "In Prog: "}
+              {task.data.status === 4 && "Done: "}
+              {task.data.Description}
+            </Button>
+          ))}
+        </Stack>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+      </DialogActions>
+    </Dialog>
     </>
   );
 };

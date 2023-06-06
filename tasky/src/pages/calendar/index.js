@@ -12,13 +12,19 @@ import Scheduler from "@/components/Scheduler/Scheduler";
 const CalendarPage = () => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
+  const [tasks , setTasks ] = useState([]);
 
   useEffect( () => {
     const fetchData = async () => {
       try {
         const response = await getMessage(`event/getAllEventsByUID/${uid}`);
+        const responseTasks = await getMessage(`task/getTaskByUid/${uid}`);
         if (response ) {
           setEvents(response);
+        }
+        if (responseTasks ) {
+          setTasks(responseTasks);
+          console.log(tasks)
         }
       } catch (error) {
         console.error("[Scheduler] Failed to fetch events:", error);
@@ -26,7 +32,7 @@ const CalendarPage = () => {
     };
     fetchData();
   }, [date]);
-
+  
   const handleDateChange = (date) => {
     setDate(date);
   };
@@ -49,11 +55,15 @@ const CalendarPage = () => {
           />
         </ContentContainer>
         <ContentContainer>
-          <ProgChart />
+          <ProgChart 
+            uid={testUid}
+            tasks={tasks}
+          />
           <EventOps 
             date={date}
             uid={testUid}
             events={events}
+            tasks={tasks}
           />
         </ContentContainer>
       </Container>

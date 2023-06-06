@@ -73,11 +73,16 @@ const EventOps = (params) => {
   const date = params.date;
 
   const userId = params.uid;
+  const myTasks = params.tasks;
 
   return (
     <Container>
       <ContainerRaw>
-        <EventButton uid={userId} events={dayEvents}/>
+        <EventButton 
+          uid={userId} 
+          events={dayEvents}
+          tasks={myTasks}
+        />
       </ContainerRaw>
         
     </Container>
