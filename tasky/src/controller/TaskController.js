@@ -1,30 +1,20 @@
 import { getMessage, postMessage } from "./APIController";
 
 export const createTask = async (
-  assignee,
-  buisnessValue,
-  dependencies,
-  description,
-  devEffort,
-  riskReduction,
-  urgency,
-  sprint,
-  status,
-  taskNum,
-  title
+ params
 ) => {
   await postMessage("/task/createTask", {
-    Assignee: assignee,
-    BuisnessValue: buisnessValue,
-    Dependencies: dependencies,
-    Description: description,
-    DevelopmentEffort: devEffort,
-    RiskReduction: riskReduction,
-    Urgency: urgency,
-    Sprint: sprint,
-    Status: status,
-    TaskNum: taskNum,
-    Title: title,
+    Assignee: params?.assignee,
+    BuisnessValue: params?.buisnessValue,
+    Dependencies: params?.dependencies,
+    Description: params?.description,
+    DevelopmentEffort: params?.devEffort,
+    RiskReduction: params?.riskReduction,
+    Urgency: params?.urgency,
+    Sprint: params?.sprint,
+    Status: params?.status,
+    TaskNum: params?.taskNum,
+    Title: params?.title,
   }).catch((err) => {
     alert("couldnt create task");
   });
@@ -54,4 +44,9 @@ export const updateTask = async (updateParams, taskId) => {
   }).catch((err) => {
     alert("couldnt create task");
   });
+};
+
+export const getAllTasks = async (sprintId) => {
+  const tasks = await getMessage(`/task/getAllTasks/${sprintId}`);
+  return tasks;
 };

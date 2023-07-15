@@ -23,8 +23,8 @@ const Task = (props) => {
   };
 
   const formatDescription = (desc) => {
-    if (desc.length > 20) {
-      return desc.substring(0, 17) + "...";
+    if (desc?.length > 20) {
+      return desc?.substring(0, 17) + "...";
     }
     return desc;
   };
@@ -35,8 +35,8 @@ const Task = (props) => {
         <Priority color={props.color} />
         <Title>TAS - 1</Title>
         <DescriptionContainer>
-          <Description size={props.description.length}>
-            {formatDescription(props.description)}
+          <Description size={props.title?.length}>
+            {formatDescription(props.title)}
           </Description>
         </DescriptionContainer>
         <Spacer />
@@ -47,7 +47,7 @@ const Task = (props) => {
         <Spacer />
         <Title>Assignee: </Title>
         <Selected>
-          <StatusText>{"Bar Goldenberg"}</StatusText>
+          <StatusText>{props.assignee}</StatusText>
         </Selected>
         <Spacer />
         <Image

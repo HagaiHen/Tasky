@@ -24,15 +24,16 @@ const MultiDropDown = (props) => {
       <div style={{ marginTop: "10px" }}>
         <Select
           isMulti
+          onChange={props.onChange}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
               fontFamily: "sans-serif",
             }),
             option: (baseStyles, state) => ({
-                ...baseStyles,
-                fontFamily: "sans-serif"
-            })
+              ...baseStyles,
+              fontFamily: "sans-serif",
+            }),
           }}
           options={options}
           components={animatedComponents}

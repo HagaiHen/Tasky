@@ -13,7 +13,7 @@ export default function TextAreaAppearanceSubtle(props) {
       defaultValue={props.title}
       spellCheck={true}
       maxHeight="10px"
-      onInput={input}
+      onInput={props.onInput}
       text-color="white"
       resize="vertical"
       style={{

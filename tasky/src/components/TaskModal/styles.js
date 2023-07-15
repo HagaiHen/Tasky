@@ -37,7 +37,8 @@ export const Description = styled.text`
 
 export const DescriptionContainer = styled.div`
   border-radius: 10px;
-  background-color: ${(props) => props.color ? colors[props.color] : colors.green};
+  background-color: ${(props) =>
+    props.color ? colors[props.color] : colors.green};
   /* padding-left: 10px;/ */
   padding-right: 10px;
 `;
@@ -76,7 +77,8 @@ export const Priority = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 100px;
-  background-color: ${(props) => colors[props.color]};
+  background-color: ${(props) =>
+    props.color ? colors[props.color] : colors.green};
   margin-left: 10px;
 `;
 
@@ -132,4 +134,27 @@ export const ProgressTitle = styled.text`
   font-size: 1em;
   margin-bottom: 10px;
   letter-spacing: 0.3em;
-`
+`;
+
+export const SaveTaskButton = styled.div`
+  background-color: ${(props) =>
+    props.color ? colors[props.color] : colors.green};
+  width: 150px;
+  height: 30px;
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 10px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  :hover {
+    cursor: pointer;
+  }
+`;
+export const ButtonTitle = styled.h4`
+  color: black;
+  font-family: sans-serif;
+`;
+

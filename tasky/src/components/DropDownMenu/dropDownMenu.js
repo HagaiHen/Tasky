@@ -39,6 +39,7 @@ const DropDownMenu = (props) => {
       <ParamType>{props.title}</ParamType>
       <div style={{ marginTop: "10px" }}>
         <Select
+          onChange={props.onChange}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,

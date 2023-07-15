@@ -7,7 +7,7 @@ export const postMessage = async (path, body) => {
 
   try {
     // Send a POST request to the specified path on the local server
-    data = await fetch(`http://localhost:5000/api/${path}`, {
+    data = await fetch(`http://localhost:5001/api/${path}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -37,7 +37,7 @@ export const postMessage = async (path, body) => {
 export const getMessage = async (path) => {
   try {
     // Send a GET request to the specified path on the local server
-    const data = await fetch(`http://localhost:5000/api/${path}`, {
+    const data = await fetch(`http://localhost:5001/api/${path}`, {
       method: "GET",
       headers: {
         Accept: "application/json",

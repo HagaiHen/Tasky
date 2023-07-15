@@ -1,83 +1,45 @@
 import React, { useEffect, useState } from "react";
 import DataCard from "../DataCard/DataCard";
 import { SideContainer, Title } from "./styles";
-const sprints = [
-  {
-    project: "TAS",
-    sprintNum: 0,
-    start: "--",
-    end: "--",
-    open: true,
-    isBacklog: true
-  },
-  {
-    project: "TAS",
-    sprintNum: 1,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 2,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 3,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 4,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 5,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 6,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  },
-  {
-    project: "TAS",
-    sprintNum: 7,
-    start: "18/04/23",
-    end: "03/05/23",
-    open: false,
-  }
-];
+import { getAllSprints } from "@/controller/SprintController";
+
 const SideBar = (props) => {
   const [click, onClick] = useState(true);
+  const [sprints, setSprints] = useState();
+  useEffect(() => {
+    const getSprints = async () => {
+      const sprints = await getAllSprints(0);
+      let sprintTests =  sprints?.map((sprint) => ({
+        project: "TAS",
+        sprintNum: sprint.SprintNum,
+        start: sprint.StartDate,
+        end: sprint.EndDate,
+        team: sprint.sprintTeam,
+        open: sprint.SprintNum === 0,
+        id: sprint.sprintId,
+        isBacklog: sprint.SprintNum === 0 
+      }));
+      setSprints(sprintTests.sort((a,b)=> a.sprintNum - b.sprintNum));
+    };
+    getSprints();
+  }, []);
+  
   const sprintClicked = (sprintNum) => {
     props.selectSprint(sprintNum);
-    sprints.forEach((sprint)=>{
-        if(sprint.sprintNum === sprintNum){
-            sprint.open=true;
-            console.log(sprint.sprintNum, sprintNum);
-        }else{
-            sprint.open=false;
-        }
+    sprints.forEach((sprint) => {
+      console.log("SprintNum", sprint.id);
+      if (sprint.id === sprintNum) {
+        sprint.open = true;
+      } else {
+        sprint.open = false;
+      }
     });
     onClick(!click);
-  }
+  };
   return (
     <SideContainer>
       <Title>Sprints</Title>
-      {sprints.map((sprint) => (
+      {sprints?.map((sprint) => (
         <DataCard
           project={sprint.project}
           sprint={sprint.sprintNum}
@@ -86,6 +48,8 @@ const SideBar = (props) => {
           open={sprint.open}
           onClick={sprintClicked}
           isBacklog={sprint.isBacklog}
+          key={sprint.id}
+          sprintId={sprint.id}
         />
       ))}
     </SideContainer>
