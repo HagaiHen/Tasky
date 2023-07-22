@@ -12,8 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { submitFirstSignup } from '../../utils/consts';
-import Router from 'next/router'
+import { controllerSignUp } from '@/controller/auth';
+import { useRouter } from 'next/router';
+import { appContext } from "../index";
+import { useContext } from 'react';
 
 function Copyright(props) {
   return (
@@ -31,21 +33,20 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const router = useRouter();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const res = await controllerSignUp({email: data.get('email'),password: data.get('password')});
 
-    // push the user to the dashboard page
+    const data = new FormData(event.currentTarget);
+    const res = await controllerSignUp({ firstName: data.get('firstName'), lastName: data.get('lastName'), email: data.get('email'), password: data.get('password') });
     if (!res.success) {
       alert(res.error);
     }
     else {
-      Router.push({ pathname: '/dashboard', query: { token: res.token } }); 
+      router.push({ pathname: '/auth/signup_session', query: {token: res.token, uid:res.uid} });
     }
-    
-
-  }
+  };
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

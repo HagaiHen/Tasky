@@ -1,23 +1,20 @@
+import { use } from "react";
 import SignIn from "./signin";
-import { initializeApp } from "firebase/app";
+import Signup from "./signup";
+import { useState } from "react";
 
 export default function Auth(props) {
-  // fiebase logic to check user state, for now just display signup page
-  const app = initializeApp(props.firebaseConfig);
-  return <SignIn enviroment={props} app={app} />;
-}
 
-export const getServerSideProps = (context) => {
-  return {
-    props: {
-      firebaseConfig: {
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-      },
-    },
-  };
-};
+  const [state, changeState] = useState(true);
+
+  const updateState = () => {
+    changeState((prev)=>(!prev))
+  }
+
+  if (state) {
+    return <SignIn updateState={updateState} />;
+  }
+  else{
+    return <Signup updateState={updateState} />;
+  }
+}

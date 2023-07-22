@@ -1,7 +1,7 @@
 class User {
-  constructor(name, email, role, team = null, id = null) {
-    this.id = id
-    this.name = name;
+  constructor(NickName, email, role, team = null, uid = null) {
+    this.uid = uid
+    this.nickName = NickName;
     this.email = email;
     this.role = role;
     this.team = team;

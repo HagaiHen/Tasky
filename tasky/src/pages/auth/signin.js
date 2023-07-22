@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { controllerSignIn } from '@/controller/auth';
-import Router from 'next/router'
+import { appContext } from '..';
 
 function Copyright(props) {
   return (
@@ -32,17 +32,17 @@ const theme = createTheme();
 
 export default function SignIn(props) {
 
+  const app = React.useContext(appContext);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const res = await controllerSignIn(props.app, data.get('email'), data.get('password'));
+    const res = await controllerSignIn(data.get('email'), data.get('password'), app);
 
     if (!res.success) {
       alert(res.error);
     }
-    else {
-      Router.push({ pathname: '/backlog', query: { token: res.token } }); 
-    }};
+  };
 
   return (
     <ThemeProvider theme={theme}>
