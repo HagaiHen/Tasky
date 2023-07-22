@@ -29,17 +29,17 @@ import { getAllSprints } from "@/controller/SprintController";
 const TaskModal = (props) => {
   const [params, setParams] = useState({});
   const [nextTaskNum, setNextTaskNum] = useState(0);
-  useEffect(() => {
-    const getNextTaskNum = async () => {
-      const sprints = await getAllSprints(0);
-      sprints.forEach(async (sprint) => {
-        const tasks = await getAllTasks(sprint.sprintId);
-        setNextTaskNum(nextTaskNum+tasks.length);
-      });
-    };
+  // useEffect(() => {
+  //   const getNextTaskNum = async () => {
+  //     const sprints = await getAllSprints(0);
+  //     sprints.forEach(async (sprint) => {
+  //       const tasks = await getAllTasks(sprint.sprintId);
+  //       setNextTaskNum(nextTaskNum+tasks.length);
+  //     });
+  //   };
     
-    getNextTaskNum();
-  }, []);
+  //   getNextTaskNum();
+  // }, []);
   const onCreateTask = async () => {
     console.log('params', params);
     await createTask({ sprint: 'lUcZmmWjS2BfFTgvsxWF', ...params });

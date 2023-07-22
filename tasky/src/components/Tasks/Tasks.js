@@ -30,9 +30,7 @@ const getPriority = (task) => {
 };
 
 const Tasks = (props) => {
-  const [tasks, setTasks] = useState(
-    []
-  );
+  const [tasks, setTasks] = useState([]);
   useEffect(() => {
     const getTasks = async (sprintId) => {
       const taskList = await getAllTasks(sprintId);
@@ -40,6 +38,18 @@ const Tasks = (props) => {
     };
     getTasks(props.selectedSprint);
   }, [props.selectedSprint]);
+
+  // useEffect(() => {
+  //   const getNextTaskNum = async () => {
+  //     const sprints = await getAllSprints(0);
+  //     sprints.forEach(async (sprint) => {
+  //       const tasks = await getAllTasks(sprint.sprintId);
+  //       setNextTaskNum(nextTaskNum+tasks.length);
+  //     });
+  //   };
+
+  //   getNextTaskNum();
+  // }, []);
 
   // const [query, setQuery] = useState("");
   // const typeOneTask = {
@@ -93,10 +103,7 @@ const Tasks = (props) => {
 
   return (
     <MainContainer>
-      <TaskModal
-        isOpen={isOpen}
-        toggleModal={toggleModal}
-      />
+      <TaskModal isOpen={isOpen} toggleModal={toggleModal} />
       <Title>Backlog</Title>
       <SearchContainer>
         <SearchTask placeholder="Search backlog" onChange={onSearch} />
