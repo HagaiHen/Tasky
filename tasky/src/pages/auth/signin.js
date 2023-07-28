@@ -13,7 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { controllerSignIn } from '@/controller/auth';
-import Router from 'next/router'
+import { appContext } from '..';
+import { AUTH_STATES } from '@/utils/consts';
 
 function Copyright(props) {
   return (
@@ -32,17 +33,17 @@ const theme = createTheme();
 
 export default function SignIn(props) {
 
+  const app = React.useContext(appContext);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const res = await controllerSignIn(props.app, data.get('email'), data.get('password'));
+    const res = await controllerSignIn(data.get('email'), data.get('password'), app);
 
     if (!res.success) {
       alert(res.error);
     }
-    else {
-      Router.push({ pathname: '/backlog', query: { token: res.token } }); 
-    }};
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -113,14 +114,16 @@ export default function SignIn(props) {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2">\
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/auth/signup" variant="body2">
+                  <div onClick={() => props.updateState(AUTH_STATES.SIGNUP)} style={{cursor: "pointer"}}>
+                  <Link variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
+                  </div>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

@@ -1,8 +1,10 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { URLS } from "@/utils/consts";
-// helper function to submit auth form data to the server and get a user token back
-// TODO: if the method is login - generate a token with firebase auth client sdk and send it to the server
-//       the server will verify the token and return a ok response or an error
+import { getAuth } from "firebase/auth";
+import { signInWithCustomToken } from "firebase/auth";
+
+
+/* Function to handle user signup, this is the first stage sign up, after it there is the signup session */
 export const controllerSignUp = async (formData) => {
   const res = await fetch(URLS.SERVER + `/auth/signup`, {
     method: "POST",
@@ -12,17 +14,45 @@ export const controllerSignUp = async (formData) => {
     body: JSON.stringify(formData),
   });
 
+  console.log(res);
+
   if (res.ok) {
     // start signup form session
-    return { success: true, error: null, token: res.body.uid };
+    const data = await res.json();
+    return { success: true, error: null, uid: data.uid, token: data.token };
   } else {
     // indicate error
     return { success: false, error: res.body.message };
   }
 };
 
-// Function to handle user login
-export const controllerSignIn = async (app, email, password) => {
+export const controllerSignUpSession = async (user, token, app) => {
+  try {
+    const res = await fetch(URLS.SERVER + `/user/updateUser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    if (res.ok) {
+      // sign the user in 
+      const userCredential = await signInWithCustomToken(getAuth(app), token);
+      if (userCredential.user.uid === user.uid) {
+        return { success: true, error: null };
+      }
+    } else {
+      // indicate error
+      return { success: false, error: res.body.message };
+    }
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+/* signin function handle firebase client sdk logic for sign up + update the node server and wait for verification from him */
+export const controllerSignIn = async (email, password, app) => {
   try {
     // Sign in user with email and password
     const userCredential = await signInWithEmailAndPassword(
@@ -64,3 +94,12 @@ export const controllerSignIn = async (app, email, password) => {
     return { success: false, error: error.message };
   }
 };
+
+// export const controllerSignOut = async () => {
+//   try {
+//     await instance.getAuth().signOut();
+//     return { success: true, error: null };
+//   } catch (error) {
+//     return { success: false, error: error.message };
+//   }
+// }
