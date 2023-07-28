@@ -28,6 +28,7 @@ export const TaskContainer = styled.div`
   height: 80%;
   align-self: center;
   overflow: scroll;
+  align-items: center;
 `;
 export const SearchTask = styled.input`
   background-color: #d9d9d9;

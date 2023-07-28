@@ -10,46 +10,81 @@ import {
 } from "./styles";
 import Image from "next/image";
 import Task from "@/components/Task/Task";
+import TaskModal from "../TaskModal/TaskModal";
+import { getAllTasks } from "@/controller/TaskController";
+
+const getPriority = (task) => {
+  const fib = [2, 3, 5, 8, 13];
+  const weight =
+    (fib[task.Urgency] + fib[task.BuisnessValue] + fib[task.RiskReduction]) /
+    fib[task.DevelopmentEffort];
+  const maxValue = 3;
+  const priority = (weight / maxValue) * 100;
+  console.log("priority", priority, "task", task);
+  if (priority < 33) {
+    return "green";
+  } else if (priority < 66) {
+    return "yellow";
+  }
+  return "red";
+};
 
 const Tasks = (props) => {
-  useEffect(()=>{
-    setTasks(taskList.filter((task) => task.Sprint === props.selectedSprint));
-  },[props.selectedSprint]);
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    const getTasks = async (sprintId) => {
+      const taskList = await getAllTasks(sprintId);
+      setTasks(taskList);
+    };
+    getTasks(props.selectedSprint);
+  }, [props.selectedSprint]);
 
-  const [query, setQuery] = useState("");
-  const typeOneTask = {
-    Description: "Make Wallpaper",
-    Priority: "red",
-    Assignee: "Bar",
-    Sprint: 1
-  };
-  const typeTwoTask = {
-    Description: "Make Other Stuff",
-    Priority: "green",
-    Assignee: "Hagai",
-    Sprint: 2
-  };
-  const taskList = [
-    typeOneTask,
-    typeOneTask,
-    typeOneTask,
-    typeOneTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeOneTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-    typeTwoTask,
-  ];
+  // useEffect(() => {
+  //   const getNextTaskNum = async () => {
+  //     const sprints = await getAllSprints(0);
+  //     sprints.forEach(async (sprint) => {
+  //       const tasks = await getAllTasks(sprint.sprintId);
+  //       setNextTaskNum(nextTaskNum+tasks.length);
+  //     });
+  //   };
+
+  //   getNextTaskNum();
+  // }, []);
+
+  // const [query, setQuery] = useState("");
+  // const typeOneTask = {
+  //   Description: "Make Wallpaper",
+  //   Priority: "red",
+  //   Assignee: "Bar",
+  //   Sprint: 1,
+  // };
+  // const typeTwoTask = {
+  //   Description: "Make Other Stuff",
+  //   Priority: "green",
+  //   Assignee: "Hagai",
+  //   Sprint: 2,
+  // };
+  // const taskList = [
+  //   typeOneTask,
+  //   typeOneTask,
+  //   typeOneTask,
+  //   typeOneTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  //   typeOneTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  //   typeTwoTask,
+  // ];
 
   const onSearch = (event) => {
     if (!event.target.value) {
-      setTasks(taskList.filter((task)=>(task.Sprint === props.selectedSprint)));
+      setTasks({});
     } else {
       setTasks(
         tasks.filter(
@@ -60,17 +95,18 @@ const Tasks = (props) => {
       );
     }
   };
-  const [tasks, setTasks] = useState(
-    taskList.filter((task) => (task.Sprint === props.selectedSprint))
-  );
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <MainContainer>
+      <TaskModal isOpen={isOpen} toggleModal={toggleModal} />
       <Title>Backlog</Title>
       <SearchContainer>
-        <SearchTask
-          placeholder="Search backlog"
-          onChange={onSearch}
-        />
+        <SearchTask placeholder="Search backlog" onChange={onSearch} />
         <Image
           src="./Search.svg"
           width={15}
@@ -80,7 +116,7 @@ const Tasks = (props) => {
             setTasks(onSearch);
           }}
         />
-        <CreateTaskButton>
+        <CreateTaskButton onClick={toggleModal}>
           <Image
             src="./Plus.svg"
             width={15}
@@ -93,9 +129,10 @@ const Tasks = (props) => {
       <TaskContainer>
         {tasks.map((task) => (
           <Task
-            color={task.Priority}
-            assignee={task.Assignee}
-            description={task.Description}
+            color={getPriority(task)}
+            assignee={task?.Assignee}
+            description={task?.Description}
+            title={task?.Title}
             key={Math.random()}
           />
         ))}

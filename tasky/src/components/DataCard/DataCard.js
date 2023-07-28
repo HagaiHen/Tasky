@@ -40,7 +40,7 @@ const DataCard = (props) => {
         return !props.isBacklog ? (
           <ClosedCardContainer
             onClick={() => {
-              props.onClick(props.sprint);
+              props.onClick(props.sprintId);
             }}
           >
             <TextContainer>
@@ -51,7 +51,7 @@ const DataCard = (props) => {
         ) : (
           <ClosedCardContainer
             onClick={() => {
-              props.onClick(props.sprint);
+              props.onClick(props.sprintId);
             }}
           >
             <TextContainer>

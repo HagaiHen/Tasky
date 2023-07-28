@@ -9,15 +9,16 @@ export default function TextAreaAppearanceSubtle(props) {
   return (
     <TextArea
       appearance="none"
-      placeholder="Write the tasks description here"
-      defaultValue={props.description}
+      placeholder="Write the tasks title here"
+      defaultValue={props.title}
       spellCheck={true}
-      maxHeight="100px"
+      maxHeight="10px"
       onInput={props.onInput}
       text-color="white"
       resize="vertical"
       style={{
         color: "white",
+        fontSize: '1.5em'
       }}
     />
   );

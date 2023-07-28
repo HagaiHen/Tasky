@@ -7,7 +7,7 @@ export const postMessage = async (path, body) => {
 
   try {
     // Send a POST request to the specified path on the local server
-    data = await fetch(`http://localhost:5000/api/${path}`, {
+    data = await fetch(`http://localhost:5001/api/${path}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -19,7 +19,7 @@ export const postMessage = async (path, body) => {
     if (data) {
       // If the response is received successfully (i.e., data is truthy)
       // Try parsing the response data as JSON
-      return data.json().catch((err) => {
+      return await data.json().catch((err) => {
         console.log(
           `error in parsing json ${data.statusText}, error: ${err.message}`
         );
@@ -37,7 +37,7 @@ export const postMessage = async (path, body) => {
 export const getMessage = async (path) => {
   try {
     // Send a GET request to the specified path on the local server
-    const data = await fetch(`http://localhost:5000/api/${path}`, {
+    const data = await fetch(`http://localhost:5001/api/${path}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -48,7 +48,7 @@ export const getMessage = async (path) => {
     if (data) {
       // If the response is received successfully (i.e., data is truthy)
       // Try parsing the response data as JSON
-      return data.json().catch((err) => {
+      return await data.json().catch((err) => {
         console.log(`error in parsing json ${data}, error: ${err.message}`);
         return null; // Return null if parsing fails
       });
