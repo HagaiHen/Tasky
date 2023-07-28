@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { controllerSignIn } from '@/controller/auth';
 import { appContext } from '..';
+import { AUTH_STATES } from '@/utils/consts';
 
 function Copyright(props) {
   return (
@@ -113,14 +114,16 @@ export default function SignIn(props) {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="#" variant="body2">\
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/auth/signup" variant="body2">
+                  <div onClick={() => props.updateState(AUTH_STATES.SIGNUP)} style={{cursor: "pointer"}}>
+                  <Link variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
+                  </div>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

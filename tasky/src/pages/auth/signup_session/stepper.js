@@ -17,7 +17,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { MenuItem, Menu } from "@mui/material";
 import { ROLES } from "@/utils/consts";
 import { controllerSignUpSession } from "@/controller/auth";
-import { appContext } from "../index";
+import { appContext } from "@/pages/index";
 import { useContext } from "react";
 
 

@@ -1,6 +1,8 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { URLS } from "@/utils/consts";
 import { getAuth } from "firebase/auth";
+import { signInWithCustomToken } from "firebase/auth";
+
 
 /* Function to handle user signup, this is the first stage sign up, after it there is the signup session */
 export const controllerSignUp = async (formData) => {
@@ -36,7 +38,10 @@ export const controllerSignUpSession = async (user, token, app) => {
 
     if (res.ok) {
       // sign the user in 
-      getAuth(app).signInWithCustomToken(token);
+      const userCredential = await signInWithCustomToken(getAuth(app), token);
+      if (userCredential.user.uid === user.uid) {
+        return { success: true, error: null };
+      }
     } else {
       // indicate error
       return { success: false, error: res.body.message };

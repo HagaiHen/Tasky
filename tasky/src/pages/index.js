@@ -3,13 +3,15 @@ import {useAuthState} from "react-firebase-hooks/auth"
 import Backlog from "./backlog";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { createContext, useEffect } from "react";
+import { createContext } from "react";
 
 export const appContext = createContext(null);
 
 export default function Home(props) {
 
+  
   const app = initializeApp(props.firebaseConfig);
+
   const [user, loading, error] = useAuthState(getAuth(app));
 
   // getAuth(app).signOut();

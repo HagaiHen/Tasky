@@ -10,3 +10,10 @@ export const ROLES = [
   'Quality Assurance Engineer',
   'DevOps Engineer',
 ];
+
+
+export const AUTH_STATES = {
+  SIGNIN: 0,
+  SIGNUP: 1,
+  SIGNUP_SESSION: 2,
+}

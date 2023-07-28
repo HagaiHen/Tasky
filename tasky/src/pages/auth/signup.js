@@ -14,8 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { controllerSignUp } from '@/controller/auth';
 import { useRouter } from 'next/router';
-import { appContext } from "../index";
-import { useContext } from 'react';
+import { AUTH_STATES } from '@/utils/consts';
 
 function Copyright(props) {
   return (
@@ -32,7 +31,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp(props) {
   const router = useRouter();
 
   const handleSubmit = async (event) => {
@@ -44,7 +43,8 @@ export default function SignUp() {
       alert(res.error);
     }
     else {
-      router.push({ pathname: '/auth/signup_session', query: {token: res.token, uid:res.uid} });
+      props.updateSession(res.uid, res.token);
+      props.updateState(AUTH_STATES.SIGNUP_SESSION);
     }
   };
   return (
@@ -126,9 +126,11 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/auth/signin" variant="body2">
+              <div onClick={() => props.updateState(AUTH_STATES.SIGNIN)} style={{cursor: "pointer"}}>
+                <Link variant="body2">
                   Already have an account? Sign in
                 </Link>
+                </div>
               </Grid>
             </Grid>
             <Copyright sx={{ mt: 5 }} />
