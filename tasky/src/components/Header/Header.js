@@ -1,52 +1,61 @@
-import React from "react";
 import Image from "next/image";
-import { HeaderContainer } from "./styles";
-import { useRouter } from "next/router";
-const Header = () => {
-  const router = useRouter();
+import React, { useState } from "react";
+import { HeaderContainer, NavButton, Container } from "./styles";
+import Backlog from "@/pages/backlog";
+// import Calendar from "@/pages/calendar";// TODO: uncomment this line and implement the calendar page
+import Home from "@/pages/home";
+
+const headerButtons = ["Home", "Calendar", "Backlog", "Profile"];
+
+const NavHeader = (props) => {
+  const [activePage, setActivePage] = useState("Home"); // State to track active page
+
+  const handleNavigation = (page) => {
+    setActivePage(page);
+  };
+
   return (
-    <HeaderContainer>
-      <Image
-        width={160}
-        height={58}
-        src="./Logo.svg"
-        style={{ marginLeft: "15px" }}
-      />
-      <Image
-        width={131.5}
-        height={20}
-        src="./HomePageUC.svg"
-        style={{ marginLeft: "10%", marginTop: "2%", cursor: "pointer" }}
-        onClick={() => {
-          router.push("/homepage");
-        }}
-      />
-      <Image
-        width={108.5}
-        height={20}
-        src="./CalendarUC.svg"
-        style={{ marginLeft: "2%", marginTop: "2%", cursor: "pointer" }}
-        onClick={() => {
-          router.push("/calendar");
-        }}
-      />
-      <Image
-        width={99}
-        height={40}
-        src="./BacklogClicked.svg"
-        style={{ marginLeft: "2%", marginTop: "2%", cursor: "pointer" }}
-        onClick={() => {
-          router.push("/backlog");
-        }}
-      />
-      <Image
-        width={70}
-        height={38}
-        src="./ProfileClicked.svg"
-        style={{ marginLeft: "46%", marginTop: "1.2%", cursor: "pointer" }}
-      />
-    </HeaderContainer>
+    <Container>
+      <HeaderContainer>
+        <Image
+          width={160}
+          height={58}
+          src="./Logo.svg"
+          style={{ marginLeft: "15px" }}
+        />
+        {
+          headerButtons.map((button) => (
+            <NavButton
+              active={activePage === button}
+              onClick={() => handleNavigation(button)}
+            >
+              {button}
+            </NavButton>
+          ))
+        }
+        <Image
+          width={70}
+          height={38}
+          src="./ProfileClicked.svg"
+          style={{ marginLeft: "46%", marginTop: "1.2%", cursor: "pointer" }}
+        />
+      </HeaderContainer>
+      {(() => {
+        switch (activePage) {
+          case "Home":
+            return <Home />;
+          case "Calendar":
+            return <h1>Calendar Page</h1>;
+          case "Backlog":
+            return <Backlog />;
+          case "Profile":
+            return <h1>Profile Page</h1>;
+          default:
+            return <Home />;
+        }
+      })()}
+    </Container>
   );
 };
 
-export default Header;
+export default NavHeader;
