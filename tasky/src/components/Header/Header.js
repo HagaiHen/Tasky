@@ -2,11 +2,13 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { HeaderContainer, NavButton, Container } from "./styles";
 import Backlog from "@/pages/backlog";
-// import Calendar from "@/pages/calendar"; TODO: uncomment this line and implement the calendar page
+// import Calendar from "@/pages/calendar";// TODO: uncomment this line and implement the calendar page
 import Home from "@/pages/home";
 
+const headerButtons = ["Home", "Calendar", "Backlog", "Profile"];
+
 const NavHeader = (props) => {
-  const [activePage, setActivePage] = useState("/home"); // State to track active page
+  const [activePage, setActivePage] = useState("Home"); // State to track active page
 
   const handleNavigation = (page) => {
     setActivePage(page);
@@ -21,30 +23,16 @@ const NavHeader = (props) => {
           src="./Logo.svg"
           style={{ marginLeft: "15px" }}
         />
-        <NavButton
-          active={activePage === "/home"}
-          onClick={() => handleNavigation("/home")}
-        >
-          Home
-        </NavButton>
-        <NavButton
-          active={activePage === "/calendar"}
-          onClick={() => handleNavigation("/calendar")}
-        >
-          Calendar
-        </NavButton>
-        <NavButton
-          active={activePage === "/backlog"}
-          onClick={() => handleNavigation("/backlog")}
-        >
-          Backlog
-        </NavButton>
-        <NavButton
-          active={activePage === "/profile"}
-          onClick={() => handleNavigation("/profile")}
-        >
-          Profile
-        </NavButton>
+        {
+          headerButtons.map((button) => (
+            <NavButton
+              active={activePage === button}
+              onClick={() => handleNavigation(button)}
+            >
+              {button}
+            </NavButton>
+          ))
+        }
         <Image
           width={70}
           height={38}
@@ -54,13 +42,13 @@ const NavHeader = (props) => {
       </HeaderContainer>
       {(() => {
         switch (activePage) {
-          case "/home":
+          case "Home":
             return <Home />;
-          case "/calendar":
+          case "Calendar":
             return <h1>Calendar Page</h1>;
-          case "/backlog":
+          case "Backlog":
             return <Backlog />;
-          case "/profile":
+          case "Profile":
             return <h1>Profile Page</h1>;
           default:
             return <Home />;
