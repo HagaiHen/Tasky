@@ -1,15 +1,14 @@
-import Auth from "./auth"
-import {useAuthState} from "react-firebase-hooks/auth"
-import Backlog from "./backlog";
+import Auth from "./auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { createContext } from "react";
+import NavHeader from "@/components/Header/Header";
+import { ModalProvider } from "styled-react-modal";
 
 export const appContext = createContext(null);
 
 export default function Home(props) {
-
-  
   const app = initializeApp(props.firebaseConfig);
 
   const [user, loading, error] = useAuthState(getAuth(app));
@@ -24,14 +23,20 @@ export default function Home(props) {
     return <h1>Error: {error}</h1>;
   }
 
-  if (user) {// TODO: replace with the actual home page
-    return <Backlog user={user} />;
+  if (user) {
+
+    return (
+        <ModalProvider>
+          <NavHeader user={user} /> // this on will hold the current page content and the navigation header
+        </ModalProvider>
+    );
   }
 
-
-  return <appContext.Provider value={app}>
-          <Auth />
-        </appContext.Provider>;
+  return (
+    <appContext.Provider value={app}>
+      <Auth />
+    </appContext.Provider>
+  );
 }
 
 export const getServerSideProps = async (context) => {
