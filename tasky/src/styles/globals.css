@@ -105,8 +105,7 @@ a {
     color-scheme: dark;
   }
 }
-
-.example::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
 
