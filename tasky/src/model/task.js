@@ -116,3 +116,5 @@ class Task {
         }
     }
 }
+
+export { Task, TaskStatus, TaskDependencyType };
