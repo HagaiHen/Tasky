@@ -5,10 +5,10 @@ import { initializeApp } from "firebase/app";
 import { createContext } from "react";
 import NavHeader from "@/components/Header/Header";
 import { ModalProvider } from "styled-react-modal";
-
+import "../styles/globals.css";
 export const appContext = createContext(null);
 
-export default function Home(props) {
+export default function MyApp(props) {
   const app = initializeApp(props.firebaseConfig);
 
   const [user, loading, error] = useAuthState(getAuth(app));
@@ -24,11 +24,11 @@ export default function Home(props) {
   }
 
   if (user) {
-
     return (
-        <ModalProvider>
-          <NavHeader user={user} /> // this on will hold the current page content and navigation header
-        </ModalProvider>
+      <ModalProvider>
+        <NavHeader user={user} /> // this on will hold the current page content
+        and navigation header
+      </ModalProvider>
     );
   }
 
@@ -39,9 +39,8 @@ export default function Home(props) {
   );
 }
 
-export const getServerSideProps = async (context) => {
+MyApp.getInitialProps = async (context) => {
   return {
-    props: {
       firebaseConfig: {
         apiKey: process.env.apiKey,
         authDomain: process.env.authDomain,
@@ -50,6 +49,5 @@ export const getServerSideProps = async (context) => {
         messagingSenderId: process.env.messagingSenderId,
         appId: process.env.appId,
       },
-    },
   };
 };
