@@ -19,8 +19,12 @@ export const NavButton = styled.button`
   margin-right: 15px;
   font-size: 18px; /* Updated font size */
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
-  color: ${(props) => (props.active ? "#BDFF51" : "white")}; /* Updated text color */
+  color: ${(props) =>
+    props.active ? "#BDFF51" : "white"}; /* Updated text color */
   font-family: sans-serif;
+  :hover {
+    color: #bdff51;
+  }
 `;
 
 export const Container = styled.div`

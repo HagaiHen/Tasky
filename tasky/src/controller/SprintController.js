@@ -17,11 +17,11 @@ export const createSprint = async (
 };
 
 export const getSprint = async (sprintId) => {
-  const task = await postMessage(`/sprint/getSprint/${sprintId}`).catch((err) => {
+  const sprint = await postMessage(`/sprint/getSprint/${sprintId}`).catch((err) => {
     alert("couldnt get sprint" + err.message);
     return false;
   });
-  return task;
+  return sprint;
 };
 
 export const deleteSprint = async (sprintId) => {

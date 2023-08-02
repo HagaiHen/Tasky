@@ -29,10 +29,12 @@ const MultiDropDown = (props) => {
             control: (baseStyles, state) => ({
               ...baseStyles,
               fontFamily: "sans-serif",
+              color: "black",
             }),
             option: (baseStyles, state) => ({
               ...baseStyles,
               fontFamily: "sans-serif",
+              color: "black",
             }),
           }}
           options={options}
