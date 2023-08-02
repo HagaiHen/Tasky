@@ -63,4 +63,6 @@ class Team {
       return this.sprintNum;
     }
 
-  }
+}
+
+export default Team;

@@ -27,7 +27,7 @@ export default function Home(props) {
 
     return (
         <ModalProvider>
-          <NavHeader user={user} /> // this on will hold the current page content and the navigation header
+          <NavHeader user={user} /> // this on will hold the current page content and navigation header
         </ModalProvider>
     );
   }

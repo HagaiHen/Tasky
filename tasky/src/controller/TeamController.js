@@ -1,6 +1,7 @@
 import { postMessage, getMessage } from "./APIController";
+import { Team } from "../models/Team";
 
-export const createTeam = async (id, name, teamLead, members, tasks) => {
+export const createTeam = async (name, teamLead, members, tasks) => {
   await postMessage(
     "/task/createTask",
     new Team(name, teamLead, members, tasks)
