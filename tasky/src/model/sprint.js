@@ -1,55 +1,30 @@
 // a class for a sprint with properties: sprintid, startdate, enddate, teamid, sprintnumber
 
-class Sprint{
+class Sprint {
+  constructor(startDate, endDate, projectId, sprintNumber) {
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.projectId = projectId;
+    this.sprintNumber = sprintNumber;
+  }
 
+  toJSON() {
+    return {
+      startDate: this.startDate,
+      endDate: this.endDate,
+      projectId: this.projectId,
+      sprintNumber: this.sprintNumber,
+    };
+  }
 
-    constructor(sprintid = null, startdate, enddate, teamid, sprintnumber){
-        this.sprintid = sprintid;
-        this.startdate = startdate;
-        this.enddate = enddate;
-        this.teamid = teamid;
-        this.sprintnumber = sprintnumber;
-    }
-
-    get sprintid(){
-        return this._sprintid;
-    }
-
-    set sprintid(value){
-        this._sprintid = value;
-    }
-
-    get startdate(){
-        return this._startdate;
-    }
-
-    set startdate(value){
-        this._startdate = value;
-    }
-
-    get enddate(){
-        return this._enddate;
-    }
-
-    set enddate(value){
-        this._enddate = value;
-    }
-
-    get teamid(){
-        return this._teamid;
-    }
-
-    set teamid(value){
-        this._teamid = value;
-    }
-
-    get sprintnumber(){
-        return this._sprintnumber;
-    }
-
-    set sprintnumber(value){
-        this._sprintnumber = value;
-    }
+  static fromJSON(json) {
+    return new Sprint(
+      json.startDate,
+      json.endDate,
+      json.projectId,
+      json.sprintNumber
+    );
+  }
 }
 
 export default Sprint;

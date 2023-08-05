@@ -48,5 +48,8 @@ export const updateTask = async (updateParams, taskId) => {
 
 export const getAllTasks = async (sprintId) => {
   const tasks = await getMessage(`/task/getAllTasks/${sprintId}`);
+  // const tasksObject = {};
+  // tasksObject = tasks.map(task => (tasksObject[task.task_id]))
+  console.log("tasks", tasks);
   return tasks;
 };
