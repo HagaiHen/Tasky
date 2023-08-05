@@ -6,7 +6,7 @@ class Team {
       this.members = members;
       this.tasks = tasks;
       this.taskNum = 0;
-      this.sprintNum = 0; 
+      this.sprintNum = 0;
     }
   
     updateName(name) {
