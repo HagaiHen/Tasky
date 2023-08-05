@@ -29,26 +29,8 @@ import Task from "@/model/task";
 const TaskModal = (props) => {
   const [params, setParams] = useState(
     props.task
-      ? {
-          title: props.task.title,
-          description: props.task.description,
-          dependencies: props.task.dependencies,
-          assignee: props.task.assignee,
-          urgency: props.task.urgency,
-          buisnessValue: props.task.buisnessValue,
-          devEffort: props.task.devEffort,
-          riskReduction: props.task.riskReduction,
-        }
-      : {
-          title: "",
-          description: "",
-          dependencies: [],
-          assignee: 0,
-          urgency: 0,
-          buisnessValue: 0,
-          devEffort: 0,
-          riskReduction: 0,
-        }
+      ? props.task.toJSON()
+      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0).toJSON()
   );
   const [nextTaskNum, setNextTaskNum] = useState(0);
 
