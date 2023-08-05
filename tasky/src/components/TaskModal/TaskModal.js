@@ -35,7 +35,8 @@ const TaskModal = (props) => {
   const [nextTaskNum, setNextTaskNum] = useState(0);
 
   const onCreateTask = async () => {
-    const task = Task.fromJSON({ sprintId: "lUcZmmWjS2BfFTgvsxWF", ...params });
+    const task = Task.fromJSON(params);
+    task.sprintId = "lUcZmmWjS2BfFTgvsxWF";
     await createTask(task);
     props.toggleModal();
   };
