@@ -37,7 +37,7 @@ const CalendarPage = () => {
     setDate(date);
   };
 
-  const testUid = "aqGgZVjzgJbdLGJdBrsetEod3om2";
+  const testUid = "kxiLDVVioyaLKVESr0XTFAr6QiD3";
   const uid = testUid;
 
   return (

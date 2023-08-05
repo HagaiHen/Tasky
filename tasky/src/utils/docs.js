@@ -166,9 +166,10 @@ export const getUsers = async () => {
 export const postMessage = async (path, body) => {
   let data = false; // Variable to store the response data, initialized as false
   let payload = JSON.stringify(body); // Convert the request body to a JSON string
-  const url = `http://localhost:5000/api/${path}`;
+  const url = `http://localhost:5001/api/${path}`;
 
   try {
+    console.log("PATH :: ",path)
     // Send a POST request to the specified path on the local server
       const result = await fetch(url, {
       method: "POST",
@@ -198,7 +199,7 @@ export const postMessage = async (path, body) => {
 export const getMessage = async (path) => {
   try {
     // Send a GET request to the specified path on the local server
-    const response = await fetch(`http://localhost:5000/api/${path}`, {
+    const response = await fetch(`http://localhost:5001/api/${path}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
