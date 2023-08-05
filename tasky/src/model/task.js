@@ -1,3 +1,11 @@
+// enum for task status:
+export const TaskStatus = {
+  TODO: "TODO",
+  IN_PROGRESS: "IN_PROGRESS",
+  IN_REVIEW: "IN_REVIEW",
+  DONE: "DONE",
+};
+
 class Task {
   constructor(
     title,
@@ -57,6 +65,5 @@ class Task {
     );
   }
 }
-
 
 export default Task;
