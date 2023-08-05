@@ -39,49 +39,6 @@ const Tasks = (props) => {
     getTasks(props.selectedSprint);
   }, [props.selectedSprint]);
 
-  // useEffect(() => {
-  //   const getNextTaskNum = async () => {
-  //     const sprints = await getAllSprints(0);
-  //     sprints.forEach(async (sprint) => {
-  //       const tasks = await getAllTasks(sprint.sprintId);
-  //       setNextTaskNum(nextTaskNum+tasks.length);
-  //     });
-  //   };
-
-  //   getNextTaskNum();
-  // }, []);
-
-  // const [query, setQuery] = useState("");
-  // const typeOneTask = {
-  //   Description: "Make Wallpaper",
-  //   Priority: "red",
-  //   Assignee: "Bar",
-  //   Sprint: 1,
-  // };
-  // const typeTwoTask = {
-  //   Description: "Make Other Stuff",
-  //   Priority: "green",
-  //   Assignee: "Hagai",
-  //   Sprint: 2,
-  // };
-  // const taskList = [
-  //   typeOneTask,
-  //   typeOneTask,
-  //   typeOneTask,
-  //   typeOneTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  //   typeOneTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  //   typeTwoTask,
-  // ];
-
   const onSearch = (event) => {
     if (!event.target.value) {
       setTasks({});

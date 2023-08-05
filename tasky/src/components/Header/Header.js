@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import { HeaderContainer, NavButton, Container } from "./styles";
+import { HeaderContainer, Container, ButtonsContainer, LogoAndButtonsContainer } from "./styles";
+import NavButton from "./NavButton";
 import Backlog from "@/pages/backlog";
 // import Calendar from "@/pages/calendar";// TODO: uncomment this line and implement the calendar page
 import Home from "@/pages/home";
@@ -17,20 +18,23 @@ const NavHeader = (props) => {
   return (
     <Container>
       <HeaderContainer>
+        <LogoAndButtonsContainer>
         <Image
           width={160}
           height={58}
           src="./Logo.svg"
           style={{ marginLeft: "15px" }}
         />
-        {headerButtons.map((button) => (
-          <NavButton
-            active={activePage === button}
-            onClick={() => handleNavigation(button)}
-          >
-            {button}
-          </NavButton>
-        ))}
+        <ButtonsContainer>
+          {headerButtons.map((button) => (
+            <NavButton
+              active={activePage === button}
+              onClick={() => handleNavigation(button)}
+              title={button}
+            />
+          ))}
+        </ButtonsContainer>
+        </LogoAndButtonsContainer>
         <Image
           width={70}
           height={38}

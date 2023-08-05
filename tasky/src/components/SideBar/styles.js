@@ -12,8 +12,11 @@ export const SideContainer = styled.div`
   box-shadow: 1px 0.5px 1px 0.1px black;
   align-items: center;
   flex: 1;
-  overflow: scroll !important;
+  /* overflow: scroll !important; */
+  overflow-x: hidden;
+  overflow-y: scroll;
   /* overflow: hidden; */
+  padding-top: 60px;
 `;
 
 export const Title = styled.h1`
