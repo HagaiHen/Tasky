@@ -5,11 +5,6 @@ import { useState } from "react";
 import {AUTH_STATES} from "@/utils/consts";
 import SignupSession from "./signup_session";
 
-<<<<<<< HEAD
-export default function Auth (){
-    // fiebase logic to check user state, for now just display signup page
-    return SignUp();
-=======
 export default function Auth(props) {
 
   const [state, changeState] = useState(AUTH_STATES.SIGNIN);
@@ -33,5 +28,4 @@ export default function Auth(props) {
   else if (state == AUTH_STATES.SIGNUP_SESSION) {
     return <SignupSession token={token} uid={uid}/>;
   }
->>>>>>> origin/main
 }
