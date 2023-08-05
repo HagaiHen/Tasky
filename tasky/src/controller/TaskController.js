@@ -1,21 +1,9 @@
 import { getMessage, postMessage } from "./APIController";
+import Task from "@/model/task";
 
-export const createTask = async (
- params
-) => {
-  await postMessage("/task/createTask", {
-    Assignee: params?.assignee,
-    BuisnessValue: params?.buisnessValue,
-    Dependencies: params?.dependencies,
-    Description: params?.description,
-    DevelopmentEffort: params?.devEffort,
-    RiskReduction: params?.riskReduction,
-    Urgency: params?.urgency,
-    Sprint: params?.sprint,
-    Status: params?.status,
-    TaskNum: params?.taskNum,
-    Title: params?.title,
-  }).catch((err) => {
+export const createTask = async (taskInstance) => {
+  const task = taskInstance.toJSON();
+  await postMessage("/task/createTask", task).catch((err) => {
     alert("couldnt create task");
   });
 };
@@ -25,7 +13,7 @@ export const getTask = async (taskId) => {
     alert("couldnt get task" + err.message);
     return false;
   });
-  return task;
+  return Task.fromJSON(task);
 };
 
 export const deleteTask = async (taskId) => {
@@ -37,19 +25,15 @@ export const deleteTask = async (taskId) => {
 };
 
 // updateParams is an object which contains all the feilds we wish to update.
-export const updateTask = async (updateParams, taskId) => {
-  await postMessage("/task/updateTask", {
-    ...updateParams,
-    task_id: taskId,
-  }).catch((err) => {
+export const updateTask = async (taskInstance) => {
+  const task = taskInstance.toJSON();
+  await postMessage("/task/updateTask", task).catch((err) => {
     alert("couldnt create task");
   });
 };
 
 export const getAllTasks = async (sprintId) => {
-  const tasks = await getMessage(`/task/getAllTasks/${sprintId}`);
-  // const tasksObject = {};
-  // tasksObject = tasks.map(task => (tasksObject[task.task_id]))
-  console.log("tasks", tasks);
-  return tasks;
+  const tasksJSON = await getMessage(`/task/getAllTasks/${sprintId}`);
+  return tasksJSON.map((task) => Task.fromJSON(task));
 };
+

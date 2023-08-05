@@ -24,20 +24,20 @@ import TitleInput from "../DescriptionInput/TitleInput";
 import Comments from "./Comments";
 import DropDownMenu from "../DropDownMenu/dropDownMenu";
 import MultiDropDown from "../DropDownMenu/multiDropDown";
-import { createTask, getAllTasks } from "@/controller/TaskController";
-import { getAllSprints } from "@/controller/SprintController";
+import { createTask } from "@/controller/TaskController";
+import Task from "@/model/task";
 const TaskModal = (props) => {
   const [params, setParams] = useState(
     props.task
       ? {
-          title: props.task.Title,
-          description: props.task.Description,
-          dependencies: props.task.Dependencies,
+          title: props.task.title,
+          description: props.task.description,
+          dependencies: props.task.dependencies,
           assignee: props.task.assignee,
-          urgency: props.task.Urgency,
-          buisnessValue: props.task.BuisnessValue,
-          devEffort: props.task.DevelopmentEffort,
-          riskReduction: props.task.RiskReduction,
+          urgency: props.task.urgency,
+          buisnessValue: props.task.buisnessValue,
+          devEffort: props.task.devEffort,
+          riskReduction: props.task.riskReduction,
         }
       : {
           title: "",
@@ -53,7 +53,8 @@ const TaskModal = (props) => {
   const [nextTaskNum, setNextTaskNum] = useState(0);
 
   const onCreateTask = async () => {
-    await createTask({ sprint: 'lUcZmmWjS2BfFTgvsxWF', ...params });
+    const task = Task.fromJSON({ sprintId: "lUcZmmWjS2BfFTgvsxWF", ...params });
+    await createTask(task);
     props.toggleModal();
   };
   return (
