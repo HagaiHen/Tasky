@@ -3,8 +3,10 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 
-# TODO: multiple dependencies -
+# TODO: multiple dependencies - ?
 # TODO: multiple trees - V
+# TODO: comments and cleaning
+# TODO: check extreme cases
 
 def getDepGraph(Tasks: list[Task]):
     depG = nx.DiGraph()
@@ -23,7 +25,7 @@ def getDepGraph(Tasks: list[Task]):
     for n in depG.nodes():
         for i in depG.successors(n):
             num += 1
-        print("node: " + str(n) + " num of succ: " + str(num))
+        # print("node: " + str(n) + " num of succ: " + str(num))
         num = 0
 
     # return the dependency graph
@@ -33,6 +35,7 @@ def getDepGraph(Tasks: list[Task]):
 
     return depG
 
+# separate the whole graph to list of connected graphs
 def saparteConnComp(depG):
     component_graphs = []
     for component in nx.weakly_connected_components(depG):
@@ -62,6 +65,11 @@ def getPriority(t: Task):
     weight = (fib[t._urgency] + fib[t._busVal] + fib[t._riskReduc]) / fib[t._devEffort]
     return weight
 
+def getAllInEdges(graph, n):
+    ans = []
+    for u, v, data in graph.in_edges(n, data=True):
+        ans.append(u)
+    return ans
 
 def scheduleAlgo(Tasks: list[Task]):
     ans = []
@@ -73,10 +81,10 @@ def scheduleAlgo(Tasks: list[Task]):
     visited = []
 
     connectedComponent = saparteConnComp(g)
-
     draw(g)
 
-    print(connectedComponent)
+    # print(connectedComponent)
+
     res = []
     for g in connectedComponent:
         n = list(g.nodes)[0]
@@ -86,7 +94,12 @@ def scheduleAlgo(Tasks: list[Task]):
             for nei in g.neighbors(n):
                 t = getTaskByIndx(Tasks, nei)
                 weight = getPriority(t)
-                if weight > maxWeight and nei not in visited:
+                in_edges = getAllInEdges(g, nei)
+                check_in_edges = True
+                for i in in_edges:
+                    if i not in visited:
+                        check_in_edges = False
+                if weight > maxWeight and nei not in visited and check_in_edges:
                     maxWeight = weight
                     maxTask = t
                     maxNode = nei
@@ -99,6 +112,13 @@ def scheduleAlgo(Tasks: list[Task]):
             else:
                 if checkFamily(g, n):
                     n = list(g.predecessors(n))[0]
+                else:
+                    all_visited = True
+                    for child in g.neighbors(n):
+                        if child not in visited:
+                            all_visited = False
+                    if all_visited:
+                        n = list(g.predecessors(n))[0]
 
             maxWeight = 0
             maxTask = 0
@@ -106,20 +126,22 @@ def scheduleAlgo(Tasks: list[Task]):
 
         res.append(ans)
         ans = []
-    print(visited)
 
-    # sort by the priority
+    print("visited:", visited)
+
+    # TODO: we want the shortest first or not?
+    # sort by priority
     res.sort(key=lambda x: sum(getPriority(getTaskByIndx(Tasks, task._index)) for task in x), reverse=True)
 
+    printres(res)
     return res
-
 
 def printres(res):
     ans = []
     for lst in res:
         for i in lst:
             ans.append(i._index)
-    print(ans)
+    print("result:", ans)
 
 
 
@@ -136,25 +158,19 @@ if __name__ == '__main__':
     t3 = Task.Task([1], 2, 2, 2, 1, "Design Login Page", "info...", 3)
     t4 = Task.Task([2], 3, 2, 3, 4, "Sign in functions", "write all DB functions for sign in", 4)
     t5 = Task.Task([1], 3, 4, 3, 4, "Login functions", "write all DB functions for Login", 5)
-    t6 = Task.Task([2], 3, 4, 3, 4, "Regex Login page", "for all fields", 6)
+    t6 = Task.Task([2, 4], 3, 4, 3, 4, "Regex Login page", "for all fields", 6)
     t7 = Task.Task([], 4, 4, 4, 3, "Design Sign in Page", "info....", 7)
     t8 = Task.Task([7], 4, 2, 4, 3, "Design Sign in Page", "info....", 8)
 
     # t1 = Task.Task([], 4, 4, 4, 3, "Design Sign in Page", "info....", 1)
-    # t2 = Task.Task([1], 3, 4, 3, 2, "Regex for Sign in page", "for all fields", 2)
+    # t2 = Task.Task([1, 3], 3, 4, 3, 2, "Regex for Sign in page", "for all fields", 2)
     # t3 = Task.Task([1], 2, 2, 2, 1, "Design Login Page", "info...", 3)
     # t4 = Task.Task([2], 3, 2, 3, 4, "Sign in functions", "write all DB functions for sign in", 4)
     # t5 = Task.Task([1], 3, 4, 3, 4, "Login functions", "write all DB functions for Login", 5)
-    # t6 = Task.Task([3], 3, 4, 3, 4, "Regex Login page", "for all fields", 6)
-
-    # t1 = Task.Task([], 4, 4, 4, 3, "Design Sign in Page", "info....", 1)
-    # t2 = Task.Task([1], 3, 4, 3, 2, "Regex for Sign in page", "for all fields", 2)
-    # t3 = Task.Task([], 2, 2, 2, 1, "Design Login Page", "info...", 3)
-    # t4 = Task.Task([2], 3, 2, 3, 4, "Sign in functions", "write all DB functions for sign in", 4)
-    # t5 = Task.Task([6], 3, 4, 3, 4, "Login functions", "write all DB functions for Login", 5)
-    # t6 = Task.Task([3], 3, 4, 3, 4, "Regex Login page", "for all fields", 6)
+    # t6 = Task.Task([2, 5], 3, 4, 3, 4, "Regex Login page", "for all fields", 6)
+    # t7 = Task.Task([], 4, 4, 4, 3, "Design Sign in Page", "info....", 7)
+    # t8 = Task.Task([7], 4, 2, 4, 3, "Design Sign in Page", "info....", 8)
 
     l = [t7, t8, t1, t2, t3, t4, t5, t6]
 
     scheduleAlgo(l)
-    # getDepGraph(l)

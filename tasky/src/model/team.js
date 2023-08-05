@@ -5,6 +5,8 @@ class Team {
       this.teamLead = teamLead;
       this.members = members;
       this.tasks = tasks;
+      this.taskNum = 0;
+      this.sprintNum = 0;
     }
   
     updateName(name) {
@@ -52,4 +54,15 @@ class Team {
     getTeamLead() {
       return this.teamLead;
     }
-  }
+
+    getTaskNum() {
+      return this.taskNum;
+    }
+
+    getSprintNum()  {
+      return this.sprintNum;
+    }
+
+}
+
+export default Team;

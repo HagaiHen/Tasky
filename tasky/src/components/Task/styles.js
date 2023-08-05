@@ -11,8 +11,7 @@ export const TaskContainer = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 15px;
-  /* width: 95%;
-   */
+  /* width: 95%; */
   width: 1100px;
   height: 40px;
   align-self: center;
@@ -20,6 +19,7 @@ export const TaskContainer = styled.div`
   margin-top: 5px;
   margin-bottom: 5px;
   align-items: center;
+  /* justify-content: center; */
   :hover {
     cursor: pointer;
   }
