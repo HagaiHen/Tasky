@@ -1,7 +1,5 @@
 import * as React from 'react';
 import Image from "next/image";
-import { postMessage,getMessage } from '@/utils/docs';
-
 
 
 const CreateEventPopup = () => {

@@ -8,7 +8,6 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 import { Animation } from '@devexpress/dx-react-chart';
 import { CalContainer } from './styles';
-import { getMessage} from '@/utils/docs';
 
 
 
