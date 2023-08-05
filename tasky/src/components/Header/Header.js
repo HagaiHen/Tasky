@@ -39,23 +39,23 @@ const NavHeader = (props) => {
           width={70}
           height={38}
           src="./ProfileClicked.svg"
-          style={{ cursor: "pointer" }}
+          style={{ marginLeft: "35%", marginTop: "1.2%", cursor: "pointer" }}
         />
       </HeaderContainer>
-      {(() => {
-        switch (activePage) {
-          case "Home":
-            return <Home />;
-          case "Calendar":
-            return <h1>Calendar Page</h1>;
-          case "Backlog":
-            return <Backlog />;
-          case "Profile":
-            return <h1>Profile Page</h1>;
-          default:
-            return <Home />;
-        }
-      })()}
+        {(() => {
+          switch (activePage) {
+            case "Home":
+              return <Home />;
+            case "Calendar":
+              return <h1>Calendar Page</h1>;
+            case "Backlog":
+              return <Backlog />;
+            case "Profile":
+              return <h1>Profile Page</h1>;
+            default:
+              return <Home />;
+          }
+        })()}
     </Container>
   );
 };
