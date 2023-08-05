@@ -1,5 +1,5 @@
 export const URLS = {
-  SERVER: "http://localhost:5000/api",
+  SERVER: "http://localhost:5001/api",
 };
 
 export const ROLES = [

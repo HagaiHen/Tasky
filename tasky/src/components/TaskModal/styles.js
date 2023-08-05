@@ -87,6 +87,7 @@ export const TitleContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 15px;
 `;
 
 export const ParamContainer = styled.div`

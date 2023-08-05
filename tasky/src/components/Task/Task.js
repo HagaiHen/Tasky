@@ -65,6 +65,7 @@ const Task = (props) => {
         toggleModal={toggleModal}
         description={props.description}
         priority={props.color}
+        task={props.task}
       />
     </div>
   );
