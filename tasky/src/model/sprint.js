@@ -1,7 +1,8 @@
 // a class for a sprint with properties: sprintid, startdate, enddate, teamid, sprintnumber
 
 class Sprint {
-  constructor(startDate, endDate, projectId, sprintNumber) {
+  constructor(sprintId="", startDate, endDate, projectId, sprintNumber) {
+    this.sprintId = sprintId,
     this.startDate = startDate;
     this.endDate = endDate;
     this.projectId = projectId;
@@ -19,6 +20,7 @@ class Sprint {
 
   static fromJSON(json) {
     return new Sprint(
+      json.sprintId,
       json.startDate,
       json.endDate,
       json.projectId,

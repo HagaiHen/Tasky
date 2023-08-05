@@ -8,6 +8,7 @@ export const TaskStatus = {
 
 class Task {
   constructor(
+    taskId = "",
     title,
     description,
     status,
@@ -20,6 +21,7 @@ class Task {
     riskReduction,
     devEffort
   ) {
+    this.taskId = taskId;
     this.title = title;
     this.description = description;
     this.status = status;
@@ -35,6 +37,7 @@ class Task {
 
   toJSON() {
     return {
+      taskId: this.taskId,
       title: this.title,
       description: this.description,
       status: this.status,
@@ -51,6 +54,7 @@ class Task {
 
   static fromJSON(json) {
     return new Task(
+      json.taskId,
       json.title,
       json.description,
       json.status,
