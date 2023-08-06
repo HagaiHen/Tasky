@@ -6,7 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Stack from "@mui/material/Stack";
-import { postMessage, getMessage } from "@/utils/docs";
+import { getMessage, postMessage } from "../../controller/APIController";
 
 const EventButton = (params) => {
   const [openEventsDialog, setOpenEventsDialog] = useState(false);

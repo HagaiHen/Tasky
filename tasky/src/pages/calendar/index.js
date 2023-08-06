@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { getMessage } from "@/utils/docs";
+import { getMessage, postMessage } from "../../controller/APIController";
 import { Container, ContentContainer } from "./styles";
 import { ModalProvider } from "styled-react-modal";
 import Calendar from "@/components/Calendar/Calendar";
@@ -43,7 +43,6 @@ const CalendarPage = () => {
   return (
     <ModalProvider>
       <Container>
-        <Header />
         <ContentContainer>
           <Calendar 
             onDateReceived={handleDateChange} 

@@ -8,7 +8,7 @@ import {
   TaskContainer
 } from "./styles";
 import DailyEvent from "../DailyEvent/DailyEvent";
-import { getMessage } from "@/utils/docs";
+import { getMessage, postMessage } from "../../controller/APIController";
 
 const Scheduler = (params) => {
   const [dayEvents, setDayEvents] = useState([]);
@@ -79,7 +79,6 @@ const Scheduler = (params) => {
   return (
     <MainContainer>
       <Title> Daily Scheduler </Title>
-      <SepLine />
       <TasksTaskContainr>
         <TaskContainer>
           {dayEvents.map((event) => (
