@@ -25,6 +25,7 @@ const MultiDropDown = (props) => {
         <Select
           isMulti
           onChange={props.onChange}
+          defaultValue={props.defaultValue}
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,

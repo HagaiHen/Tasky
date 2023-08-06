@@ -46,8 +46,8 @@ const Tasks = (props) => {
       setTasks(
         tasks.filter(
           (task) =>
-            task.Description.includes(event.target.value) ||
-            task.Description.toLowerCase().includes(event.target.value)
+            task.description.includes(event.target.value) ||
+            task.description.toLowerCase().includes(event.target.value)
         )
       );
     }
@@ -87,10 +87,11 @@ const Tasks = (props) => {
         {tasks.map((task) => (
           <Task
             color={getPriority(task)}
-            assignee={task?.Assignee}
-            description={task?.Description}
-            title={task?.Title}
+            assignee={task?.assignee}
+            description={task?.description}
+            title={task?.title}
             key={Math.random()}
+            task={task}
           />
         ))}
       </TaskContainer>

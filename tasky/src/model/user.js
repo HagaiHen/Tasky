@@ -1,43 +1,28 @@
 class User {
-  constructor(NickName, email, role, team = null, uid = null) {
-    this.uid = uid
-    this.nickName = NickName;
+  constructor(userId="", name, email, role, imageUrl = null) {
+    (this.userId = userId), (this.name = name);
     this.email = email;
     this.role = role;
-    this.team = team;
-    this.assignedTasks = [];
+    this.imageUrl = imageUrl;
   }
 
-  updateName(name) {
-    this.name = name;
+  toJSON() {
+    return {
+      userId: this.userId,
+      name: this.name,
+      email: this.email,
+      role: this.role,
+      imageUrl: this.imageUrl,
+    };
   }
 
-  updateEmail(email) {
-    this.email = email;
-  }
-
-  updateRole(role) {
-    this.role = role;
-  }
-
-  assignToTeam(team) {
-    this.team = team;
-  }
-
-  unassignFromTeam() {
-    this.team = null;
-  }
-
-  assignTask(task) {
-    this.assignedTasks.push(task);
-  }
-
-  unassignTask(task) {
-    const index = this.assignedTasks.indexOf(task);
-    if (index !== -1) {
-      this.assignedTasks.splice(index, 1);
-    }
+  static fromJSON(json) {
+    return new User(
+      json.userId,
+      json.name,
+      json.email,
+      json.role,
+      json.imageUrl
+    );
   }
 }
-
-export default User;

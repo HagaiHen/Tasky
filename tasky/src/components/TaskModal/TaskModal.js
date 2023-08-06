@@ -24,25 +24,21 @@ import TitleInput from "../DescriptionInput/TitleInput";
 import Comments from "./Comments";
 import DropDownMenu from "../DropDownMenu/dropDownMenu";
 import MultiDropDown from "../DropDownMenu/multiDropDown";
-import { createTask, getAllTasks } from "@/controller/TaskController";
-import { getAllSprints } from "@/controller/SprintController";
+import { createTask } from "@/controller/TaskController";
+import Task from "@/model/task";
 const TaskModal = (props) => {
-  const [params, setParams] = useState({});
+  const [params, setParams] = useState(
+    props.task
+      ? props.task.toJSON()
+      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0).toJSON()
+  );
   const [nextTaskNum, setNextTaskNum] = useState(0);
-  // useEffect(() => {
-  //   const getNextTaskNum = async () => {
-  //     const sprints = await getAllSprints(0);
-  //     sprints.forEach(async (sprint) => {
-  //       const tasks = await getAllTasks(sprint.sprintId);
-  //       setNextTaskNum(nextTaskNum+tasks.length);
-  //     });
-  //   };
-    
-  //   getNextTaskNum();
-  // }, []);
+
   const onCreateTask = async () => {
-    console.log('params', params);
-    await createTask({ sprint: 'lUcZmmWjS2BfFTgvsxWF', ...params });
+    const task = Task.fromJSON(params);
+    task.sprintId = "lUcZmmWjS2BfFTgvsxWF";
+    await createTask(task);
+    props.toggleModal();
   };
   return (
     <TaskModalStyled isOpen={props.isOpen}>
@@ -102,36 +98,42 @@ const TaskModal = (props) => {
                 onChange={(options) => {
                   setParams({ ...params, dependencies: options });
                 }}
+                defaultValue={params.dependencies}
                 title="Dependencies"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, assignee: option.label });
                 }}
+                defaultValue={params.assignee}
                 title="Assignee"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, urgency: option.value });
                 }}
+                defaultValue={params.urgency}
                 title="Urgency"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, buisnessValue: option.value });
                 }}
+                defaultValue={params.buisnessValue}
                 title="Buisness value"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, devEffort: option.value });
                 }}
+                defaultValue={params.devEffort}
                 title="Dev effort"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, riskReduction: option.value });
                 }}
+                defaultValue={params.riskReduction}
                 title="Risk Reduction"
               />
             </div>
