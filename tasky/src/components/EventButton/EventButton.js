@@ -11,10 +11,19 @@ import { EventModal } from "../EventModal/EventModal";
 import TaskModal from "../TaskModal/TaskModal";
 import { CreateTaskButton } from "./styles";
 
+
+const emptyData = {
+  title:"",
+  description:"",
+  status:""
+}
+
 const EventButton = (params) => {
   const [openEventsDialog, setOpenEventsDialog] = useState(false);
+  const [openDescriptionDialog, setOpenDescriptionDialog] = useState(false);
   const [openTask, setOpenTask] = useState(false);
   const [isDelete, setIsDelete] = useState(false); // Flag to indicate delete operation
+  const [currentTaskData,updateCurrentData] = useState(emptyData); // the current task data we are looking at.
 
   const handleMyTasks = () =>{
     setOpenTask(true);
@@ -25,8 +34,11 @@ const EventButton = (params) => {
     setOpenEventsDialog(true);
   };
 
+  
+
   const handleClose = () => {
     setOpenEventsDialog(false);
+    setOpenDescriptionDialog(false);
     setOpenTask(false);
   };
 
@@ -106,6 +118,12 @@ const EventButton = (params) => {
     await postMessage("event/updateEvent", data);
   };
 
+  const openDescription = async (data) => {
+    updateCurrentData(data);
+    setOpenDescriptionDialog(true);
+    // console.log("Task Title: ", data.description);
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
     setIsOpen(prev => !prev);
@@ -178,7 +196,7 @@ const EventButton = (params) => {
         {/* </CreateTaskButton> */}
       </ButtonGroup>
 
-      <Dialog open={openEventsDialog} onClose={handleClose} >
+      <Dialog open={openEventsDialog} onClose={handleClose} PaperProps={{ sx: { bgcolor: "#4b4747" } }} >
         <DialogTitle>
         {isDelete ? "Select Event to Delete" : "Select Event to Update"}
         </DialogTitle>
@@ -200,31 +218,72 @@ const EventButton = (params) => {
       </Dialog>
 
       <Dialog
-      open={openTask}
-      onClose={handleClose}
-      PaperProps={{ sx: { bgcolor: "#4b4747" } }} // Set dialog background color
+        open={openTask}
+        onClose={handleClose}
+        PaperProps={{ sx: { bgcolor: "#4b4747" } }} // Set dialog background color
       >
-      <DialogTitle>My Tasks</DialogTitle>
-      <DialogContent>
-        <Stack spacing={1} justifyContent="start" >
-          {params.tasks.map((task) => (
-            <Button
-              key={task.id}
-              sx={{ color: "white" }} // Set text color to black
-            >
-              {task.data.status === "1" && "BackLog: "}
-              {task.data.status === "2" && "To Do: "  }
-              {task.data.status === "3" && "In Prog: "}
-              {task.data.status === "4" && "Done: "   }
-              {task.data.title}
-            </Button>
-          ))}
-        </Stack>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-      </DialogActions>
-    </Dialog>
+        <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>My Tasks</DialogTitle>
+        <DialogContent>
+          <Stack spacing={1} justifyContent="start">
+            {params.tasks.map((task) => (
+              <Button
+                key={task.id}
+                sx={{ color: "white" }} // Set text color to white
+                onClick={()=> openDescription(task.data)}
+              >
+                <span
+                  style={{
+                    color:
+                      task.data.status === "1"
+                        ? "Black" // BackLog
+                        : task.data.status === "2"
+                        ? "Black" // To Do
+                        : task.data.status === "3"
+                        ? "Black" // In Progress
+                        : task.data.status === "4"
+                        ? "Black" // Done
+                        : "white", // Default color
+                  }}
+                >
+                  {task.data.status === "1" && "BackLog: "}
+                  {task.data.status === "2" && "To Do: "}
+                  {task.data.status === "3" && "In Prog: "}
+                  {task.data.status === "4" && "Done: "}
+                </span>
+                {task.data.title}
+              </Button>
+            ))}
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog> 
+
+      <Dialog open={openDescriptionDialog} onClose={handleClose} PaperProps={{ sx: { bgcolor: "#4b4747" } }}>
+      <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>Name: 
+      <span style={{color:"black"}}> {currentTaskData.title}</span>
+      </DialogTitle>
+      <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>Status: 
+      <span style={{color:"black"}}> 
+        {currentTaskData.status === "1" && " BackLog "}
+        {currentTaskData.status === "2" && " To Do "}
+        {currentTaskData.status === "3" && " In Prog "}
+        {currentTaskData.status === "4" && " Done "}
+        </span>
+      </DialogTitle>
+      <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>Description: 
+      <span style={{color:"black"}}> {currentTaskData.description}</span>
+      </DialogTitle>
+        <DialogContent>
+          <Stack spacing={1} justifyContent="start">
+                  
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
