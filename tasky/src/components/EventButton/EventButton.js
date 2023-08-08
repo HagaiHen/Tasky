@@ -20,10 +20,12 @@ const emptyData = {
 
 const EventButton = (params) => {
   const [openEventsDialog, setOpenEventsDialog] = useState(false);
+  const [isCopy, setIsOpenCopy] = useState(false);
   const [openDescriptionDialog, setOpenDescriptionDialog] = useState(false);
   const [openTask, setOpenTask] = useState(false);
   const [isDelete, setIsDelete] = useState(false); // Flag to indicate delete operation
   const [currentTaskData,updateCurrentData] = useState(emptyData); // the current task data we are looking at.
+  
 
   const handleMyTasks = () =>{
     setOpenTask(true);
@@ -34,10 +36,15 @@ const EventButton = (params) => {
     setOpenEventsDialog(true);
   };
 
+  const handleIsCopy = (isCopy) => {
+    setIsOpenCopy(isCopy);
+  }
+
   
 
   const handleClose = () => {
     setOpenEventsDialog(false);
+    setIsOpenCopy(false);
     setOpenDescriptionDialog(false);
     params.reRender();
     setOpenTask(false);
@@ -96,9 +103,13 @@ const EventButton = (params) => {
       if (newHour !== null && newHour.trim() !== "") {
         data.Hour = newHour;
       }
-
+      if(!isCopy){
       // Update operation
-      await updateEvent(data);
+        await updateEvent(data);
+      }else{
+        await copyEvent(data);
+      }
+      
     }
     setOpenEventsDialog(false);
   };
@@ -120,6 +131,15 @@ const EventButton = (params) => {
     params.reRender();
   };
 
+  const copyEvent = async (data) => {
+    // Perform the update operation
+    // Call your update API or perform any necessary update actions
+    // console.log("updateEvent: ", data);
+    // Example: Call postMessage to update the event
+    await postMessage("event/createEvent", data);
+    params.reRender();
+  };
+
   const openDescription = async (data) => {
     updateCurrentData(data);
     setOpenDescriptionDialog(true);
@@ -136,12 +156,8 @@ const EventButton = (params) => {
     setIsOpenTask(isOpenTask =>!isOpenTask);
   };
 
-  const copyEvent = () => {
-    console.log("copyEvent: Clicked Me!");
-  };
-
   return (
-    <> 
+    <>
       <EventModal isOpen={isOpen} toggleModal={toggleModal} user={params.user} uid={params.uid}/>
       <TaskModal isOpen={isOpenTask} toggleModal={toggleModalTask}/>
       <ButtonGroup
@@ -172,7 +188,7 @@ const EventButton = (params) => {
         <Button
           variant="contained"
           sx={{ bgcolor: "silver", width: "150px", color: "#4b4747" }}
-          onClick={copyEvent}
+          onClick={() => {handleIsCopy(true); handleUpdateEvent(false);}} // Pass false for update operation
         >
           Copy Event
         </Button>
@@ -200,13 +216,27 @@ const EventButton = (params) => {
       </ButtonGroup>
 
       <Dialog open={openEventsDialog} onClose={handleClose} PaperProps={{ sx: { bgcolor: "#4b4747" } }} >
-        <DialogTitle>
-        {isDelete ? "Select Event to Delete" : "Select Event to Update"}
+        <DialogTitle style={{
+          fontFamily: "sans-serif",
+          color: "white",
+          marginLeft: "5px",
+          fontWeight: "600",
+          fontSize: "1.5em",
+          letterSpacing: "0.2em",
+        }}>
+        {isDelete ? "Select Event to Delete" : isCopy? "Select Event to Copy" : "Select Event to Update"}
         </DialogTitle>
         <DialogContent>
-          <Stack spacing={1}>
+          <Stack spacing={1} >
             {params.events.map((event) => (
               <Button
+              style={{
+                fontFamily: "sans-serif",
+                color: "black",
+                marginLeft: "5px",
+                fontWeight: "600",
+                letterSpacing: "0.2em",
+              }}
                 onClick={() => handleSelectUpdate(event)}
                 key={event.event_id}
               >
