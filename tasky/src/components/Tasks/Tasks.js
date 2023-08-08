@@ -50,7 +50,7 @@ const Tasks = (props) => {
   };
   const onSearch = (event) => {
     if (!event.target.value) {
-      setTasks({});
+      rerenderTasks();
     } else {
       setTasks(
         tasks.filter(
@@ -104,7 +104,7 @@ const Tasks = (props) => {
         </CreateTaskButton>
       </SearchContainer>
       <TaskContainer>
-        {tasks.map((task) => (
+        {tasks.length && tasks.map((task) => (
           <Task
             color={getPriority(task)}
             assignee={task?.assignee}
