@@ -7,6 +7,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Stack from "@mui/material/Stack";
 import { getMessage, postMessage } from "../../controller/APIController";
+import { EventModal } from "../EventModal/EventModal";
+import TaskModal from "../TaskModal/TaskModal";
+import { CreateTaskButton } from "./styles";
 
 const EventButton = (params) => {
   const [openEventsDialog, setOpenEventsDialog] = useState(false);
@@ -103,11 +106,13 @@ const EventButton = (params) => {
     await postMessage("event/updateEvent", data);
   };
 
-  const createEvent = () => {
-    // Open a new popup window for the details text boxes
-    const windowFeatures = "width=500,height=400,resizable=no";
-    const url = `/create-event-popup?uid=${params.uid}`;
-    window.open(url, "Create Event", windowFeatures);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(prev => !prev);
+  };
+  const [isOpenTask, setIsOpenTask] = useState(false);
+  const toggleModalTask = () => {
+    setIsOpenTask(isOpenTask =>!isOpenTask);
   };
 
   const copyEvent = () => {
@@ -115,7 +120,9 @@ const EventButton = (params) => {
   };
 
   return (
-    <>
+    <> 
+      <EventModal isOpen={isOpen} toggleModal={toggleModal} user={params.user} uid={params.uid}/>
+      <TaskModal isOpen={isOpenTask} toggleModal={toggleModalTask}/>
       <ButtonGroup
         variant="contained"
         aria-label="outlined primary button group"
@@ -123,7 +130,7 @@ const EventButton = (params) => {
         <Button
           variant="contained"
           sx={{ bgcolor: "silver", width: "150px", color: "#4b4747" }}
-          onClick={createEvent}
+          onClick={toggleModal}
         >
           Create Event
         </Button>
@@ -160,16 +167,18 @@ const EventButton = (params) => {
         >
           My Tasks
         </Button>
+        {/* <CreateTaskButton onClick={toggleModalTask}> */}
         <Button
           variant="contained"
           sx={{ bgcolor: "gainsboro", width: "150px", color: "#4b4747" }}
-          onClick={copyEvent}
+          onClick={toggleModalTask}
         >
           Create Task
         </Button>
+        {/* </CreateTaskButton> */}
       </ButtonGroup>
 
-      <Dialog open={openEventsDialog} onClose={handleClose}>
+      <Dialog open={openEventsDialog} onClose={handleClose} >
         <DialogTitle>
         {isDelete ? "Select Event to Delete" : "Select Event to Update"}
         </DialogTitle>
@@ -194,20 +203,20 @@ const EventButton = (params) => {
       open={openTask}
       onClose={handleClose}
       PaperProps={{ sx: { bgcolor: "#4b4747" } }} // Set dialog background color
-    >
+      >
       <DialogTitle>My Tasks</DialogTitle>
       <DialogContent>
-        <Stack spacing={1} justifyContent="start">
+        <Stack spacing={1} justifyContent="start" >
           {params.tasks.map((task) => (
             <Button
               key={task.id}
               sx={{ color: "white" }} // Set text color to black
             >
-              {task.data.status === 1 && "BackLog: "}
-              {task.data.status === 2 && "To Do: "}
-              {task.data.status === 3 && "In Prog: "}
-              {task.data.status === 4 && "Done: "}
-              {task.data.Description}
+              {task.data.status === "1" && "BackLog: "}
+              {task.data.status === "2" && "To Do: "  }
+              {task.data.status === "3" && "In Prog: "}
+              {task.data.status === "4" && "Done: "   }
+              {task.data.title}
             </Button>
           ))}
         </Stack>

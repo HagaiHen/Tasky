@@ -11,7 +11,7 @@ const headerButtons = ["Home", "Calendar", "Backlog", "Profile"];
 
 const NavHeader = (props) => {
   const [activePage, setActivePage] = useState("Home"); // State to track active page
-
+  console.log("user", props.user);
   const handleNavigation = (page) => {
     setActivePage(page);
   };
@@ -48,7 +48,7 @@ const NavHeader = (props) => {
             case "Home":
               return <Home />;
             case "Calendar":
-              return <CalendarPage/>;
+              return <CalendarPage user={props.user}/>;
             case "Backlog":
               return <Backlog />;
             case "Profile":

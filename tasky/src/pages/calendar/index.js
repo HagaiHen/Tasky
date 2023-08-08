@@ -9,7 +9,7 @@ import ProgChart from "@/components/ProgChart/ProgChart";
 import EventOps from "@/components/EventOps/EventOps";
 import Scheduler from "@/components/Scheduler/Scheduler";
 
-const CalendarPage = () => {
+const CalendarPage = (props) => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [tasks , setTasks ] = useState([]);
@@ -24,7 +24,7 @@ const CalendarPage = () => {
         }
         if (responseTasks ) {
           setTasks(responseTasks);
-          console.log(tasks)
+          // console.log(tasks)
         }
       } catch (error) {
         console.error("[Scheduler] Failed to fetch events:", error);
@@ -38,7 +38,7 @@ const CalendarPage = () => {
   };
 
   const testUid = "kxiLDVVioyaLKVESr0XTFAr6QiD3";
-  const uid = testUid;
+  const uid = props.user.uid;
 
   return (
     <ModalProvider>
@@ -49,20 +49,21 @@ const CalendarPage = () => {
           />
           <Scheduler 
             date={date}
-            uid={testUid}
+            uid={uid}
             events={events}
           />
         </ContentContainer>
         <ContentContainer>
           <ProgChart 
-            uid={testUid}
+            uid={uid}
             tasks={tasks}
           />
           <EventOps 
             date={date}
-            uid={testUid}
+            uid={uid}
             events={events}
             tasks={tasks}
+            user={props.user}
           />
         </ContentContainer>
       </Container>
