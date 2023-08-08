@@ -33,10 +33,10 @@ const TaskModal = (props) => {
       : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0).toJSON()
   );
   const [nextTaskNum, setNextTaskNum] = useState(0);
-
+  // useEffect()
   const onCreateTask = async () => {
     const task = Task.fromJSON(params);
-    task.sprintId = "lUcZmmWjS2BfFTgvsxWF";
+    task.sprintId = props.sprint || props.project.backlogId;
     await createTask(task);
     props.toggleModal();
   };
@@ -55,13 +55,13 @@ const TaskModal = (props) => {
         <TaskInfoContainer>
           <TitleContainer>
             <Priority color={props.priority} />
-            <Title>{`TAS - ${nextTaskNum + 1}`}</Title>
+            <Title>{`${props.project?.name} - ${props.project?.taskNum + 1}`}</Title>
           </TitleContainer>
           <DescriptionContainer color={props.priority}>
             <Description>TITLE</Description>
           </DescriptionContainer>
           <TitleInput
-            title={props.title}
+            title={props.task?.title}
             onInput={(e) => {
               setParams({ ...params, title: e.target.value });
             }}
@@ -70,7 +70,7 @@ const TaskModal = (props) => {
             <Description>DESCRIPTION</Description>
           </DescriptionContainer>
           <DescriptionInput
-            description={props.description}
+            description={props.task?.description}
             onInput={(e) => {
               setParams({ ...params, description: e.target.value });
             }}
@@ -103,7 +103,7 @@ const TaskModal = (props) => {
               />
               <DropDownMenu
                 onChange={(option) => {
-                  setParams({ ...params, assignee: option.label });
+                  setParams({ ...params, assignee: option.label});
                 }}
                 defaultValue={params.assignee}
                 title="Assignee"

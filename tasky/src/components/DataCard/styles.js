@@ -32,6 +32,7 @@ export const OpenedCardContainer = styled.button`
   justify-content: center;
   align-items: center;
   margin-top: 5%;
+  padding-right: 10px;
 `;
 
 
