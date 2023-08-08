@@ -19,7 +19,8 @@ class Task {
     urgency,
     buisnessValue,
     riskReduction,
-    devEffort
+    devEffort,
+    taskNum
   ) {
     this.taskId = taskId;
     this.title = title;
@@ -33,6 +34,7 @@ class Task {
     this.buisnessValue = buisnessValue;
     this.riskReduction = riskReduction;
     this.devEffort = devEffort;
+    this.taskNum = taskNum;
   }
 
   toJSON() {
@@ -49,6 +51,7 @@ class Task {
       buisnessValue: this.buisnessValue,
       riskReduction: this.riskReduction,
       devEffort: this.devEffort,
+      taskNum: this.taskNum,
     };
   }
 
@@ -65,7 +68,8 @@ class Task {
       json.urgency,
       json.businessValue,
       json.riskReduction,
-      json.devEffort
+      json.devEffort,
+      json.taskNum
     );
   }
 }
