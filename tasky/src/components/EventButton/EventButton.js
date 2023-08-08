@@ -39,6 +39,7 @@ const EventButton = (params) => {
   const handleClose = () => {
     setOpenEventsDialog(false);
     setOpenDescriptionDialog(false);
+    params.reRender();
     setOpenTask(false);
   };
 
@@ -105,17 +106,18 @@ const EventButton = (params) => {
   const deleteEvent = async (data) => {
     // Perform the delete operation
     // Call your delete API or perform any necessary delete actions
-    // console.log("deleteEvent: ", data);
     // Example: Call postMessage to delete the event
     await getMessage(`event/deleteEvent/${data.event_id}`);
+    params.reRender();
   };
 
   const updateEvent = async (data) => {
     // Perform the update operation
     // Call your update API or perform any necessary update actions
-    console.log("updateEvent: ", data);
+    // console.log("updateEvent: ", data);
     // Example: Call postMessage to update the event
     await postMessage("event/updateEvent", data);
+    params.reRender();
   };
 
   const openDescription = async (data) => {
@@ -127,6 +129,7 @@ const EventButton = (params) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
     setIsOpen(prev => !prev);
+    params.reRender();
   };
   const [isOpenTask, setIsOpenTask] = useState(false);
   const toggleModalTask = () => {
@@ -222,13 +225,13 @@ const EventButton = (params) => {
         onClose={handleClose}
         PaperProps={{ sx: { bgcolor: "#4b4747" } }} // Set dialog background color
       >
-        <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>My Tasks</DialogTitle>
+        <DialogTitle sx={{ borderBottom: '1px solid #bdff51', color: 'white' }}>My Tasks</DialogTitle>
         <DialogContent>
           <Stack spacing={1} justifyContent="start">
             {params.tasks.map((task) => (
               <Button
                 key={task.id}
-                sx={{ color: "white" }} // Set text color to white
+                sx={{ color: "white", fontFamily: "sans-serif" }} // Set text color to white
                 onClick={()=> openDescription(task.data)}
               >
                 <span
@@ -261,10 +264,10 @@ const EventButton = (params) => {
       </Dialog> 
 
       <Dialog open={openDescriptionDialog} onClose={handleClose} PaperProps={{ sx: { bgcolor: "#4b4747" } }}>
-      <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>Name: 
+      <DialogTitle sx={{ borderBottom: '1px solid #bdff51', color: 'white' }}>Name: 
       <span style={{color:"black"}}> {currentTaskData.title}</span>
       </DialogTitle>
-      <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>Status: 
+      <DialogTitle sx={{ borderBottom: '1px solid #bdff51', color: 'white' }}>Status: 
       <span style={{color:"black"}}> 
         {currentTaskData.status === "1" && " BackLog "}
         {currentTaskData.status === "2" && " To Do "}
@@ -272,7 +275,7 @@ const EventButton = (params) => {
         {currentTaskData.status === "4" && " Done "}
         </span>
       </DialogTitle>
-      <DialogTitle sx={{ borderBottom: '1px solid black', color: 'white' }}>Description: 
+      <DialogTitle sx={{ borderBottom: '1px solid #bdff51', color: 'white' }}>Description: 
       <span style={{color:"black"}}> {currentTaskData.description}</span>
       </DialogTitle>
         <DialogContent>

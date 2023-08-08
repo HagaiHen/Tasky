@@ -83,6 +83,7 @@ const EventOps = (params) => {
           events={dayEvents}
           tasks={params.tasks}
           user={params.user}
+          reRender={params.reRender}
         />
       </ContainerRaw>
         

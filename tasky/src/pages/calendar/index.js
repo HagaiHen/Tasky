@@ -13,7 +13,14 @@ const CalendarPage = (props) => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [tasks , setTasks ] = useState([]);
+  const uid = props.user.uid;
+  const [render, reRender] = useState(false);
 
+  const reRenderPage = () => {
+    console.log("______________________________________")
+    reRender(prev => !prev);
+  }
+  
   useEffect( () => {
     const fetchData = async () => {
       try {
@@ -31,14 +38,11 @@ const CalendarPage = (props) => {
       }
     };
     fetchData();
-  }, [date]);
+  }, [date, render]);
   
   const handleDateChange = (date) => {
     setDate(date);
   };
-
-  const testUid = "kxiLDVVioyaLKVESr0XTFAr6QiD3";
-  const uid = props.user.uid;
 
   return (
     <ModalProvider>
@@ -64,6 +68,7 @@ const CalendarPage = (props) => {
             events={events}
             tasks={tasks}
             user={props.user}
+            reRender={reRenderPage}
           />
         </ContentContainer>
       </Container>
