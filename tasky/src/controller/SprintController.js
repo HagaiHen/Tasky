@@ -42,7 +42,7 @@ export const updateSprint = async (updateParams, sprintId) => {
   });
 };
 
-export const getAllSprints = async (teamId) => {
-    const sprints = await getMessage(`/sprint/getAllSprints/${teamId}`);
+export const getAllSprints = async (projectId) => {
+    const sprints = await getMessage(`/sprint/getAllSprints/${projectId}`);
     return sprints;
 }
