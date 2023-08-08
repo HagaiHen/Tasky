@@ -27,19 +27,26 @@ import MultiDropDown from "../DropDownMenu/multiDropDown";
 import { createTask } from "@/controller/TaskController";
 import Task from "@/model/task";
 const TaskModal = (props) => {
+
   const [params, setParams] = useState(
     props.task
       ? props.task.toJSON()
-      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0).toJSON()
+      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0, props.project?.taskNum ).toJSON()
   );
-  const [nextTaskNum, setNextTaskNum] = useState(0);
-  // useEffect()
+  useEffect(() => {
+    setParams(  props.task
+      ? props.task.toJSON()
+      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0, props.project?.taskNum ).toJSON())
+  }, [props.project])
   const onCreateTask = async () => {
     const task = Task.fromJSON(params);
     task.sprintId = props.sprint || props.project.backlogId;
     await createTask(task);
+    props.updateProject({taskNum: props.project.taskNum + 1});
     props.toggleModal();
+    props.updateTasks();
   };
+
   return (
     <TaskModalStyled isOpen={props.isOpen}>
       <CloseContainer>
@@ -55,7 +62,7 @@ const TaskModal = (props) => {
         <TaskInfoContainer>
           <TitleContainer>
             <Priority color={props.priority} />
-            <Title>{`${props.project?.name} - ${props.project?.taskNum + 1}`}</Title>
+            <Title>{`${props.project?.name} - ${props.task?.taskNum ? props.task.taskNum : props.project?.taskNum + 1}`}</Title>
           </TitleContainer>
           <DescriptionContainer color={props.priority}>
             <Description>TITLE</Description>

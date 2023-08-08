@@ -12,9 +12,7 @@ const Backlog = (props) => {
 
   useEffect(() => {
     const getProjects = async () => {
-      console.log('userId', props.user.uid);
       const projects = await getAllProjectsByUserId(props.user.uid);
-      console.log('projects', projects)
       setUserProjects(projects);
     };
     getProjects();

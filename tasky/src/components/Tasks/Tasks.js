@@ -7,15 +7,13 @@ import {
   CreateTaskButton,
   ButtonTitle,
   TaskContainer,
-  SearchBarContainer
+  SearchBarContainer,
 } from "./styles";
 import Image from "next/image";
 import Task from "@/components/Task/Task";
 import TaskModal from "../TaskModal/TaskModal";
 import { getAllTasks } from "@/controller/TaskController";
 import ProjectDropdown from "../ProjectDropdown/ProjectDropdown";
-
-
 
 const getPriority = (task) => {
   const fib = [2, 3, 5, 8, 13];
@@ -36,6 +34,10 @@ const getPriority = (task) => {
 const Tasks = (props) => {
   const [updateUI, setUpdateUI] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [project, setProject] = useState(props.project);
+  useEffect(() => {
+    setProject(props.project);
+  },[props.project]);
   useEffect(() => {
     const getTasks = async (sprintId) => {
       const taskList = await getAllTasks(sprintId);
@@ -64,13 +66,25 @@ const Tasks = (props) => {
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-
+  const updateProject = (data) => {
+    setProject((prev) => ({ ...prev, ...data }));
+  };
   return (
     <MainContainer>
-      <TaskModal isOpen={isOpen} toggleModal={toggleModal} project={props.project} sprint={props.selectedSprint}/>
+      <TaskModal
+        isOpen={isOpen}
+        toggleModal={toggleModal}
+        project={project}
+        sprint={props.selectedSprint}
+        updateTasks={rerenderTasks}
+        updateProject={updateProject}
+      />
       <Title>Backlog</Title>
       <SearchContainer>
-        <ProjectDropdown projects={props.projects} onSelect={props.onSelectProject}/>
+        <ProjectDropdown
+          projects={props.projects}
+          onSelect={props.onSelectProject}
+        />
         <SearchBarContainer>
           <SearchTask placeholder="Search backlog" onChange={onSearch} />
           <Image
@@ -99,6 +113,8 @@ const Tasks = (props) => {
             key={Math.random()}
             task={task}
             rerenderTasks={rerenderTasks}
+            project={project}
+            updateProject={updateProject}
           />
         ))}
       </TaskContainer>
