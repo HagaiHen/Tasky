@@ -60,7 +60,7 @@ export const CreateTaskButton = styled.div`
   gap: 10px;
   align-items: center;
   padding-left: 4px;
-  padding-right: 4px; 
+  padding-right: 15px; 
   :hover {
     cursor: pointer;
     background-color: #729639;

@@ -62,7 +62,7 @@ const TaskModal = (props) => {
         <TaskInfoContainer>
           <TitleContainer>
             <Priority color={props.priority} />
-            <Title>{`${props.project?.name} - ${props.task?.taskNum ? props.task.taskNum : props.project?.taskNum + 1}`}</Title>
+            <Title>{`${props.project?.name} - ${props.task?.taskNum !== undefined ? props.task.taskNum : props.project?.taskNum}`}</Title>
           </TitleContainer>
           <DescriptionContainer color={props.priority}>
             <Description>TITLE</Description>
