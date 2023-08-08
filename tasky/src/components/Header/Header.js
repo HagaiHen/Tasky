@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { HeaderContainer, Container, ButtonsContainer, LogoAndButtonsContainer } from "./styles";
 import NavButton from "./NavButton";
 import Backlog from "@/pages/backlog";
+import CalendarPage from "@/pages/calendar";
 // import Calendar from "@/pages/calendar";// TODO: uncomment this line and implement the calendar page
 import Home from "@/pages/home";
 
@@ -10,7 +11,7 @@ const headerButtons = ["Home", "Calendar", "Backlog", "Profile"];
 
 const NavHeader = (props) => {
   const [activePage, setActivePage] = useState("Home"); // State to track active page
-
+  console.log("user", props.user);
   const handleNavigation = (page) => {
     setActivePage(page);
   };
@@ -47,7 +48,7 @@ const NavHeader = (props) => {
             case "Home":
               return <Home />;
             case "Calendar":
-              return <h1>Calendar Page</h1>;
+              return <CalendarPage user={props.user}/>;
             case "Backlog":
               return <Backlog />;
             case "Profile":
