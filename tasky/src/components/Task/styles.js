@@ -113,17 +113,19 @@ export const DescriptionContainer = styled.div`
 export const Selected = styled.div`
   background-color: #a3a1a1;
   border-radius: 6px;
-  height: 30px;
+  height: 35px;
   width: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin-left: 50px;
   margin-right: 40px;
 `;
 
 export const StatusText = styled.h4`
   color: white;
+  font-size: 1rem;
   font-family: sans-serif;
 `;
 

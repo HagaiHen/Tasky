@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TaskContainer,
   Priority,
@@ -12,9 +12,26 @@ import {
 import Image from "next/image";
 import TaskModal from "../TaskModal/TaskModal";
 import { deleteTask } from "@/controller/TaskController";
+import { getUser } from "@/controller/UserController";
+import {statusOptions} from "../../model/task";
 
 const Task = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [assigneeName, setAssigneeName] = useState("");
+  useEffect(()=>{
+    const updateName = async () => {
+      if(!props.task){
+        return;
+      }
+      const userId = props.task.assigneeId;
+      if(!userId){
+        return;
+      }
+      const user = await getUser(userId);
+      setAssigneeName(user.firstName);
+    }
+    updateName();
+  },[props.task]);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -47,12 +64,12 @@ const Task = (props) => {
         <Spacer />
         <Title>Status: </Title>
         <Selected>
-          <StatusText>{"IN PROGRESS"}</StatusText>
+          <StatusText>{statusOptions[props.task.status]?.label}</StatusText>
         </Selected>
         <Spacer />
         <Title>Assignee: </Title>
         <Selected>
-          <StatusText>{props.assignee}</StatusText>
+          <StatusText>{assigneeName}</StatusText>
         </Selected>
         <Spacer />
         <Image
@@ -77,6 +94,7 @@ const Task = (props) => {
         updateTasks={updateTasks}
         project={props.project}
         updateProject={props.updateProject}
+        tasks={props.tasks}
       />
     </div>
   );

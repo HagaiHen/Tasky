@@ -24,25 +24,80 @@ import TitleInput from "../DescriptionInput/TitleInput";
 import Comments from "./Comments";
 import DropDownMenu from "../DropDownMenu/dropDownMenu";
 import MultiDropDown from "../DropDownMenu/multiDropDown";
-import { createTask } from "@/controller/TaskController";
+import { createTask, updateTask } from "@/controller/TaskController";
 import Task from "@/model/task";
+import { getUser } from "@/controller/UserController";
+import {statusOptions} from "@/model/task";
 const TaskModal = (props) => {
-
   const [params, setParams] = useState(
     props.task
       ? props.task.toJSON()
-      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0, props.project?.taskNum ).toJSON()
+      : new Task(
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          0,
+          0,
+          0,
+          0,
+          props.project?.taskNum
+        ).toJSON()
   );
   useEffect(() => {
-    setParams(  props.task
-      ? props.task.toJSON()
-      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0, props.project?.taskNum ).toJSON())
-  }, [props.project])
+    setParams(
+      props.task
+        ? props.task.toJSON()
+        : new Task(
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            0,
+            0,
+            0,
+            0,
+            props.project?.taskNum
+          ).toJSON()
+    );
+  }, [props.project]);
+  const [assignee, setAssignee] = useState({});
+  useEffect(() => {
+    const getAssignee = async () => {
+      if (!props.task) {
+        return;
+      }
+      const assignee = props.task.assigneeId;
+      if (!assignee) {
+        return;
+      }
+      const user = await getUser(assignee);
+      setAssignee({ label: user.firstName, value: assignee });
+    };
+    getAssignee();
+  }, [props.task]);
+
   const onCreateTask = async () => {
     const task = Task.fromJSON(params);
     task.sprintId = props.sprint || props.project.backlogId;
     await createTask(task);
-    props.updateProject({taskNum: props.project.taskNum + 1});
+    props.updateProject({ taskNum: props.project.taskNum + 1 });
+    props.toggleModal();
+    props.updateTasks();
+  };
+
+  const onUpdateTask = async () => {
+    const task = Task.fromJSON(params);
+    console.log("task on update = ", task);
+    await updateTask(task);
     props.toggleModal();
     props.updateTasks();
   };
@@ -62,7 +117,11 @@ const TaskModal = (props) => {
         <TaskInfoContainer>
           <TitleContainer>
             <Priority color={props.priority} />
-            <Title>{`${props.project?.name} - ${props.task?.taskNum !== undefined ? props.task.taskNum : props.project?.taskNum}`}</Title>
+            <Title>{`${props.project?.name} - ${
+              props.task?.taskNum !== undefined
+                ? props.task.taskNum
+                : props.project?.taskNum
+            }`}</Title>
           </TitleContainer>
           <DescriptionContainer color={props.priority}>
             <Description>TITLE</Description>
@@ -86,7 +145,10 @@ const TaskModal = (props) => {
             <Comments />
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <SaveTaskButton color={props.priority} onClick={onCreateTask}>
+            <SaveTaskButton
+              color={props.priority}
+              onClick={props.task ? onUpdateTask : onCreateTask}
+            >
               <ButtonTitle>SAVE TASK</ButtonTitle>
             </SaveTaskButton>
           </div>
@@ -95,7 +157,12 @@ const TaskModal = (props) => {
           <ProgressContainer color={props.priority}>
             <ProgressTitle>PROGRESS</ProgressTitle>
             <ParamLine color={props.priority} />
-            <DropDownMenu />
+            <DropDownMenu
+              onChange={(option) => {
+                setParams({ ...params, status: option.value });
+              }}
+              defaultValue={statusOptions[props.task?.status] || null}
+            />
           </ProgressContainer>
           <ParamContainer color={props.priority}>
             <ProgressTitle>PARAMETERS</ProgressTitle>
@@ -107,40 +174,68 @@ const TaskModal = (props) => {
                 }}
                 defaultValue={params.dependencies}
                 title="Dependencies"
+                tasks={props.tasks}
+                project={props.project}
               />
               <DropDownMenu
                 onChange={(option) => {
-                  setParams({ ...params, assignee: option.label});
+                  setParams({ ...params, assigneeId: option.value });
                 }}
-                defaultValue={params.assignee}
+                defaultValue={assignee}
                 title="Assignee"
+                projectId={props.project?.projectId}
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, urgency: option.value });
                 }}
-                defaultValue={params.urgency}
+                defaultValue={
+                  props.task?.urgency
+                    ? { label: props.task.urgency, value: props.task.urgency }
+                    : null
+                }
                 title="Urgency"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, buisnessValue: option.value });
                 }}
-                defaultValue={params.buisnessValue}
+                defaultValue={
+                  props.task?.buisnessValue
+                    ? {
+                        label: props.task.buisnessValue,
+                        value: props.task.buisnessValue,
+                      }
+                    : null
+                }
                 title="Buisness value"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, devEffort: option.value });
                 }}
-                defaultValue={params.devEffort}
+                defaultValue={
+                  props.task?.devEffort
+                    ? {
+                        label: props.task.devEffort,
+                        value: props.task.devEffort,
+                      }
+                    : null
+                }
                 title="Dev effort"
               />
               <DropDownMenu
                 onChange={(option) => {
                   setParams({ ...params, riskReduction: option.value });
                 }}
-                defaultValue={params.riskReduction}
+                defaultValue={
+                  props.task?.riskReduction
+                    ? {
+                        label: props.task.riskReduction,
+                        value: props.task.riskReduction,
+                      }
+                    : null
+                }
                 title="Risk Reduction"
               />
             </div>
