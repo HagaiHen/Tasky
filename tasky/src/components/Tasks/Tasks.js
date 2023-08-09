@@ -7,11 +7,13 @@ import {
   CreateTaskButton,
   ButtonTitle,
   TaskContainer,
+  SearchBarContainer,
 } from "./styles";
 import Image from "next/image";
 import Task from "@/components/Task/Task";
 import TaskModal from "../TaskModal/TaskModal";
 import { getAllTasks } from "@/controller/TaskController";
+import ProjectDropdown from "../ProjectDropdown/ProjectDropdown";
 
 const getPriority = (task) => {
   const fib = [2, 3, 5, 8, 13];
@@ -30,18 +32,25 @@ const getPriority = (task) => {
 };
 
 const Tasks = (props) => {
+  const [updateUI, setUpdateUI] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [project, setProject] = useState(props.project);
+  useEffect(() => {
+    setProject(props.project);
+  },[props.project]);
   useEffect(() => {
     const getTasks = async (sprintId) => {
       const taskList = await getAllTasks(sprintId);
       setTasks(taskList);
     };
     getTasks(props.selectedSprint);
-  }, [props.selectedSprint]);
-
+  }, [props.selectedSprint, updateUI]);
+  const rerenderTasks = () => {
+    setUpdateUI((prev) => !prev);
+  };
   const onSearch = (event) => {
     if (!event.target.value) {
-      setTasks({});
+      rerenderTasks();
     } else {
       setTasks(
         tasks.filter(
@@ -57,34 +66,45 @@ const Tasks = (props) => {
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-
+  const updateProject = (data) => {
+    setProject((prev) => ({ ...prev, ...data }));
+  };
   return (
     <MainContainer>
-      <TaskModal isOpen={isOpen} toggleModal={toggleModal} />
+      <TaskModal
+        isOpen={isOpen}
+        toggleModal={toggleModal}
+        project={project}
+        sprint={props.selectedSprint}
+        updateTasks={rerenderTasks}
+        updateProject={updateProject}
+      />
       <Title>Backlog</Title>
       <SearchContainer>
-        <SearchTask placeholder="Search backlog" onChange={onSearch} />
-        <Image
-          src="./Search.svg"
-          width={15}
-          height={15}
-          style={{ marginLeft: "-2%", marginTop: "0.6%", cursor: "pointer" }}
-          onClick={() => {
-            setTasks(onSearch);
-          }}
+        <ProjectDropdown
+          projects={props.projects}
+          onSelect={props.onSelectProject}
         />
-        <CreateTaskButton onClick={toggleModal}>
+        <SearchBarContainer>
+          <SearchTask placeholder="Search backlog" onChange={onSearch} />
           <Image
-            src="./Plus.svg"
+            src="./Search.svg"
             width={15}
             height={15}
-            style={{ marginTop: "4%", marginLeft: "4%" }}
+            style={{ marginLeft: "-2%", marginTop: "0.6%", cursor: "pointer" }}
+            onClick={() => {
+              setTasks(onSearch);
+            }}
           />
+        </SearchBarContainer>
+
+        <CreateTaskButton onClick={toggleModal}>
+          <Image src="./Plus.svg" width={15} height={15} />
           <ButtonTitle>Create Task</ButtonTitle>
         </CreateTaskButton>
       </SearchContainer>
       <TaskContainer>
-        {tasks.map((task) => (
+        {tasks.length && tasks.map((task) => (
           <Task
             color={getPriority(task)}
             assignee={task?.assignee}
@@ -92,6 +112,9 @@ const Tasks = (props) => {
             title={task?.title}
             key={Math.random()}
             task={task}
+            rerenderTasks={rerenderTasks}
+            project={project}
+            updateProject={updateProject}
           />
         ))}
       </TaskContainer>

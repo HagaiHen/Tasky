@@ -1,16 +1,17 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HeaderContainer, Container, ButtonsContainer, LogoAndButtonsContainer } from "./styles";
 import NavButton from "./NavButton";
 import Backlog from "@/pages/backlog";
+import CalendarPage from "@/pages/calendar";
 // import Calendar from "@/pages/calendar";// TODO: uncomment this line and implement the calendar page
 import Home from "@/pages/home";
+import { getAllProjectsByUserId } from "@/controller/ProjectController";
 
 const headerButtons = ["Home", "Calendar", "Backlog", "Profile"];
 
 const NavHeader = (props) => {
   const [activePage, setActivePage] = useState("Home"); // State to track active page
-
   const handleNavigation = (page) => {
     setActivePage(page);
   };
@@ -47,9 +48,9 @@ const NavHeader = (props) => {
             case "Home":
               return <Home />;
             case "Calendar":
-              return <h1>Calendar Page</h1>;
+              return <CalendarPage user={props.user}/>;
             case "Backlog":
-              return <Backlog />;
+              return <Backlog user={props.user}/>;
             case "Profile":
               return <h1>Profile Page</h1>;
             default:

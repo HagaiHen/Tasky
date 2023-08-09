@@ -1,4 +1,5 @@
-import Project from "../models/Project";
+import { getMessage } from "./APIController";
+import Project from "@/model/project";
 
 export const createProject = async (projectInstance) => {
   await postMessage("/project/createProject", projectInstance).catch((err) => {
@@ -31,11 +32,7 @@ export const updateProject = async (projectInstance) => {
   });
 };
 
-export const getProjectOfUser = async (userId) => {
+export const getAllProjectsByUserId = async (userId) => {
   const projects = await getMessage(`/project/getProjectOfUser/${userId}`);
-  const projectsObject = [];
-  projects.forEach((project) => {
-    projectsObject.push(Project.fromJSON(project));
-  });
-  return projects;
+  return projects.map((project) => Project.fromJSON(project));
 };

@@ -10,9 +10,8 @@ import {
   DescriptionContainer,
 } from "./styles";
 import Image from "next/image";
-import Comments from "../TaskModal/Comments";
-import { touchRippleClasses } from "@mui/material";
 import TaskModal from "../TaskModal/TaskModal";
+import { deleteTask } from "@/controller/TaskController";
 
 const Task = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,11 +28,17 @@ const Task = (props) => {
     return desc;
   };
 
+  const updateTasks = () => {
+    props.rerenderTasks();
+  }
+
   return (
     <div>
       <TaskContainer onClick={toggleModal}>
         <Priority color={props.color} />
-        <Title>TAS - 1</Title>
+        <Title>
+          {props.project?.name} - {props.task.taskNum}
+        </Title>
         <DescriptionContainer>
           <Description size={props.title?.length}>
             {formatDescription(props.title)}
@@ -55,8 +60,11 @@ const Task = (props) => {
           width={20}
           height={20}
           style={{ alignSelf: "center", marginLeft: "33px" }}
-          onClick={() => {
-            console.log("delete");
+          onClick={async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            await deleteTask(props.task.taskId);
+            props.rerenderTasks();
           }}
         />
       </TaskContainer>
@@ -66,6 +74,9 @@ const Task = (props) => {
         description={props.description}
         priority={props.color}
         task={props.task}
+        updateTasks={updateTasks}
+        project={props.project}
+        updateProject={props.updateProject}
       />
     </div>
   );

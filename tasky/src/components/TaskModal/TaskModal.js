@@ -27,19 +27,26 @@ import MultiDropDown from "../DropDownMenu/multiDropDown";
 import { createTask } from "@/controller/TaskController";
 import Task from "@/model/task";
 const TaskModal = (props) => {
+
   const [params, setParams] = useState(
     props.task
       ? props.task.toJSON()
-      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0).toJSON()
+      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0, props.project?.taskNum ).toJSON()
   );
-  const [nextTaskNum, setNextTaskNum] = useState(0);
-
+  useEffect(() => {
+    setParams(  props.task
+      ? props.task.toJSON()
+      : new Task("", "", "", "", "", "", "", "", 0, 0, 0, 0, props.project?.taskNum ).toJSON())
+  }, [props.project])
   const onCreateTask = async () => {
     const task = Task.fromJSON(params);
-    task.sprintId = "lUcZmmWjS2BfFTgvsxWF";
+    task.sprintId = props.sprint || props.project.backlogId;
     await createTask(task);
+    props.updateProject({taskNum: props.project.taskNum + 1});
     props.toggleModal();
+    props.updateTasks();
   };
+
   return (
     <TaskModalStyled isOpen={props.isOpen}>
       <CloseContainer>
@@ -55,13 +62,13 @@ const TaskModal = (props) => {
         <TaskInfoContainer>
           <TitleContainer>
             <Priority color={props.priority} />
-            <Title>{`TAS - ${nextTaskNum + 1}`}</Title>
+            <Title>{`${props.project?.name} - ${props.task?.taskNum !== undefined ? props.task.taskNum : props.project?.taskNum}`}</Title>
           </TitleContainer>
           <DescriptionContainer color={props.priority}>
             <Description>TITLE</Description>
           </DescriptionContainer>
           <TitleInput
-            title={props.title}
+            title={props.task?.title}
             onInput={(e) => {
               setParams({ ...params, title: e.target.value });
             }}
@@ -70,7 +77,7 @@ const TaskModal = (props) => {
             <Description>DESCRIPTION</Description>
           </DescriptionContainer>
           <DescriptionInput
-            description={props.description}
+            description={props.task?.description}
             onInput={(e) => {
               setParams({ ...params, description: e.target.value });
             }}
@@ -103,7 +110,7 @@ const TaskModal = (props) => {
               />
               <DropDownMenu
                 onChange={(option) => {
-                  setParams({ ...params, assignee: option.label });
+                  setParams({ ...params, assignee: option.label});
                 }}
                 defaultValue={params.assignee}
                 title="Assignee"

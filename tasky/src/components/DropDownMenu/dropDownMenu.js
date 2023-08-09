@@ -52,7 +52,7 @@ const DropDownMenu = (props) => {
             }),
           }}
           options={getListOptions()}
-          defaultValue={props.defaultValue}
+          defaultInputValue={props.defaultValue}
         />
       </div>
     </DropDownContainer>
