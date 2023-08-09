@@ -3,20 +3,10 @@ import Select from "react-select";
 import { DropDownContainer, ParamType } from "./styles";
 import makeAnimated from "react-select/animated";
 const MultiDropDown = (props) => {
-  const options = [
-    {
-      value: "id",
-      label: "TAS - 1",
-    },
-    {
-      value: "id1",
-      label: "TAS - 2",
-    },
-    {
-      value: "id2",
-      label: "TAS - 3",
-    },
-  ];
+  const options = props.tasks?.map((task) => ({
+    label: `${props.project.name} - ${task.taskNum}`,
+    value: task.taskId,
+  }));
   const animatedComponents = makeAnimated();
   return (
     <DropDownContainer>

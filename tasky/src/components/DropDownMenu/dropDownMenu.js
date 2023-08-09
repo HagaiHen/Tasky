@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { DropDownContainer, ParamType } from "./styles";
+import { getUsersOfProject } from "@/controller/ProjectController";
 
 const DropDownMenu = (props) => {
+  const [assignees, setAssignees] = useState([]);
+  const statusOptions = [
+    { value: 0, label: "TO DO" },
+    { value: 1, label: "SELECTED FOR DEVELOPMENT" },
+    { value: 2, label: "IN PROGRESS" },
+    { value: 3, label: "IN REVIEW" },
+    { value: 4, label: "IN TESTING" },
+    { value: 5, label: "DONE" },
+  ];
+  useEffect(() => {
+    const getAssignees = async () => {
+      if (!props.projectId) {
+        return;
+      }
+      const assignees = await getUsersOfProject(props.projectId);
+      setAssignees(assignees);
+    };
+    getAssignees();
+  }, [props.projectId]);
   const getListOptions = () => {
     if (!props.title) {
       return [
@@ -16,13 +36,7 @@ const DropDownMenu = (props) => {
     }
     switch (props.title) {
       case "Assignee":
-        return [
-          { value: 1, label: "Bar Goldenberg" },
-          { value: 2, label: "Hagai Hen" },
-          { value: 3, label: "Sappir Bohbot" },
-          { value: 4, label: "Elad Sez" },
-          { value: 5, label: "Other person" },
-        ];
+        return assignees;
       default:
         return [
           { value: 1, label: "1" },
@@ -52,7 +66,7 @@ const DropDownMenu = (props) => {
             }),
           }}
           options={getListOptions()}
-          defaultInputValue={props.defaultValue}
+          defaultValue={props.defaultValue}
         />
       </div>
     </DropDownContainer>
