@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { color } from "@mui/system";
+import { StyledTypography, CustomDiv } from "./styles";
 
 const bull = (
   <Box
@@ -16,26 +17,25 @@ const bull = (
 
 export default function ProjectCard(project) {
   return (
-    <Card sx={{ width: 300, height: 200, margin: 2, backgroundColor: "#d9d9d9" }}>
+    <Card
+      sx={{ width: 300, height: 150, margin: 2, backgroundColor: "#d9d9d9" }}
+    >
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
+          Project Owner
         </Typography>
         <Typography variant="h5" component="div">
-          be{bull}nev{bull}o{bull}lent
+          Project Name
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        <CustomDiv>
+          <Typography color="text.secondary" flex={1}>
+            Sprints: 1
+          </Typography>
+          <Typography color="text.secondary" flex={0.5}>
+            Tasks: 5
+          </Typography>
+        </CustomDiv>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }

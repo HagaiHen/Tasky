@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { RecentProjectsContainer } from "./styles";
+import { RecentProjectsContainer, TitleContainer } from "./styles";
 import ProjectCard from "../../components/ProjectCard/projectCard";
-import { MainContainer } from "../../components/Tasks/styles";
 
 const HomePage = () => {
   return (
     <div style={{ paddingTop: 20 }}>
+      {/* recent project title */}
+      <TitleContainer>
+        <h1>Your recent projects</h1>
+      </TitleContainer>
       <RecentProjectsContainer>
         <ProjectCard />
         <ProjectCard />
