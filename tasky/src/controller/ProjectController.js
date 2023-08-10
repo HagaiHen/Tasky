@@ -41,3 +41,19 @@ export const getUsersOfProject = async (projectId) => {
   const users = await getMessage(`/project/getUsersOfProject/${projectId}`);
   return users.map((user) => ({ label: user.firstName, value: user.uid }));
 };
+
+export const addUsersToProject = async (projectId, users) => {
+  await postMessage(`/project/addUsersToProject/${projectId}`, users).catch(
+    (err) => {
+      alert("couldnt add users to project");
+    }
+  );
+};
+
+export const removeUsersFromProject = async (projectId, users) => {
+  await postMessage(`/project/removeUsersFromProject/${projectId}`, users).catch(
+    (err) => {
+      alert("couldnt remove users from project");
+    }
+  );
+}

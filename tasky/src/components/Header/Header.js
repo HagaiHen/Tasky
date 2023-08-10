@@ -24,7 +24,9 @@ const NavHeader = (props) => {
           width={160}
           height={58}
           src="./Logo.svg"
-          style={{ marginLeft: "15px" }}
+          style={{ marginLeft: "15px", marginTop: "1.2%", cursor: "pointer" }}
+          // redirect to https://github.com/HagaiHen/Final-Project
+          onClick={() => window.open("https://github.com/HagaiHen/Final-Project", "_blank")}
         />
         <ButtonsContainer>
           {headerButtons.map((button) => (
