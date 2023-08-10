@@ -6,6 +6,15 @@ export const TaskStatus = {
   DONE: "DONE",
 };
 
+export const statusOptions = [
+  { value: 0, label: "TO DO" },
+  { value: 1, label: "SELECTED FOR DEVELOPMENT" },
+  { value: 2, label: "IN PROGRESS" },
+  { value: 3, label: "IN REVIEW" },
+  { value: 4, label: "IN TESTING" },
+  { value: 5, label: "DONE" },
+];
+
 class Task {
   constructor(
     taskId = "",
@@ -66,7 +75,7 @@ class Task {
       json.publisherId,
       json.dependencies,
       json.urgency,
-      json.businessValue,
+      json.buisnessValue,
       json.riskReduction,
       json.devEffort,
       json.taskNum

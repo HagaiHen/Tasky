@@ -22,7 +22,6 @@ const getPriority = (task) => {
     fib[task.DevelopmentEffort];
   const maxValue = 3;
   const priority = (weight / maxValue) * 100;
-  console.log("priority", priority, "task", task);
   if (priority < 33) {
     return "green";
   } else if (priority < 66) {
@@ -78,6 +77,7 @@ const Tasks = (props) => {
         sprint={props.selectedSprint}
         updateTasks={rerenderTasks}
         updateProject={updateProject}
+        tasks={tasks}
       />
       <Title>Backlog</Title>
       <SearchContainer>
@@ -115,6 +115,7 @@ const Tasks = (props) => {
             rerenderTasks={rerenderTasks}
             project={project}
             updateProject={updateProject}
+            tasks={tasks}
           />
         ))}
       </TaskContainer>
