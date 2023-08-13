@@ -95,11 +95,11 @@ export const controllerSignIn = async (email, password, app) => {
   }
 };
 
-// export const controllerSignOut = async () => {
-//   try {
-//     await instance.getAuth().signOut();
-//     return { success: true, error: null };
-//   } catch (error) {
-//     return { success: false, error: error.message };
-//   }
-// }
+export const controllerSignOut = async (app) => {
+  try {
+    await getAuth(app).signOut();
+    return { success: true, error: null };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}
