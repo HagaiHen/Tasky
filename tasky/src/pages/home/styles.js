@@ -9,3 +9,10 @@ export const RecentProjectsContainer = styled.div`
   display: grid;
   grid-auto-flow: column; /* Make it flow horizontally */
 `;
+
+export const TitleContainer = styled.div`
+  padding-left: 1rem;
+  color: white;
+  font-family: sans-serif;
+  margin-right: 50%;
+`;

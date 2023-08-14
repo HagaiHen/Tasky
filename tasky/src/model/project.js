@@ -1,5 +1,5 @@
 class Project {
-  constructor(projectId = "", name="", taskNum, backlogId, recentChange, sprintNum) {
+  constructor(projectId = "", name="", taskNum = 0, backlogId = null, recentChange = null, sprintNum = 0) {
     this.projectId = projectId;
     this.name = name;
     this.taskNum = taskNum;

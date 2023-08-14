@@ -1,12 +1,26 @@
 import React, { useState } from "react";
-import { RecentProjectsContainer } from "./styles";
+import { RecentProjectsContainer, TitleContainer } from "./styles";
 import ProjectCard from "../../components/ProjectCard/projectCard";
-import { MainContainer } from "../../components/Tasks/styles";
+import NewProjectCard from "../../components/ProjectCard/newProjectCard";
+import CreateProjectModal from "../../components/ProjectModal/projectModal";
 
 const HomePage = () => {
+
+  const [isOpen, setOpen] = useState(false);
+
+  const toggleModal = () => {
+    setOpen(!isOpen);
+  };
+
+
   return (
+
     <div style={{ paddingTop: 20 }}>
+      <TitleContainer>
+        <h1>Your recent projects</h1>
+      </TitleContainer>
       <RecentProjectsContainer>
+        <NewProjectCard setOpen={toggleModal}/>
         <ProjectCard />
         <ProjectCard />
         <ProjectCard />
@@ -19,6 +33,7 @@ const HomePage = () => {
         <ProjectCard />
         <ProjectCard />
       </RecentProjectsContainer>
+      <CreateProjectModal isOpen={isOpen} toggleModal={toggleModal}/>
     </div>
   );
 };
