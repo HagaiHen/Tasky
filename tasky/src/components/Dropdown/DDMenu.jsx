@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import DropdownItem from "./DropdownItem";
 import { CSSTransition } from "react-transition-group";
 import styles from "./styles2";  // Import styles from styles2.js
+import {AppContext, appContext} from "../../pages/_app"
+import { getAuth } from "firebase/auth";
 import { Button } from "react-aria-menubutton";
 
 const DDMenu = () => {
@@ -25,8 +27,12 @@ const DDMenu = () => {
     console.log("You Pressed OtherUser!");
   }
   const handleLogOut = () =>{
-    console.log("You Pressed LogOut!");
+    console.log("1. You Pressed LogOut!");
+    const app = useContext(appContext)
+    getAuth(app).signOut();
+    console.log("2. You Pressed LogOut!");
   }
+
 
   return (
     <div style={{ ...styles.dropdown, height: menuHeight }}>
@@ -61,7 +67,7 @@ const DDMenu = () => {
           <DropdownItem  
             // goToMenu="animals" 
             setActive={setActive}
-            onEnter={()=>handleLogOut}
+            onEnter={handleLogOut}
             >
           Log Out You Fuck...
           </DropdownItem>

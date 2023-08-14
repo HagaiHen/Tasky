@@ -25,10 +25,13 @@ export default function MyApp(props) {
 
   if (user) {
     return (
-      <ModalProvider>
-        <NavHeader user={user} /> // this on will hold the current page content
-        and navigation header
-      </ModalProvider>
+      <appContext.Provider value={app}>
+        <ModalProvider>
+          <NavHeader user={user} /> // this on will hold the current page content
+          and navigation header
+        </ModalProvider>
+      </appContext.Provider>
+      
     );
   }
 
