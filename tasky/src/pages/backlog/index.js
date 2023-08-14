@@ -4,9 +4,9 @@ import Header from "../../components/Header/Header";
 import SideBar from "@/components/SideBar/SideBar";
 import Tasks from "@/components/Tasks/Tasks";
 import { getAllProjectsByUserId } from "@/controller/ProjectController";
-import { ModalProvider } from "styled-react-modal";
+
 const Backlog = (props) => {
-  const [selectedSprint, setSelectedSprint] = useState("lUcZmmWjS2BfFTgvsxWF");
+  const [selectedSprint, setSelectedSprint] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [userProjects, setUserProjects] = useState([]);
 

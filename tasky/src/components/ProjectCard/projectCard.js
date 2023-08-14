@@ -1,41 +1,67 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { color } from "@mui/system";
+import { CustomDiv } from "./styles";
+import { CardHeader, CardMedia, Avatar, IconButton } from "@mui/material";
+import { red, blue, green, yellow, orange, purple } from "@mui/material/colors";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  ></Box>
-);
+//TODO: connect ot backend
+const colors = [red[500], blue[500], green[500], yellow[500], orange[500], purple[500]];
+const letters = ["R", "B", "G", "Y", "O", "P", "A", "C", "D", "E", "F", "H", "I", "J", "K", "L"];
+const dates = [
+  "September 14, 2016",
+  "March 5, 2020",
+  "June 20, 2019",
+  "December 2, 2018",
+  "August 10, 2015",
+  "January 30, 2017",
+  "November 8, 2022",
+  "April 18, 2014",
+  "July 25, 2021",
+  "October 12, 2013",
+];
+
 
 export default function ProjectCard(project) {
   return (
-    <Card sx={{ width: 300, height: 200, margin: 2, backgroundColor: "#d9d9d9" }}>
+    <Card
+      sx={{ width: 300, height: 185, margin: 2, backgroundColor: "#d9d9d9" }}
+    >
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: colors[Math.floor(Math.random() * colors.length)] }} aria-label="recipe">
+            {letters[Math.floor(Math.random() * letters.length)]}
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings" >
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title="last updated:"
+        subheader={dates[Math.floor(Math.random() * dates.length)]}
+      />
+      <CardMedia
+        component="img"
+        height="0"
+        image="/static/images/cards/paella.jpg"
+        alt=""
+      />
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
         <Typography variant="h5" component="div">
-          be{bull}nev{bull}o{bull}lent
+          Project Name
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        <CustomDiv>
+          <Typography variant="body2" color="text.secondary" flex={1}>
+            Sprints: {Math.floor(Math.random() * 10) + 1}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" flex={0.5}>
+            Tasks: {Math.floor(Math.random() * 100) + 1}
+          </Typography>
+        </CustomDiv>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }

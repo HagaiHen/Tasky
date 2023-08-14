@@ -5,3 +5,8 @@ export const getUser = async (userId) => {
     const user = await getMessage(`/user/getUser/${userId}`)
     return User.fromJSON(user);
 }
+
+export const getAllUsers = async () => {
+    const users = await getMessage(`/user/getAllUsers`)
+    return users.map(user => User.fromJSON(user));
+}

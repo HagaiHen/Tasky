@@ -17,7 +17,7 @@ export const SideContainer = styled.div`
   padding-top: 60px;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   color: white;
   /* margin-top: 2%; */
   font-family: sans-serif;
@@ -42,7 +42,7 @@ export const CreateSprintButton = styled.div`
   }
 `;
 
-export const ButtonTitle = styled.h4`
+export const ButtonTitle = styled.h5`
   color: black;
   font-family: sans-serif;
 `;
