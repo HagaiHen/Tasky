@@ -3,6 +3,7 @@
 export const postMessage = async (path, body) => {
   let data = false; // Variable to store the response data, initialized as false
   let payload = JSON.stringify(body); // Convert the request body to a JSON string
+  
   console.log("postMessage - posting message - body = ", body);
 
   try {
@@ -15,7 +16,7 @@ export const postMessage = async (path, body) => {
       },
       body: payload, // Include the JSON payload in the request body
     });
-    // console.log("PostMessage Response: ", data.msg);
+    console.log("PostMessage Response: ", data);
     if (data) {
       // If the response is received successfully (i.e., data is truthy)
       // Try parsing the response data as JSON
@@ -25,6 +26,35 @@ export const postMessage = async (path, body) => {
         );
         return null; // Return null if parsing fails
       });
+    }
+  } catch (err) {
+    // Catch any errors that occur during the fetch operation
+    alert(`${err}, path:  ${path}, data ${data}`);
+  }
+};
+
+export const uniquePostMessage = async (path, body) => {
+  let data = false; // Variable to store the response data, initialized as false
+  let payload = JSON.stringify(body); // Convert the request body to a JSON string
+  
+  console.log("postMessage - posting message - body = ", body);
+
+  try {
+    // Send a POST request to the specified path on the local server
+    data = await fetch(`http://localhost:5001/api/${path}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: payload, // Include the JSON payload in the request body
+    }).then(response => response.json());
+    // let result = data;
+    console.log("PostMessage Response: ", data);
+    if (data) {
+      // If the response is received successfully (i.e., data is truthy)
+      // Try parsing the response data as JSON
+      return data;
     }
   } catch (err) {
     // Catch any errors that occur during the fetch operation
