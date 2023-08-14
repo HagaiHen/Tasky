@@ -1,4 +1,4 @@
-import { getMessage, postMessage } from "./APIController";
+import { getMessage, postMessage, uniquePostMessage } from "./APIController";
 import Task from "@/model/task";
 
 export const createTask = async (taskInstance) => {
@@ -35,5 +35,10 @@ export const updateTask = async (taskInstance) => {
 export const getAllTasks = async (sprintId) => {
   const tasksJSON = await getMessage(`/task/getAllTasks/${sprintId}`);
   return tasksJSON.map((task) => Task.fromJSON(task));
+};
+
+export const getSortedList = async (lst) => {
+  const tasksJSON = await uniquePostMessage(`task/sort`, lst);
+  return tasksJSON['Sched'];
 };
 
