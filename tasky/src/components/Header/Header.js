@@ -4,16 +4,32 @@ import { HeaderContainer, Container, ButtonsContainer, LogoAndButtonsContainer }
 import NavButton from "./NavButton";
 import Backlog from "@/pages/backlog";
 import CalendarPage from "@/pages/calendar";
-// import Calendar from "@/pages/calendar";// TODO: uncomment this line and implement the calendar page
 import Home from "@/pages/home";
 import { getAllProjectsByUserId } from "@/controller/ProjectController";
+import Navbar from "../Navbar/Navbar";
+import NavItem from "../NavIteam/NavItem";
+import DDMenu from "../Dropdown/DDMenu";
+import DropdownItem from "../Dropdown/DropdownItem";
 
 const headerButtons = ["Home", "Calendar", "Backlog", "Profile"];
 
 const NavHeader = (props) => {
   const [activePage, setActivePage] = useState("Home"); // State to track active page
+  const [dropdownOpen, setDropdownOpen] = useState(false); // set the state of the dropdown.
+
   const handleNavigation = (page) => {
     setActivePage(page);
+  };
+
+  const handleDropDown = () =>{
+    console.log("I Pressed Me !!, dropdownOpen:", dropdownOpen);
+    setDropdownOpen(dropdownOpen => !dropdownOpen);
+  }
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(prev => !prev);
+    params.reRender();
   };
 
   return (
@@ -38,12 +54,15 @@ const NavHeader = (props) => {
           ))}
         </ButtonsContainer>
         </LogoAndButtonsContainer>
-        <Image
-          width={70}
-          height={38}
-          src="./ProfileClicked.svg"
+        <NavItem
+          imageSrc="./ProfileClicked.svg"
+          onClick={() => handleDropDown()}
           style={{ marginLeft: "35%", marginTop: "1.2%", cursor: "pointer" }}
-        />
+      >
+        <DDMenu /> 
+      </NavItem>
+
+
       </HeaderContainer>
         {(() => {
           switch (activePage) {
