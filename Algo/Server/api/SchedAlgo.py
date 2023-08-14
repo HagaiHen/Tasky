@@ -16,9 +16,13 @@ def getDepGraph(Tasks):
     for t in Tasks:
         depG.add_node(t._index)
 
+
     # add edges according to the dependencies
     for t in Tasks:
+        # print("t._dependencies", t._dependencies)
         for d in t._dependencies:
+            d = d['value']
+            # print("d", d)
             depG.add_edge(d, t._index)
 
     num = 0
@@ -62,7 +66,7 @@ def getTaskByIndx(Tasks, i):
 
 
 def getPriority(t):
-    fib = [2, 3, 5, 8, 13]
+    fib = [0, 2, 3, 5, 8, 13]
     weight = (fib[t._urgency] + fib[t._busVal] + fib[t._riskReduc]) / fib[t._devEffort]
     return weight
 
@@ -128,12 +132,11 @@ def scheduleAlgo(Tasks):
         res.append(ans)
         ans = []
 
-    print("visited:", visited)
+    # print("visited:", visited)
 
     # TODO: we want the shortest first or not?
     # sort by priority
     res.sort(key=lambda x: sum(getPriority(getTaskByIndx(Tasks, task._index)) for task in x), reverse=True)
-    
     result = []
     result = printres(res)
     return result
@@ -143,7 +146,7 @@ def printres(res):
     for lst in res:
         for i in lst:
             ans.append(i._index)
-    print("result:", ans)
+    # print("result:", ans)
     return ans
 
 
