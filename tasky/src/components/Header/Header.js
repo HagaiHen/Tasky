@@ -59,7 +59,7 @@ const NavHeader = (props) => {
           onClick={() => handleDropDown()}
           style={{ marginLeft: "35%", marginTop: "1.2%", cursor: "pointer" }}
       >
-        <DDMenu /> 
+        <DDMenu setActivePage={setActivePage}  /> 
       </NavItem>
 
 
@@ -74,6 +74,8 @@ const NavHeader = (props) => {
               return <Backlog user={props.user}/>;
             case "Profile":
               return <h1>Profile Page</h1>;
+            case "Settings":
+              return <h1>Settings Page</h1>;
             default:
               return <Home />;
           }

@@ -13,7 +13,12 @@ const DropdownItem = (props) => {
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={() => props.goToMenu && props.setActive(props.goToMenu)}
+        onClick={() =>
+          { 
+          props.goToMenu && props.setActive(props.goToMenu);
+          props.onEnter && props.onEnter();
+          }
+        }
       >
         <span className="icon-button">{props.leftIcon}</span>
         {props.children}

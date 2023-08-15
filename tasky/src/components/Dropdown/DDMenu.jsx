@@ -5,11 +5,14 @@ import styles from "./styles2";  // Import styles from styles2.js
 import {AppContext, appContext} from "../../pages/_app"
 import { getAuth } from "firebase/auth";
 import { Button } from "react-aria-menubutton";
+import NavHeader from "../Header/Header";
 
-const DDMenu = () => {
+const DDMenu = (props) => {
   // state for csstransition
   const [active, setActive] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
+
+  const app = useContext(appContext);
 
   function calcHeight(el) {
     const height = el.offsetHeight;
@@ -19,18 +22,17 @@ const DDMenu = () => {
 
   const handleMyProfile = () =>{
     console.log("You Pressed My Profile!");
+    props.setActivePage('Profile'); // Sets the active page to 'Profile'
   }
   const handleSettings = () =>{
     console.log("You Pressed Settings!");
+    props.setActivePage('Settings'); // Sets the active page to 'Profile'
   }
   const handleOtherUser = () =>{
-    console.log("You Pressed OtherUser!");
+    getAuth(app).signOut();
   }
   const handleLogOut = () =>{
-    console.log("1. You Pressed LogOut!");
-    const app = useContext(appContext)
     getAuth(app).signOut();
-    console.log("2. You Pressed LogOut!");
   }
 
 
@@ -51,70 +53,25 @@ const DDMenu = () => {
             My Profile
             </DropdownItem>
           <DropdownItem
-            // goToMenu={"settings"}
             setActive={setActive}
             onEnter={()=>handleSettings()}
           >
             Settings
           </DropdownItem>
           <DropdownItem  
-            // goToMenu="animals" 
             setActive={setActive}
             onEnter={()=>handleOtherUser()}
             >
           Change User
           </DropdownItem>
           <DropdownItem  
-            // goToMenu="animals" 
             setActive={setActive}
-            onEnter={handleLogOut}
+            onEnter={()=>handleLogOut()}
             >
-          Log Out You Fuck...
+          Log Out
           </DropdownItem>
         </div>
       </CSSTransition>
-
-      {/* <CSSTransition
-        in={active === "settings"}
-        unmountOnExit
-        timeout={500}
-        classNames="menu-secondary"
-        onEnter={calcHeight}
-      >
-        <div style={styles.menu}>
-          <DropdownItem
-            // leftIcon={<AiFillCaretLeft />}
-            goToMenu={"main"}
-            setActive={setActive}
-          />
-          <DropdownItem >HTML</DropdownItem>
-          <DropdownItem >CSS</DropdownItem>
-          <DropdownItem >JavaScript</DropdownItem>
-          <DropdownItem >Awesome!</DropdownItem>
-        </div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={active === "animals"}
-        timeout={500}
-        classNames="menu-secondary"
-        unmountOnExit
-        onEnter={calcHeight}
-      >
-        <div style={styles.menu}>
-          <DropdownItem
-            goToMenu="main"
-            // leftIcon={<AiFillCaretLeft />}
-            setActive={setActive}
-          >
-            <h2>Animals</h2>
-          </DropdownItem>
-          <DropdownItem >Kangaroo</DropdownItem>
-          <DropdownItem >Frog</DropdownItem>
-          <DropdownItem >Horse?</DropdownItem>
-          <DropdownItem >Hedgehog</DropdownItem>
-        </div>
-      </CSSTransition> */}
     </div>
   );
 };
