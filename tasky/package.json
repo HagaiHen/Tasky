@@ -45,6 +45,7 @@
     "babel-plugin-styled-components": "^2.1.1",
     "firebase": "^9.19.1",
     "material-ui": "^0.20.2",
+    "moment": "^2.29.4",
     "react-aria-menubutton": "^7.0.3",
     "react-firebase-hooks": "^5.1.1",
     "react-form-stepper": "^2.0.3",

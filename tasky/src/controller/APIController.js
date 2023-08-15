@@ -3,8 +3,6 @@
 export const postMessage = async (path, body) => {
   let data = false; // Variable to store the response data, initialized as false
   let payload = JSON.stringify(body); // Convert the request body to a JSON string
-  
-  console.log("postMessage - posting message - body = ", body);
 
   try {
     // Send a POST request to the specified path on the local server
@@ -16,7 +14,6 @@ export const postMessage = async (path, body) => {
       },
       body: payload, // Include the JSON payload in the request body
     });
-    console.log("PostMessage Response: ", data);
     if (data) {
       // If the response is received successfully (i.e., data is truthy)
       // Try parsing the response data as JSON

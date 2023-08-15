@@ -6,28 +6,21 @@ import { Select, Tag } from "antd";
 
 const { Option } = Select;
 
-const ContactMultiSelect = () => {
+const ContactMultiSelect = (props) => {
   const { search, onChangeSearch, filteredContacts } = useContacts();
-  const [selectedValues, setSelectedValues] = useState([]);
+
+  const selectedValues = props.selectedValues;
+  const setSelectedValues = (options) => {
+    props.setSelectedValues(
+      options.map((option) => {
+        return option.key;
+      })
+    );
+  };
 
   const customFilterOption = (inputValue, option) => {
     // Custom filtering, the true condition is happening in the onChangeSearch function
     return true;
-  };
-
-  const dropdownRenderer = (menu) => {
-    return (
-      <div>
-        {/* Render the selected values */}
-        {selectedValues.map((value) => (
-          <div key={value.key}>
-            <div style={{ color: "white" }}>{value.value}</div>
-          </div>
-        ))}
-        {/* Render the dropdown menu */}
-        <div>{menu}</div>
-      </div>
-    );
   };
 
   const tagRender = (props) => {
@@ -49,28 +42,41 @@ const ContactMultiSelect = () => {
   };
 
   return (
-    <Select
-      mode="multiple"
-      style={{ width: "100%" }}
-      placeholder="Invite your team"
-      labelInValue
-      value={selectedValues}
-      onChange={setSelectedValues}
-      onSearch={onChangeSearch}
-      filterOption={customFilterOption} // Set the custom filter function
-      showSearch
-      dropdownStyle={{
-        backgroundColor: "#303030",
+    <div
+      style={{
+        width: "100%",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
       }}
-      searchValue={search}
-      tagRender={tagRender}
     >
-      {filteredContacts.map((user) => (
-        <Option key={user.uid} value={user.firsName + " " + user.lastName}>
-          <Contact key={user.uid} user={user} />
-        </Option>
-      ))}
-    </Select>
+      <Select
+        mode="multiple"
+        style={{
+          width: "100%",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
+        placeholder="Invite your team"
+        labelInValue
+        onChange={setSelectedValues}
+        onSearch={onChangeSearch}
+        filterOption={customFilterOption} // Set the custom filter function
+        showSearch
+        dropdownStyle={{
+          backgroundColor: "#303030",
+        }}
+        searchValue={search}
+        tagRender={tagRender}
+        size="large"
+      >
+        {filteredContacts.map((user) => (
+          <Option key={user.uid} value={user.firstName + " " + user.lastName}>
+            <Contact key={user.uid} user={user} />
+          </Option>
+        ))}
+      </Select>
+    </div>
   );
 };
 

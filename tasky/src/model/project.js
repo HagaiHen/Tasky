@@ -1,11 +1,14 @@
+import moment from "moment";
+
 class Project {
-  constructor(projectId = "", name="", taskNum = 0, backlogId = null, recentChange = null, sprintNum = 0) {
+  constructor(projectId = "", name="", taskNum = 0, backlogId = null, recentChange = null, sprintNum = 0, teamLeaderUid = '') {
     this.projectId = projectId;
     this.name = name;
     this.taskNum = taskNum;
     this.backlogId = backlogId;
-    this.recentChange = recentChange;
+    this.recentChange = moment().format('YYYY-MM-DD HH:mm:ss');
     this.sprintNum = sprintNum;
+    this.teamLeaderUid = teamLeaderUid;
   }
 
   toJSON() {
@@ -14,8 +17,9 @@ class Project {
       name: this.name,
       taskNum: this.taskNum,
       backlogId: this.backlogId,
-      recentChange: this.recentChange,
+      recentChange: moment().format('YYYY-MM-DD HH:mm:ss'),
       sprintNum: this.sprintNum,
+      teamLeaderUid: this.teamLeaderUid
     };
   }
 
@@ -26,7 +30,8 @@ class Project {
       json.taskNum,
       json.backlogId,
       json.recentChange,
-      json.sprintNum
+      json.sprintNum,
+      json.teamLeaderUid
     );
   }
 }
