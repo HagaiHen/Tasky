@@ -69,7 +69,8 @@ const NavHeader = (props) => {
             case "Home":
               return <Home />;
             case "Calendar":
-              return <CalendarPage user={props.user}/>;
+              return <h1>Calendar is closed for now</h1>
+              // return <CalendarPage user={props.user}/>;
             case "Backlog":
               return <Backlog user={props.user}/>;
             case "Profile":
