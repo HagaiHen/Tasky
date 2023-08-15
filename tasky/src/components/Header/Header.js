@@ -67,7 +67,7 @@ const NavHeader = (props) => {
         {(() => {
           switch (activePage) {
             case "Home":
-              return <Home />;
+              return <Home user={props.user}/>;
             case "Calendar":
               return <h1>Calendar is closed for now</h1>
               // return <CalendarPage user={props.user}/>;

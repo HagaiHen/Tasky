@@ -1,10 +1,22 @@
-import { getMessage } from "./APIController";
+import { getMessage, postMessage } from "./APIController";
 import Project from "@/model/project";
 
 export const createProject = async (projectInstance) => {
-  await postMessage("/project/createProject", projectInstance).catch((err) => {
-    alert("couldnt create project");
+  // take the projectId from the response and set it to the projectInstance
+  const serverRes = await postMessage(
+    "/project/createProject",
+    projectInstance
+  ).catch((err) => {
+    alert("couldnt create project " + err.message);
   });
+  await postMessage("/project/addUserToProject", {
+    projectId: serverRes.projectId,
+    userId: projectInstance.teamLeaderUid,
+    timeEstimate: 0
+  }).catch((err) => {
+    alert("couldnt add user to project " + err.message);
+  });
+  return serverRes.projectId;
 };
 
 export const getProject = async (projectId) => {
@@ -42,8 +54,8 @@ export const getUsersOfProject = async (projectId) => {
   return users.map((user) => ({ label: user.firstName, value: user.uid }));
 };
 
-export const addUsersToProject = async (projectId, users) => {
-  await postMessage(`/project/addUsersToProject/${projectId}`, users).catch(
+export const addUsersToProject = async (projectId, usersId) => {
+  await postMessage(`/project/addUsersToProject/${projectId}`, usersId).catch(
     (err) => {
       alert("couldnt add users to project");
     }
@@ -51,9 +63,10 @@ export const addUsersToProject = async (projectId, users) => {
 };
 
 export const removeUsersFromProject = async (projectId, users) => {
-  await postMessage(`/project/removeUsersFromProject/${projectId}`, users).catch(
-    (err) => {
-      alert("couldnt remove users from project");
-    }
-  );
-}
+  await postMessage(
+    `/project/removeUsersFromProject/${projectId}`,
+    users
+  ).catch((err) => {
+    alert("couldnt remove users from project");
+  });
+};

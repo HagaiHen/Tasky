@@ -4,7 +4,7 @@ import ProjectCard from "../../components/ProjectCard/projectCard";
 import NewProjectCard from "../../components/ProjectCard/newProjectCard";
 import CreateProjectModal from "../../components/ProjectModal/projectModal";
 
-const HomePage = () => {
+const HomePage = (props) => {
 
   const [isOpen, setOpen] = useState(false);
 
@@ -16,6 +16,7 @@ const HomePage = () => {
   return (
 
     <div style={{ paddingTop: 20 }}>
+      <CreateProjectModal isOpen={isOpen} toggleModal={toggleModal} user={props.user}/>
       <TitleContainer>
         <h1>Your recent projects</h1>
       </TitleContainer>
@@ -33,7 +34,6 @@ const HomePage = () => {
         <ProjectCard />
         <ProjectCard />
       </RecentProjectsContainer>
-      <CreateProjectModal isOpen={isOpen} toggleModal={toggleModal}/>
     </div>
   );
 };

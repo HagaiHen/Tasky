@@ -81,7 +81,7 @@ def scheduleAlgo(Tasks):
     g = getDepGraph(Tasks)
 
     maxWeight = 0
-    maxTask = 0
+    maxTask = None
     maxNode = 0
     visited = []
 
@@ -92,11 +92,20 @@ def scheduleAlgo(Tasks):
 
     res = []
     for g in connectedComponent:
-        n = list(g.nodes)[0]
+        # TODO: find a mission without dependencies
+        for i in range(len(g)):
+            n = list(g.nodes)[i]
+            if len(getTaskByIndx(Tasks, n)._dependencies) == 0:
+                break
+            if i == len(connectedComponent):
+                raise RuntimeError("Can not find a task without dependencies, Check again your task dependencies")
+
         visited.append(n)
         ans.append(getTaskByIndx(Tasks, n))
         while len(ans) < len(list(g.nodes)):
+            
             for nei in g.neighbors(n):
+                # print("ansss", ans)
                 t = getTaskByIndx(Tasks, nei)
                 weight = getPriority(t)
                 in_edges = getAllInEdges(g, nei)
@@ -109,7 +118,7 @@ def scheduleAlgo(Tasks):
                     maxTask = t
                     maxNode = nei
 
-            if type(maxTask) is Task and maxTask not in ans:
+            if maxTask is not None and maxTask not in ans:
                 ans.append(maxTask)
                 visited.append(maxNode)
                 if len(list(g.neighbors(maxNode))) != 0:
@@ -123,14 +132,18 @@ def scheduleAlgo(Tasks):
                         if child not in visited:
                             all_visited = False
                     if all_visited:
-                        n = list(g.predecessors(n))[0]
+                        if len(visited) == len(list(g.nodes)):
+                            break
+                        else:
+                            n = list(g.predecessors(n))[0]
 
             maxWeight = 0
-            maxTask = 0
+            maxTask = None
             maxNode = 0
 
         res.append(ans)
         ans = []
+        
 
     # print("visited:", visited)
 
