@@ -6,25 +6,12 @@ from .SchedAlgo import scheduleAlgo
 from .Task import Task
 
 
-#         taskId: task.taskId,
-#         title: task.title,
-#         description: task.description,
-#         status: task.status,
-#         sprintId: task.sprintId,
-#         assigneeId: task.assigneeId,
-#         publisherId: task.publisherId,
-#         dependencies: task.dependencies,
-#         urgency: task.urgency,
-#         riskReduction: task.riskReduction,
-#         devEffort: task.devEffort
-
 def parse(request):
-    # print("hhhhhhhhhh", request.body)
     my_dict = json.loads(request.body)
-    # print("typeeeeee", type(dict))
-    # dict = dict(dict)
+    print("my_dict",my_dict)
     lst = []
     for i in my_dict:
+        print("enterrrrr")
         i = dict(i)
         # print("element1", i)
         id = i['taskId']
@@ -35,9 +22,11 @@ def parse(request):
         devEff = i['devEffort']
         t = Task(dependencies, urg, busVal, rr, devEff, "title", "desc", id)  
         lst.append(t)
+    print("lst", lst)
     return lst
 
 def main(request):
+    print("views")
     tasks = parse(request)
     response = scheduleAlgo(tasks)
     response = {'Sched': response}
