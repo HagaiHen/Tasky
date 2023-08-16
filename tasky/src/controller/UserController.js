@@ -10,3 +10,9 @@ export const getAllUsers = async () => {
     const users = await getMessage(`/user/getAllUsers`)
     return users.map(user => User.fromJSON(user));
 }
+
+export const updateUser = async (userInstance) => {
+    const user = userInstance;
+    const response = await postMessage(`/user/updateUser`, user)
+    return response;
+}

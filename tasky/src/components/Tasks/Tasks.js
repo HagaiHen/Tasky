@@ -12,16 +12,19 @@ import {
 import Image from "next/image";
 import Task from "@/components/Task/Task";
 import TaskModal from "../TaskModal/TaskModal";
-import { getAllTasks } from "@/controller/TaskController";
+import { getAllTasks, getSortedList } from "@/controller/TaskController";
 import ProjectDropdown from "../ProjectDropdown/ProjectDropdown";
+import { postMessage } from "@/controller/APIController";
 
 const getPriority = (task) => {
-  const fib = [2, 3, 5, 8, 13];
+
+  const fib = [0, 2, 3, 5, 8, 13];
   const weight =
-    (fib[task.Urgency] + fib[task.BuisnessValue] + fib[task.RiskReduction]) /
-    fib[task.DevelopmentEffort];
-  const maxValue = 3;
+    (fib[task.urgency] + fib[task.buisnessValue] + fib[task.riskReduction]) /
+    fib[task.devEffort];
+  const maxValue = 15;
   const priority = (weight / maxValue) * 100;
+  console.log("priority", priority);
   if (priority < 33) {
     return "green";
   } else if (priority < 66) {
@@ -34,16 +37,28 @@ const Tasks = (props) => {
   const [updateUI, setUpdateUI] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [project, setProject] = useState(props.project);
+  const [sortedList, setSortedList] = useState([]);
   useEffect(() => {
     setProject(props.project);
   },[props.project]);
   useEffect(() => {
     const getTasks = async (sprintId) => {
       const taskList = await getAllTasks(sprintId);
-      setTasks(taskList);
+      console.log("taskList", taskList);
+      const sortedIds = await getSortedList(taskList);
+      console.log("sortedIds", sortedIds);
+      
+      const sortedTasks = sortedIds.map(taskId => {
+        return taskList.find(task => task.taskId === taskId);
+      });
+
+      setSortedList(sortedIds);  // If you still need this state for some other purpose
+      setTasks(sortedTasks);
     };
+    
     getTasks(props.selectedSprint);
-  }, [props.selectedSprint, updateUI]);
+
+}, [props.selectedSprint, updateUI]);
   const rerenderTasks = () => {
     setUpdateUI((prev) => !prev);
   };
@@ -68,6 +83,7 @@ const Tasks = (props) => {
   const updateProject = (data) => {
     setProject((prev) => ({ ...prev, ...data }));
   };
+  
   return (
     <MainContainer>
       <TaskModal
