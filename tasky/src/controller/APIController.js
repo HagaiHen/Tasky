@@ -33,7 +33,7 @@ export const postMessage = async (path, body) => {
 export const uniquePostMessage = async (path, body) => {
   let data = false; // Variable to store the response data, initialized as false
   let payload = JSON.stringify(body); // Convert the request body to a JSON string
-  
+  console.log("unique postmessage");
   console.log("postMessage - posting message - body = ", body);
 
   try {
@@ -46,6 +46,7 @@ export const uniquePostMessage = async (path, body) => {
       },
       body: payload, // Include the JSON payload in the request body
     }).then(response => response.json());
+    
     // let result = data;
     console.log("PostMessage Response: ", data);
     if (data) {

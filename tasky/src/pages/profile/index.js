@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { getMessage, postMessage } from "../../controller/APIController";
-import { Container, ContentContainer, LeftContainer, RightContainer } from "./styles";
+import { Container, InputField, LeftContainer, RightContainer, ProfileTextTitle, ProfileTextRole, ProfileTextEmail, ProfileTextPhone, ProfileTextAbout, InputFieldAbout } from "./styles";
 import { ModalProvider } from "styled-react-modal";
 import Avatar from '@mui/material/Avatar';
-import { getUser } from "@/controller/UserController";
+import { getUser, updateUser } from "@/controller/UserController";
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import Calendar from "@/components/Calendar/Calendar";
@@ -15,11 +15,6 @@ import Scheduler from "@/components/Scheduler/Scheduler";
 import { styled } from '@mui/material/styles';
 
 
-const Div = styled('div')(({ theme }) => ({
-  ...theme.typography.button,
-  padding: theme.spacing(2),
-  fontSize: 40,
-}));
 
 const ProfilePage = (props) => {
   const [date, setDate] = useState(new Date());
@@ -28,11 +23,12 @@ const ProfilePage = (props) => {
   const uid = props.user.uid;
   const [render, reRender] = useState(false);
   const [user, setUser] = useState(false);
+  const [editMode, setEditMode] = useState(false); // Add this state
+
 
   const handleEditClick = () => {
-    // Your logic for handling the edit click goes here
-    console.log('Edit icon clicked');
-  }
+    setEditMode(!editMode); // Toggle edit mode
+  };
   
   useEffect( () => {
     const fetchData = async () => {
@@ -40,12 +36,15 @@ const ProfilePage = (props) => {
         const response = await getMessage(`event/getAllEventsByUID/${uid}`);
         const responseTasks = await getMessage(`task/getTaskByUid/${uid}`);
         const currUser = await getUser(uid);
-        console.log("user", currUser);
-        setUser(currUser);
+        console.log("currUser", currUser);
+        
+        if (currUser) {
+          setUser(currUser);
+        }
         if (response ) {
           setEvents(response);
         }
-        if (responseTasks ) {
+        if (responseTasks) {
           setTasks(responseTasks);
         }
       } catch (error) {
@@ -53,18 +52,24 @@ const ProfilePage = (props) => {
       }
     };
     fetchData();
-  }, [date, render, user]);
+  }, [date, render, handleInputChange]);
 
-
-//   return (
-// <ModalProvider>
-//   <Container>
-
-//   </Container>
-// </ModalProvider>
-
+  const handleInputChange = async (field, value) => {
+    console.log("field", field);
+    console.log("value", value);
     
-//   );
+    setUser((prevUser) => ({
+      ...prevUser,
+      [field]: value,
+    }));
+
+    console.log("user after change", user);
+    // Call updateUser in the callback after setUser has updated the state
+    updateUser(user).then((response) => {
+      console.log("response", response);
+    });
+  };
+
 
 return(
 <Container>
@@ -90,20 +95,52 @@ return(
             cursor: "pointer"
           }}
           onClick={handleEditClick}
-        />
+        />    
+        
       </div>
-      <h1>{user.firstName} {user.lastName}</h1>
-      <Div>Hagai Hen</Div>
-      
-      <h2>Role: </h2>
-      
-      <h2>Location: </h2>
-
-      <h2>Email: </h2>
-      
-      <h2>Phone: </h2>
-
-    </div>
+      {editMode ? (
+            <>
+              <InputField
+                value={user.firstName}
+                onChange={(e) => handleInputChange("firstName", e.target.value)}
+              />
+              <InputField
+                value={user.lastName}
+                onChange={(e) => handleInputChange("lastName", e.target.value)}
+              />
+              <InputField
+                value={user.role}
+                onChange={(e) => handleInputChange("role", e.target.value)}
+              />
+              <InputField
+                value={user.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+              />
+              <InputField
+                placeholder="Write your phone number..."
+                value={user.phone}
+                onChange={(e) => handleInputChange("phone", e.target.value)}
+              />
+              
+              <InputFieldAbout
+                placeholder="Write about yourself..."
+                value={user.about}
+                onChange={(e) => handleInputChange("about", e.target.value)}
+                rows={3} // Set the initial number of rows (adjust as needed)
+              />
+            </>
+          ) : (
+            <>
+              <ProfileTextTitle>
+                {user.firstName} {user.lastName}
+              </ProfileTextTitle>
+              <ProfileTextRole>{user.role}</ProfileTextRole>
+              <ProfileTextEmail>{user.email}</ProfileTextEmail>
+              <ProfileTextPhone>{user.phone}</ProfileTextPhone>
+              <ProfileTextAbout>About: {user.about}</ProfileTextAbout>
+            </>
+          )}
+        </div>
 
   </LeftContainer>
 
