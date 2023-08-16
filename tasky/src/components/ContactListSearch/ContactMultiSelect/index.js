@@ -9,7 +9,6 @@ const { Option } = Select;
 const ContactMultiSelect = (props) => {
   const { search, onChangeSearch, filteredContacts } = useContacts();
 
-  const selectedValues = props.selectedValues;
   const setSelectedValues = (options) => {
     props.setSelectedValues(
       options.map((option) => {
