@@ -37,12 +37,16 @@ def getDepGraph(Tasks):
 
     # nx.draw(depG, with_labels=True)
     # plt.show()
-
+    # print("depG", depG)
     return depG
 
 # separate the whole graph to list of connected graphs
 def saparteConnComp(depG):
     component_graphs = []
+    if len(list(depG.nodes)) == 1:
+        component_graphs.append(depG)
+        return component_graphs
+    
     for component in nx.weakly_connected_components(depG):
         G = nx.DiGraph()
         for node in component:
@@ -84,16 +88,16 @@ def scheduleAlgo(Tasks):
     maxTask = None
     maxNode = 0
     visited = []
-
     connectedComponent = saparteConnComp(g)
     # draw(g)
 
-    # print(connectedComponent)
 
     res = []
     for g in connectedComponent:
+        # n = list(g.nodes)[0]
         # TODO: find a mission without dependencies
-        for i in range(len(g)):
+
+        for i in range(len(list(g.nodes))):
             n = list(g.nodes)[i]
             if len(getTaskByIndx(Tasks, n)._dependencies) == 0:
                 break

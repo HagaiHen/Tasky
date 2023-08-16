@@ -38,6 +38,7 @@ export const getAllTasks = async (sprintId) => {
 };
 
 export const getSortedList = async (lst) => {
+  console.log("get sortedlist fun");
   const tasksJSON = await uniquePostMessage(`task/sort`, lst);
   return tasksJSON['Sched'];
 };

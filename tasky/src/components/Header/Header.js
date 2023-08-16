@@ -4,6 +4,7 @@ import { HeaderContainer, Container, ButtonsContainer, LogoAndButtonsContainer }
 import NavButton from "./NavButton";
 import Backlog from "@/pages/backlog";
 import CalendarPage from "@/pages/calendar";
+import ProfilePage from "@/pages/profile"
 import Home from "@/pages/home";
 import { getAllProjectsByUserId } from "@/controller/ProjectController";
 import Navbar from "../Navbar/Navbar";
@@ -74,7 +75,8 @@ const NavHeader = (props) => {
             case "Backlog":
               return <Backlog user={props.user}/>;
             case "Profile":
-              return <h1>Profile Page</h1>;
+              // return <h1>Profile Page</h1>;
+              return <ProfilePage user={props.user}/>
             case "Settings":
               return <h1>Settings Page</h1>;
             default:
