@@ -35,6 +35,7 @@ const Backlog = (props) => {
         projects={userProjects}
         project={selectedProject}
         onSelectProject={onSelectProject}
+        user={props.user}
       />
     </ContentContainer>
   );
