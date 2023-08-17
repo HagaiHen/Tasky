@@ -37,6 +37,7 @@ const getPriority = (task) => {
 
 const Tasks = (props) => {
   const [myTasks, setMyTasks] = useState(false);
+  const [sort, setSort] = useState(false); 
   const [updateUI, setUpdateUI] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [project, setProject] = useState(props.project);
@@ -54,7 +55,6 @@ const Tasks = (props) => {
     const getTasks = async (sprintId) => {
       console.log(myTasks);
       if (!myTasks) {
-      console.log("hello");
       const taskList = await getAllTasks(sprintId);
 
       console.log("taskList", taskList);
@@ -72,25 +72,49 @@ const Tasks = (props) => {
       setTasks(taskList);
       }
       else {
-        
         const taskList = await getAllTasks(sprintId);
-        console.log("taskList", taskList);
-        const sortedIds = await getSortedList(taskList);
-        console.log("sortedIds", sortedIds);
-        
-        const sortedTasks = sortedIds.map(taskId => {
-          return taskList.find(task => task.taskId === taskId);
-        });
-        console.log("props", props);
-        setSortedList(sortedIds);  // If you still need this state for some other purpose
-        const filteredTasks = sortedTasks.filter(task => task.assigneeId === props.user.uid);
+        const filteredTasks = taskList.filter(task => task.assigneeId === props.user.uid);
         setTasks(filteredTasks);
       }
+
+        if (!myTasks) {
+          if (sort) {
+
+          const taskList = await getAllTasks(sprintId);
+          console.log("taskList", taskList);
+          const sortedIds = await getSortedList(taskList);
+          console.log("sortedIds", sortedIds);
+          
+          const sortedTasks = sortedIds.map(taskId => {
+            return taskList.find(task => task.taskId === taskId);
+          });
+          setSortedList(sortedIds);  // If you still need this state for some other purpose
+          setTasks(sortedTasks);
+        }
+        }
+        else {
+          if (sort) {
+          const taskList = await getAllTasks(sprintId);
+          console.log("taskList", taskList);
+          const sortedIds = await getSortedList(taskList);
+          console.log("sortedIds", sortedIds);
+          
+          const sortedTasks = sortedIds.map(taskId => {
+            return taskList.find(task => task.taskId === taskId);
+          });
+          setSortedList(sortedIds);  // If you still need this state for some other purpose
+          const filteredTasks = sortedTasks.filter(task => task.assigneeId === props.user.uid);
+          setTasks(filteredTasks);
+        }
+
+        }
+        
+      
     };
     
     getTasks(props.selectedSprint);
 
-}, [props.selectedSprint, updateUI, myTasks]);
+}, [props.selectedSprint, updateUI, myTasks, sort]);
   const rerenderTasks = () => {
     setUpdateUI((prev) => !prev);
   };
@@ -110,6 +134,10 @@ const Tasks = (props) => {
 
   const handleMyTasks = () => {
     setMyTasks(!myTasks);
+  }
+
+  const handleSort = () => {
+    setSort(!sort);
   }
 
   const [isOpen, setIsOpen] = useState(false);
@@ -168,7 +196,12 @@ const Tasks = (props) => {
 </SearchBarContainer>
 
 <CreateTaskButton onClick={handleMyTasks}>
-    <ButtonTitle className={props.classNameMYTSK}>{myTasks ? 'Show All Tasks' : 'Show My Tasks'}</ButtonTitle>
+    <ButtonTitle className={props.classNameMYTSK}>{myTasks ? 'All Tasks' : 'My Tasks'}</ButtonTitle>
+
+  </CreateTaskButton>
+
+  <CreateTaskButton onClick={handleSort}>
+    <ButtonTitle>{sort ? 'Unsort' : 'sort'}</ButtonTitle>
   </CreateTaskButton>
 
         <CreateTaskButton onClick={toggleModal}>

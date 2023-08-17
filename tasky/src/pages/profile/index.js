@@ -11,7 +11,7 @@ import Calendar from "@/components/Calendar/Calendar";
 import Header from "../../components/Header/Header";
 import ProgChart from "./profileProgChart";
 import EventOps from "@/components/EventOps/EventOps";
-import Scheduler from "@/components/Scheduler/Scheduler";
+import ProfileScheduler from "./profileScheduler";
 import { styled } from '@mui/material/styles';
 
 
@@ -56,22 +56,20 @@ const ProfilePage = (props) => {
     console.log("TAsks", tasks);
   }, [date, render, handleInputChange]);
 
-
-
   const handleInputChange = async (field, value) => {
-    console.log("field", field);
-    console.log("value", value);
-    
-    setUser((prevUser) => ({
-      ...prevUser,
+    const updatedUser = {
+      ...user,
       [field]: value,
-    }));
-
-    console.log("user after change", user);
-    // Call updateUser in the callback after setUser has updated the state
-    updateUser(user).then((response) => {
+    };
+  
+    setUser(updatedUser);
+  
+    try {
+      const response = await updateUser(updatedUser);
       console.log("response", response);
-    });
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   };
 
 console.log("TASKS", tasks);
@@ -156,7 +154,11 @@ return(
           />
           <TaskContainer> 
             <ProfileTextTitle>Personal Assignments</ProfileTextTitle>
-            
+            <ProfileScheduler 
+            date={new Date()}
+            uid={uid}
+            events={events}
+          />
           </TaskContainer>
           </FullContainer>
 </RightContainer>
