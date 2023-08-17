@@ -14,6 +14,7 @@ import Task from "@/components/Task/Task";
 import TaskModal from "../TaskModal/TaskModal";
 import { getAllTasks, getSortedList } from "@/controller/TaskController";
 import ProjectDropdown from "../ProjectDropdown/ProjectDropdown";
+import ErrorModal from "../ErrorModal/ErrorModal";
 import { postMessage } from "@/controller/APIController";
 
 const getPriority = (task) => {
@@ -38,13 +39,19 @@ const Tasks = (props) => {
   const [tasks, setTasks] = useState([]);
   const [project, setProject] = useState(props.project);
   const [sortedList, setSortedList] = useState([]);
+  const [isError, setIsError] = useState(false); //bool for error actions.
+
   useEffect(() => {
     setProject(props.project);
+    if(project === null){
+      // console.log("[Tasks] Error - project Is Null.");
+    }
   },[props.project]);
+  
   useEffect(() => {
     const getTasks = async (sprintId) => {
       const taskList = await getAllTasks(sprintId);
-      console.log("taskList", taskList);
+      // console.log("taskList", taskList);
       // const sortedIds = await getSortedList(taskList);
       // console.log("sortedIds", sortedIds);
       
@@ -78,14 +85,29 @@ const Tasks = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    // If there is no Open Project -> throw a warning to selevt Project First.
+    if(project === null){
+      setIsError(!isError);
+      console.log("Project is null, isError = ", isError);
+    }
+    else{
+      setIsOpen(!isOpen);
+      console.log("Project is NOT null, isError = ", isError);
+    }
   };
   const updateProject = (data) => {
     setProject((prev) => ({ ...prev, ...data }));
   };
+
+  const error_createTaskWithoutProject = "[Warning] You cant create a new task before open/ link a new Project, please select a project and try again."; 
   
   return (
     <MainContainer>
+      <ErrorModal
+        isOpen={isError}
+        setError={setIsError}
+        errorMessage={error_createTaskWithoutProject}
+      />
       <TaskModal
         isOpen={isOpen}
         toggleModal={toggleModal}

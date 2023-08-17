@@ -28,6 +28,8 @@ import { createTask, updateTask } from "@/controller/TaskController";
 import Task from "@/model/task";
 import { getUser } from "@/controller/UserController";
 import {statusOptions} from "@/model/task";
+
+
 const TaskModal = (props) => {
   const [params, setParams] = useState(
     props.task
@@ -69,7 +71,9 @@ const TaskModal = (props) => {
           ).toJSON()
     );
   }, [props.project]);
+  
   const [assignee, setAssignee] = useState({});
+  
   useEffect(() => {
     const getAssignee = async () => {
       if (!props.task) {
