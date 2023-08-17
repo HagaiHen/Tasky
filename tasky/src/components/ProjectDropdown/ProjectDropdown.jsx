@@ -45,7 +45,7 @@ const DropdownListItem = styled.div`
   text-align: center;
 `;
 
-function ProjectDropdown({ projects, onSelect }) {
+function ProjectDropdown({ projects, onSelect ,className}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -56,7 +56,7 @@ function ProjectDropdown({ projects, onSelect }) {
   };
 
   return (
-    <DropdownContainer>
+    <DropdownContainer className={className}>
       <DropdownHeader onClick={() => setIsOpen(!isOpen)}>
         <StyledText>
           {selectedProject ? selectedProject.name : "Select a project"}

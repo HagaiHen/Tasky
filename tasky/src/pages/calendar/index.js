@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import Joyride from 'react-joyride';
 import { getMessage, postMessage } from "../../controller/APIController";
 import { Container, ContentContainer } from "./styles";
 import { ModalProvider } from "styled-react-modal";
@@ -15,6 +16,29 @@ const CalendarPage = (props) => {
   const [tasks , setTasks ] = useState([]);
   const uid = props.user.uid;
   const [render, reRender] = useState(false);
+
+  const [steps] = useState([
+    {
+      target: ".calendar-component", 
+      content: "This is Your Calendar! Here you will select a date, in order to see your daily schedule for that day or create and duplicate tasks for that day!",
+      title:"Pick A date Section!"
+    },
+    {
+      target: ".scheduler-component",
+      content: "This is your Scheduler! Here You will see All the Events For schdualed for this date (the date you just pick, remmember?)",
+      title:"Scheduler Section!"
+    },
+    {
+      target: ".events-component",
+      content: "Here You can create, update, copy and delete events for you personal schedular!",
+      title:"Lot Of Fun Bottoms!"
+    },
+    {
+      target: ".progChart-component",
+      content: "Ok, you Have Some Tasks to do and you want to see where are in the progress? No Problem! All your Tasks summerized into one easy to read Chart!",
+      title:"Progress Chart!"
+    },
+  ]);
 
   const reRenderPage = () => {
     console.log("______________________________________")
@@ -44,23 +68,36 @@ const CalendarPage = (props) => {
     setDate(date);
   };
 
+  console.log("[----------] isOnboarding = ", props.isOnboarding);
+
   return (
     <ModalProvider>
       <Container>
-        <ContentContainer>
-          <Calendar 
-            onDateReceived={handleDateChange} 
+      {props.isOnboarding && (
+          <Joyride
+            steps={steps}
+            continuous={true}
+            showProgress={true}
+            showSkipButton={true}
           />
+        )}
+        <ContentContainer>
+            <Calendar 
+              onDateReceived={handleDateChange}
+              className="calendar-component"
+            />
           <Scheduler 
             date={date}
             uid={uid}
             events={events}
+            className="scheduler-component"
           />
         </ContentContainer>
         <ContentContainer>
           <ProgChart 
             uid={uid}
             tasks={tasks}
+            className="progChart-component"
           />
           <EventOps 
             date={date}
@@ -69,6 +106,7 @@ const CalendarPage = (props) => {
             tasks={tasks}
             user={props.user}
             reRender={reRenderPage}
+            classNameA="events-component"
           />
         </ContentContainer>
       </Container>

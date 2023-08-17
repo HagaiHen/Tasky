@@ -15,7 +15,7 @@ const Calendar = (props) => {
   };
 
   return (
-    <CalContainer>
+    <CalContainer className={props.className}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
           orientation="portrait"

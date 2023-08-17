@@ -159,7 +159,7 @@ const Tasks = (props) => {
   const error_createTaskWithoutProject = "[Warning] You cant create a new task before open/ link a new Project, please select a project and try again."; 
   
   return (
-    <MainContainer>
+    <MainContainer className={props.classNameTASK}>
       <ErrorModal
         isOpen={isError}
         setError={setIsError}
@@ -179,6 +179,7 @@ const Tasks = (props) => {
         <ProjectDropdown
           projects={props.projects}
           onSelect={props.onSelectProject}
+          className={props.className1}
         />
         <SearchBarContainer>
   <SearchTask placeholder="Search backlog" onChange={onSearch} />
@@ -195,7 +196,8 @@ const Tasks = (props) => {
 </SearchBarContainer>
 
 <CreateTaskButton onClick={handleMyTasks}>
-    <ButtonTitle>{myTasks ? 'All Tasks' : 'My Tasks'}</ButtonTitle>
+    <ButtonTitle className={props.classNameMYTSK}>{myTasks ? 'All Tasks' : 'My Tasks'}</ButtonTitle>
+
   </CreateTaskButton>
 
   <CreateTaskButton onClick={handleSort}>
@@ -204,7 +206,7 @@ const Tasks = (props) => {
 
         <CreateTaskButton onClick={toggleModal}>
           <Image src="./Plus.svg" width={15} height={15} />
-          <ButtonTitle>Create Task</ButtonTitle>
+          <ButtonTitle className={props.classNameCRTTSK} >Create Task</ButtonTitle>
         </CreateTaskButton>
       </SearchContainer>
       <TaskContainer>

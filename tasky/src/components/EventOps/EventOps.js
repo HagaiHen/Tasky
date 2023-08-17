@@ -76,7 +76,7 @@ const EventOps = (params) => {
   const myTasks = params.tasks;
 
   return (
-    <Container>
+    <Container className={params.classNameA}>
       <ContainerRaw>
         <EventButton 
           uid={params.uid} 
