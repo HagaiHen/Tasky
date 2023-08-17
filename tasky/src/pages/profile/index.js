@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { getMessage, postMessage } from "../../controller/APIController";
-import { Container, InputField, LeftContainer, RightContainer, ProfileTextTitle, ProfileTextRole, ProfileTextEmail, ProfileTextPhone, ProfileTextAbout, InputFieldAbout } from "./styles";
+import { Container, InputField, LeftContainer,  FullContainer, TaskContainer, RightContainer, ProfileTextTitle, ProfileTextRole, ProfileTextEmail, ProfileTextPhone, ProfileTextAbout, InputFieldAbout } from "./styles";
 import { ModalProvider } from "styled-react-modal";
 import Avatar from '@mui/material/Avatar';
 import { getUser, updateUser } from "@/controller/UserController";
@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import Calendar from "@/components/Calendar/Calendar";
 import Header from "../../components/Header/Header";
-import ProgChart from "@/components/ProgChart/ProgChart";
+import ProgChart from "./profileProgChart";
 import EventOps from "@/components/EventOps/EventOps";
 import Scheduler from "@/components/Scheduler/Scheduler";
 import { styled } from '@mui/material/styles';
@@ -35,9 +35,10 @@ const ProfilePage = (props) => {
       try {
         const response = await getMessage(`event/getAllEventsByUID/${uid}`);
         const responseTasks = await getMessage(`task/getTaskByUid/${uid}`);
+        console.log("responseTasks", responseTasks);
         const currUser = await getUser(uid);
         console.log("currUser", currUser);
-        
+
         if (currUser) {
           setUser(currUser);
         }
@@ -52,7 +53,10 @@ const ProfilePage = (props) => {
       }
     };
     fetchData();
+    console.log("TAsks", tasks);
   }, [date, render, handleInputChange]);
+
+
 
   const handleInputChange = async (field, value) => {
     console.log("field", field);
@@ -70,7 +74,7 @@ const ProfilePage = (props) => {
     });
   };
 
-
+console.log("TASKS", tasks);
 return(
 <Container>
   <LeftContainer>
@@ -137,7 +141,7 @@ return(
               <ProfileTextRole>{user.role}</ProfileTextRole>
               <ProfileTextEmail>{user.email}</ProfileTextEmail>
               <ProfileTextPhone>{user.phone}</ProfileTextPhone>
-              <ProfileTextAbout>About: {user.about}</ProfileTextAbout>
+              <ProfileTextAbout>{user.about}</ProfileTextAbout>
             </>
           )}
         </div>
@@ -145,11 +149,16 @@ return(
   </LeftContainer>
 
 <RightContainer>
+  <FullContainer>
 <ProgChart 
             uid={uid}
             tasks={tasks}
           />
-
+          <TaskContainer> 
+            <ProfileTextTitle>Personal Assignments</ProfileTextTitle>
+            
+          </TaskContainer>
+          </FullContainer>
 </RightContainer>
 </Container>
 );
