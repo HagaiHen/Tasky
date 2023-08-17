@@ -11,7 +11,7 @@ import Calendar from "@/components/Calendar/Calendar";
 import Header from "../../components/Header/Header";
 import ProgChart from "./profileProgChart";
 import EventOps from "@/components/EventOps/EventOps";
-import Scheduler from "@/components/Scheduler/Scheduler";
+import ProfileScheduler from "./profileScheduler";
 import { styled } from '@mui/material/styles';
 
 
@@ -154,7 +154,11 @@ return(
           />
           <TaskContainer> 
             <ProfileTextTitle>Personal Assignments</ProfileTextTitle>
-            
+            <ProfileScheduler 
+            date={new Date()}
+            uid={uid}
+            events={events}
+          />
           </TaskContainer>
           </FullContainer>
 </RightContainer>

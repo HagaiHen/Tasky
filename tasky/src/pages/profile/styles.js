@@ -172,3 +172,39 @@ export const InputFieldAbout = styled.textarea`
   text-align: center;
   resize: vertical; /* Allow vertical resizing */
 `;
+
+export const MainContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    flex: 2;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* margin-right: 10px; */
+    margin-top: 80px;
+    margin-bottom: 80px;
+    padding-left: 20px;
+    border-radius: 10px;
+`;
+
+export const TasksTaskContainr = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    flex: 1;
+    margin-right: 10px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+`;
+
+export const TaskContainers = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  // background-color: #d9d9d9;
+  border-radius: 30px;
+  width: 96%;
+  height: 100%;
+  align-self: center;
+  overflow: scroll;
+`;
