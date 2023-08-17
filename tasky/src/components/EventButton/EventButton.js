@@ -40,8 +40,6 @@ const EventButton = (params) => {
     setIsOpenCopy(isCopy);
   }
 
-  
-
   const handleClose = () => {
     setOpenEventsDialog(false);
     setIsOpenCopy(false);
@@ -151,6 +149,7 @@ const EventButton = (params) => {
     setIsOpen(prev => !prev);
     params.reRender();
   };
+  
   const [isOpenTask, setIsOpenTask] = useState(false);
   const toggleModalTask = () => {
     setIsOpenTask(isOpenTask =>!isOpenTask);
@@ -168,6 +167,7 @@ const EventButton = (params) => {
           variant="contained"
           sx={{ bgcolor: "silver", width: "150px", color: "#4b4747" }}
           onClick={toggleModal}
+          
         >
           Create Event
         </Button>

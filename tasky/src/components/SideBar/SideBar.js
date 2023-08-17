@@ -62,7 +62,7 @@ const SideBar = (props) => {
 
   return (
     <div>
-      <SideContainer>
+      <SideContainer className={props.classNameSPRT}>
         <ErrorModal
           isOpen={isError}
           setError={setIsError}
@@ -72,7 +72,7 @@ const SideBar = (props) => {
           <Title>Sprints</Title>
           <CreateSprintButton onClick={toggleModal}>
             <Image src="./Plus.svg" width={15} height={15} />
-            <ButtonTitle>Create Sprint</ButtonTitle>
+            <ButtonTitle className={props.classNameCRT}>Create Sprint</ButtonTitle>
           </CreateSprintButton>
         </SprintHeaderContainer>
         {sprints?.map((sprint) => (

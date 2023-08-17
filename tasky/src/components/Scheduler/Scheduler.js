@@ -77,7 +77,7 @@ const Scheduler = (params) => {
   const date = params.date;
 
   return (
-    <MainContainer>
+    <MainContainer className={params.className}>
       <Title> Daily Scheduler </Title>
       <TasksTaskContainr>
         <TaskContainer>

@@ -12,20 +12,31 @@ import NavItem from "../NavIteam/NavItem";
 import DDMenu from "../Dropdown/DDMenu";
 import DropdownItem from "../Dropdown/DropdownItem";
 
-const headerButtons = ["Home", "Calendar", "Backlog", "Profile"];
+const headerButtons = ["Home", "Calendar", "Backlog", "Profile","Help"];
 
 const NavHeader = (props) => {
   const [activePage, setActivePage] = useState("Home"); // State to track active page
   const [dropdownOpen, setDropdownOpen] = useState(false); // set the state of the dropdown.
+  const [isOnboarding , setIsOnboarding] = useState(false);
 
   const handleNavigation = (page) => {
-    setActivePage(page);
+    if(page === "Help"){
+      console.log("You pressed Help! Current Page: ", activePage);
+      setIsOnboarding(!isOnboarding);
+    }else{
+      setIsOnboarding(false);
+      setActivePage(page);
+    }
+  };
+
+  const handleIsOnboarding = () =>{
+    setIsOnboarding(!isOnboarding);
   };
 
   const handleDropDown = () =>{
     console.log("I Pressed Me !!, dropdownOpen:", dropdownOpen);
     setDropdownOpen(dropdownOpen => !dropdownOpen);
-  }
+  };
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
@@ -70,12 +81,10 @@ const NavHeader = (props) => {
             case "Home":
               return <Home user={props.user}/>;
             case "Calendar":
-              // return <h1>Calendar is closed for now</h1>
-              return <CalendarPage user={props.user}/>;
+              return <CalendarPage isOnboarding={isOnboarding} user={props.user}/>;
             case "Backlog":
-              return <Backlog user={props.user}/>;
+              return <Backlog isOnboarding={isOnboarding} user={props.user}/>;
             case "Profile":
-              // return <h1>Profile Page</h1>;
               return <ProfilePage user={props.user}/>
             case "Settings":
               return <h1>Settings Page</h1>;

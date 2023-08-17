@@ -61,7 +61,7 @@ const ProgChart = (params) => {
   const chartData = data;
 
   return (
-    <CalContainer>
+    <CalContainer className={params.className}>
       <Paper>
         <Chart data={chartData}>
           <PieSeries valueField="area" argumentField="country" />
