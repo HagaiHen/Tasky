@@ -1,11 +1,13 @@
 class User {
-  constructor(uid = "", firstName, lastName, email, role, imageUrl = null) {
+  constructor(uid = "", firstName, lastName, email, role, imageUrl = null, about = null, phone = null) {
     this.uid = uid;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.role = role;
     this.imageUrl = imageUrl;
+    this.about = about;
+    this.phone = phone;
   }
 
   toJSON() {
@@ -16,6 +18,8 @@ class User {
       email: this.email,
       role: this.role,
       imageUrl: this.imageUrl,
+      about: this.about,
+      phone: this.phone,
     };
   }
 
@@ -26,7 +30,9 @@ class User {
       json.lastName,
       json.email,
       json.role,
-      json.imageUrl
+      json.imageUrl,
+      json.about,
+      json.phone,
     );
   }
 }
