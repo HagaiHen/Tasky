@@ -72,8 +72,6 @@ export const getMessage = async (path) => {
         "Content-Type": "application/json",
       },
     });
-    
-    console.log("tasks - getTaskByUid (data)", data);
 
     if (data) {
       // If the response is received successfully (i.e., data is truthy)
