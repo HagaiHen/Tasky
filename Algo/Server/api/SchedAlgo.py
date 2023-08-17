@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 # TODO: comments and cleaning
 # TODO: check extreme cases
 
+eps = 0.1
+
 def getDepGraph(Tasks):
     depG = nx.DiGraph()
 
@@ -71,7 +73,7 @@ def getTaskByIndx(Tasks, i):
 
 def getPriority(t):
     fib = [0, 2, 3, 5, 8, 13]
-    weight = (fib[t._urgency] + fib[t._busVal] + fib[t._riskReduc]) / fib[t._devEffort]
+    weight = (fib[t._urgency] + fib[t._busVal] + fib[t._riskReduc]) / (fib[t._devEffort] + eps)
     return weight
 
 def getAllInEdges(graph, n):
@@ -96,12 +98,12 @@ def scheduleAlgo(Tasks):
     for g in connectedComponent:
         # n = list(g.nodes)[0]
         # TODO: find a mission without dependencies
-
+        
         for i in range(len(list(g.nodes))):
             n = list(g.nodes)[i]
             if len(getTaskByIndx(Tasks, n)._dependencies) == 0:
                 break
-            if i == len(connectedComponent):
+            if i == len(list(g.nodes)):
                 raise RuntimeError("Can not find a task without dependencies, Check again your task dependencies")
 
         visited.append(n)
