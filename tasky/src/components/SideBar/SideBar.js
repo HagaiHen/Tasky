@@ -10,14 +10,19 @@ import {
 import { getAllSprints } from "@/controller/SprintController";
 import Image from "next/image";
 import CreateSprintModal from "../SprintModal/index";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const SideBar = (props) => {
   const [click, onClick] = useState(true);
   const [sprints, setSprints] = useState();
+  const [isError, setIsError] = useState(false); //bool for error actions.
+
 
   const [isOpen, setIsOpen] = useState(false);
+  
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    if(props.project == null){setIsError(!isError);}
+    else{setIsOpen(!isOpen);}
   };
 
   useEffect(() => {
@@ -52,9 +57,17 @@ const SideBar = (props) => {
     });
     onClick(!click);
   };
+
+  const error_createSprintWithoutProject = "[Warning] You cant create a new Sprint before open / link a new Project, please select a project and try again."; 
+
   return (
     <div>
       <SideContainer>
+        <ErrorModal
+          isOpen={isError}
+          setError={setIsError}
+          errorMessage={error_createSprintWithoutProject}
+        />
         <SprintHeaderContainer>
           <Title>Sprints</Title>
           <CreateSprintButton onClick={toggleModal}>
