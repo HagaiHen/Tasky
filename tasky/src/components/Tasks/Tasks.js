@@ -58,9 +58,9 @@ const Tasks = (props) => {
         setTasks(filteredTasks);
       }
 
-      if (sort) {
         if (!myTasks) {
-          console.log("sorting....")
+          if (sort) {
+
           const taskList = await getAllTasks(sprintId);
           console.log("taskList", taskList);
           const sortedIds = await getSortedList(taskList);
@@ -72,8 +72,9 @@ const Tasks = (props) => {
           setSortedList(sortedIds);  // If you still need this state for some other purpose
           setTasks(sortedTasks);
         }
+        }
         else {
-          console.log("sorting....")
+          if (sort) {
           const taskList = await getAllTasks(sprintId);
           console.log("taskList", taskList);
           const sortedIds = await getSortedList(taskList);
@@ -83,12 +84,13 @@ const Tasks = (props) => {
             return taskList.find(task => task.taskId === taskId);
           });
           setSortedList(sortedIds);  // If you still need this state for some other purpose
-          const filteredTasks = taskList.filter(task => task.assigneeId === props.user.uid);
+          const filteredTasks = sortedTasks.filter(task => task.assigneeId === props.user.uid);
           setTasks(filteredTasks);
+        }
 
         }
         
-      }
+      
     };
     
     getTasks(props.selectedSprint);
