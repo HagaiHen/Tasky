@@ -16,13 +16,31 @@ export const ContainerRaw = styled.div`
   height: 100%;
 `;
 
+export const FullContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
 export const CalContainer = styled.div`
-  border: 1px solid black;
-  background-color: rgb(226 232 240);
+  background-color: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /* margin-right: 10px; */
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 5%;
+  margin-left: 40px;
+  width: 40%; /* Adjust as needed */
+  height: 80%;
+  border-radius: 40px;
+  margin-right: auto;
+`;
+
+export const TaskContainer = styled.div`
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 5%;
+  margin-right: 40px;
+  width: 40%; /* Adjust as needed */
+  height: 80%;
+  border-radius: 40px;
+  margin-left: auto;
 `;
 
 export const TasksContainer = styled.div`
@@ -97,6 +115,7 @@ export const ProfileTextTitle = styled.div`
   font-family: Tahoma, sans-serif; /* Set the font to Arial */
   color: #4b4747; /* Adjust the text color */
   margin-top: 10px;
+  text-align: center; /* Center-align the text horizontally */
 `;
 
 export const ProfileTextRole = styled.div`
@@ -118,6 +137,8 @@ export const ProfileTextPhone = styled.div`
   font-family: Tahoma, sans-serif; /* Set the font to Arial */
   color: #888; /* Adjust the text color */
   margin-top: 10px;
+  text-align: center; /* Centerize the text */
+
 `;
 
 export const ProfileTextAbout = styled.div`
@@ -125,6 +146,8 @@ export const ProfileTextAbout = styled.div`
   font-family: Tahoma, sans-serif; /* Set the font to Arial */
   color: #4b4747; /* Adjust the text color */
   margin-top: 20px;
+  text-align: center; /* Centerize the text */
+
 `;
 
 export const InputField = styled.input`
