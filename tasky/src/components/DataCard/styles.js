@@ -47,6 +47,7 @@ export const Info = styled.text`
   color: black;
   font-family: sans-serif;
   font-weight: 600;
+  font-size: 11px;
 `;
 
 export const TextContainer = styled.div`

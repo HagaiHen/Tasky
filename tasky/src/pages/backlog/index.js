@@ -29,7 +29,7 @@ const Backlog = (props) => {
 
   return (
     <ContentContainer>
-      <SideBar selectSprint={renderSelectedSprint} project={selectedProject}/>
+      <SideBar selectSprint={renderSelectedSprint} project={selectedProject} setProject={setSelectedProject} />
       <Tasks
         selectedSprint={selectedSprint}
         projects={userProjects}

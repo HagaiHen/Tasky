@@ -28,13 +28,12 @@ const SideBar = (props) => {
       const sprints = await getAllSprints(props.project.projectId);
       let sprintTests = sprints?.map((sprint) => ({
         project: props.project.name,
-        sprintNum: sprint.sprintNum,
+        sprintNum: sprint.sprintNumber,
         start: sprint.startDate,
         end: sprint.endDate,
-        team: sprint.sprintTeam,
-        open: sprint.sprintNum === 0,
+        open: sprint.sprintNumber === 0,
         id: sprint.sprintId,
-        isBacklog: sprint.sprintNum === 0,
+        isBacklog: sprint.sprintNumber === 0,
       }));
       setSprints(sprintTests.sort((a, b) => a.sprintNum - b.sprintNum));
     };
@@ -76,7 +75,14 @@ const SideBar = (props) => {
             sprintId={sprint.id}
           />
         ))}
-        <CreateSprintModal isOpen={isOpen} toggleModal={toggleModal} />
+        <CreateSprintModal
+          isOpen={isOpen}
+          toggleModal={toggleModal}
+          setProject={props.setProject}
+          project={props.project}
+          setSprints={setSprints}
+          sprints={sprints}
+        />
       </SideContainer>
     </div>
   );

@@ -1,19 +1,11 @@
 import { getMessage, postMessage } from "./APIController";
+import Sprint from "../model/sprint";
 
-export const createSprint = async (
-  startDate,
-  endDate,
-  sprintNum,
-  sprintTeam
-) => {
-  await postMessage("/sprint/createSprint", {
-    StartDate: startDate,
-    EndDate: endDate,
-    SprintNum: sprintNum,
-    SprintTeam: sprintTeam,
-  }).catch((err) => {
+export const createSprint = async (sprint) => {
+  const res = await postMessage("/sprint/createSprint", sprint.toJSON()).catch((err) => {
     alert("couldnt create task");
   });
+  return res.sprintId;
 };
 
 export const getSprint = async (sprintId) => {
@@ -44,5 +36,5 @@ export const updateSprint = async (updateParams, sprintId) => {
 
 export const getAllSprints = async (projectId) => {
     const sprints = await getMessage(`/sprint/getAllSprints/${projectId}`);
-    return sprints;
+    return sprints.map((sprint) => (Sprint.fromJSON(sprint)));
 }

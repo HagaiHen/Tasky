@@ -45,15 +45,15 @@ const Tasks = (props) => {
     const getTasks = async (sprintId) => {
       const taskList = await getAllTasks(sprintId);
       console.log("taskList", taskList);
-      const sortedIds = await getSortedList(taskList);
-      console.log("sortedIds", sortedIds);
+      // const sortedIds = await getSortedList(taskList);
+      // console.log("sortedIds", sortedIds);
       
-      const sortedTasks = sortedIds.map(taskId => {
-        return taskList.find(task => task.taskId === taskId);
-      });
+      // const sortedTasks = sortedIds.map(taskId => {
+      //   return taskList.find(task => task.taskId === taskId);
+      // });
 
-      setSortedList(sortedIds);  // If you still need this state for some other purpose
-      setTasks(sortedTasks);
+      // setSortedList(sortedIds);  // If you still need this state for some other purpose
+      setTasks(taskList);
     };
     
     getTasks(props.selectedSprint);
