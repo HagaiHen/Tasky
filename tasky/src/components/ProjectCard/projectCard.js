@@ -4,12 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CustomDiv } from "./styles";
 import { CardHeader, CardMedia, Avatar, IconButton } from "@mui/material";
-import { red, blue, green, yellow, orange, purple } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { getUser } from '../../controller/UserController' 
 
-//TODO: connect ot backend
-const colors = [red[500], blue[500], green[500], yellow[500], orange[500], purple[500]];
-const letters = ["R", "B", "G", "Y", "O", "P", "A", "C", "D", "E", "F", "H", "I", "J", "K", "L"];
 const dates = [
   "September 14, 2016",
   "March 5, 2020",
@@ -24,24 +21,32 @@ const dates = [
 ];
 
 
-export default function ProjectCard(project) {
+export default function ProjectCard(props) {
+
+  const [teamLeader, setTeamLeader] = React.useState({});
+  React.useEffect(() => {
+    getUser(props.project.teamLeaderUid).then((user) => {
+      setTeamLeader(user);
+    });
+  }, []);
+
   return (
     <Card
       sx={{ width: 300, height: 185, margin: 2, backgroundColor: "#d9d9d9" }}
     >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: colors[Math.floor(Math.random() * colors.length)] }} aria-label="recipe">
-            {letters[Math.floor(Math.random() * letters.length)]}
+          <Avatar aria-label="recipe">
+          <img src={teamLeader.imageUrl} width={40} height={40} />  
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings" >
+          <IconButton aria-label="project-settings" >
             <MoreVertIcon />
           </IconButton>
         }
         title="last updated:"
-        subheader={dates[Math.floor(Math.random() * dates.length)]}
+        subheader={props.project.recentChange}
       />
       <CardMedia
         component="img"
@@ -51,14 +56,14 @@ export default function ProjectCard(project) {
       />
       <CardContent>
         <Typography variant="h5" component="div">
-          Project Name
+          {props.project.name}
         </Typography>
         <CustomDiv>
           <Typography variant="body2" color="text.secondary" flex={1}>
-            Sprints: {Math.floor(Math.random() * 10) + 1}
+            Sprints: {props.project.sprintNum}
           </Typography>
           <Typography variant="body2" color="text.secondary" flex={0.5}>
-            Tasks: {Math.floor(Math.random() * 100) + 1}
+            Tasks: {props.project.taskNum}
           </Typography>
         </CustomDiv>
       </CardContent>

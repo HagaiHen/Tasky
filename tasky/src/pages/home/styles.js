@@ -8,6 +8,7 @@ export const RecentProjectsContainer = styled.div`
   scroll-behavior: smooth;
   display: grid;
   grid-auto-flow: column; /* Make it flow horizontally */
+  justify-content: start;
 `;
 
 export const TitleContainer = styled.div`

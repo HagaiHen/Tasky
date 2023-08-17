@@ -14,11 +14,21 @@ import TextField from "@mui/material/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import GroupIcon from "@mui/icons-material/Group";
 import PersonIcon from "@mui/icons-material/Person";
+import FemaleIcon from '@mui/icons-material/Female';
+import MaleIcon from '@mui/icons-material/Male';
+
 import { MenuItem, Menu } from "@mui/material";
 import { ROLES } from "@/utils/consts";
 import { controllerSignUpSession } from "@/controller/auth";
 import { appContext } from "@/pages/_app";
 import { useContext } from "react";
+import {
+  AVATAR_URLS,
+  MALE_AVATAR_URLS,
+  FEMALE_AVATAR_URLS,
+} from "@/utils/consts";
+
+import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +48,10 @@ function getSteps(selectedUserType) {
   return [
     <Typography variant="p" gutterBottom>
       Enter your nickname
+    </Typography>,
+    // picker for male or female or other (used only for avatar selection)
+    <Typography variant="p" gutterBottom>
+      Avatar selection
     </Typography>,
     <Typography variant="p" gutterBottom>
       Tell us your work status
@@ -67,7 +81,9 @@ function getStepContent(
   handleMenuOpen,
   anchorEl,
   handleRoleSelect,
-  selectedRole
+  selectedRole,
+  selectedGender,
+  setSelectedGender
 ) {
   switch (step) {
     case 0:
@@ -83,6 +99,45 @@ function getStepContent(
         />
       );
     case 1:
+      // picker for your gender: male, female or other  (used only for avatar selection)
+      return (
+        <div>
+          <Button
+            variant={
+              selectedGender === 'male'
+                ? "contained"
+                : "outlined"
+            }
+            onClick={() => setSelectedGender('male')}
+            startIcon={<MaleIcon />}
+          >
+            Male
+          </Button>
+          <Button
+            variant={
+              selectedGender === 'female'
+                ? "contained"
+                : "outlined"
+            }
+            onClick={() => setSelectedGender('female')}
+            startIcon={<FemaleIcon />}
+          >
+            Female
+          </Button>
+          <Button
+            variant={
+              selectedGender === 'other'
+                ? "contained"
+                : "outlined"
+            }
+            onClick={() => setSelectedGender('other')}
+            startIcon={<GroupIcon />}
+          >
+            Other
+          </Button>
+        </div>
+      );
+    case 2:
       return (
         <div>
           <Button
@@ -109,7 +164,7 @@ function getStepContent(
           </Button>
         </div>
       );
-    case 2:
+    case 3:
       const ret =
         selectedUserType === UserType.ORGANIZATION ? (
           <div>
@@ -169,10 +224,12 @@ const SignupStepper = (probs) => {
   const [selecteduserType, setSelectedUserType] = useState(null);
   const [selectedRole, setSelectedRole] = useState("");
   const [anchorEl, setAnchorEl] = useState(null); // for role selection
+  const [selectedGender, setSelectedGender] = useState(null);
   const [signUpFormData, setSignUpFormData] = useState({
     nickname: null,
     organizationUID: null,
   });
+
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -205,6 +262,16 @@ const SignupStepper = (probs) => {
             : signUpFormData.organizationUID,
         role: selectedRole == "" ? "take from organization" : selectedRole,
         uid: uid,
+        imageUrl:
+          selectedGender == "male"
+            ? MALE_AVATAR_URLS[
+                Math.floor(Math.random() * MALE_AVATAR_URLS.length)
+              ]
+            : selectedGender == "female"
+            ? FEMALE_AVATAR_URLS[
+                Math.floor(Math.random() * FEMALE_AVATAR_URLS.length)
+              ]
+            : AVATAR_URLS[Math.floor(Math.random() * AVATAR_URLS.length)],
       };
       const res = await controllerSignUpSession(user, token, app);
       if (!res.success) {
@@ -216,12 +283,16 @@ const SignupStepper = (probs) => {
       alert("Please enter your nickname");
       return;
     }
-    if (activeStep === 1 && selecteduserType === null) {
+    if (activeStep === 1 && selectedGender === null) {
+      alert("please select a gender (for avatar selection)");
+      return;
+    }
+    if (activeStep === 2 && selecteduserType === null) {
       alert("Please select your user type");
       return;
     }
     if (
-      activeStep === 2 &&
+      activeStep === 3 &&
       signUpFormData.organizationUID === null &&
       selectedRole === ""
     ) {
@@ -255,7 +326,7 @@ const SignupStepper = (probs) => {
           >
             <Grid container spacing={5}>
               <Grid item xs={12}>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" align="center" style={{color: "black"}}>
                   Tasky Sign Up Session
                 </Typography>
               </Grid>
@@ -277,7 +348,9 @@ const SignupStepper = (probs) => {
                                 handleMenuOpen,
                                 anchorEl,
                                 handleRoleSelect,
-                                selectedRole
+                                selectedRole,
+                                selectedGender,
+                                setSelectedGender,
                               )}
                             </div>
                           </Grid>
