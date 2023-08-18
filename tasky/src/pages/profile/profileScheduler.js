@@ -79,7 +79,7 @@ const ProfileScheduler = (params) => {
   return (
     // <MainContainer>
       // <TasksTaskContainr>
-        <TaskContainers>
+        <TaskContainers className={params.className}>
           {dayEvents.map((event) => (
             <DailyEvent 
               Description={event.Description}
