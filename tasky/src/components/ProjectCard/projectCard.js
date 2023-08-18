@@ -33,6 +33,7 @@ export default function ProjectCard(props) {
   return (
     <Card
       sx={{ width: 300, height: 185, margin: 2, backgroundColor: "#d9d9d9" }}
+      className={props.className}
     >
       <CardHeader
         avatar={
