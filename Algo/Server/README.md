@@ -29,6 +29,9 @@ python -m venv venv
   ```
 
 4. Install the project dependencies
+```
+pip install django djangorestframework networkx matplotlib
+```
 5. To start the Django server, use the following command:
 ```
 python manage.py runserver
