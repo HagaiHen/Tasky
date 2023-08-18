@@ -13,6 +13,8 @@ import ProgChart from "./profileProgChart";
 import EventOps from "@/components/EventOps/EventOps";
 import ProfileScheduler from "./profileScheduler";
 import { styled } from '@mui/material/styles';
+import Joyride from 'react-joyride';
+
 
 
 
@@ -73,6 +75,26 @@ const ProfilePage = (props) => {
   };
 
 console.log("TASKS", tasks);
+
+const [steps] = useState([
+  {
+    target: ".first-component", 
+    content: "Welcome to your happy place! 🌟 Customize your profile to reflect your unique style and make task management a joyous journey. Let's sprinkle some personality onto your oasis!",
+    title:"Personalize Your Task Oasis!!"
+  },
+  {
+    target: ".progChart-component", 
+    content: "Step into the world of colorful accomplishments! 🎨 Your progress chart is a canvas of success. Watch as tasks transform through different shades, reflecting their stages of completion",
+    title:"Colors of Achievement!"
+  },
+  {
+    target: ".Assignments-component", 
+    content: "Transform your ideas into achievements! 🌟 Your personal assignments are the bridge between dreams and reality. Nurture them with care and watch as they blossom into completed tasks!",
+    title:"From Ideas to Accomplishments!"
+  },
+]);
+
+
 return(
 <Container>
   <LeftContainer>
@@ -86,8 +108,16 @@ return(
         marginTop: "2vh"   // Adjust margin as needed
       }}
     >
+      {props.isOnboarding && (
+          <Joyride
+            steps={steps}
+            continuous={true}
+            showProgress={true}
+            showSkipButton={true}
+          />
+        )}
       <div style={{ position: "relative" }}>
-        <Avatar sx={{ width: 150, height: 150 }} />
+        <Avatar className="first-component"  sx={{ width: 150, height: 150 }} />
         <EditIcon
           sx={{
             position: "absolute",
@@ -149,12 +179,14 @@ return(
 <RightContainer>
   <FullContainer>
 <ProgChart 
+            className="progChart-component"
             uid={uid}
             tasks={tasks}
           />
           <TaskContainer> 
             <ProfileTextTitle>Personal Assignments</ProfileTextTitle>
             <ProfileScheduler 
+            className="Assignments-component"
             date={new Date()}
             uid={uid}
             events={events}

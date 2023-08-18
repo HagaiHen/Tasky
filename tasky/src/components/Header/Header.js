@@ -85,7 +85,7 @@ const NavHeader = (props) => {
             case "Backlog":
               return <Backlog isOnboarding={isOnboarding} user={props.user}/>;
             case "Profile":
-              return <ProfilePage user={props.user}/>
+              return <ProfilePage isOnboarding={isOnboarding} user={props.user}/>
             case "Settings":
               return <h1>Settings Page</h1>;
             default:

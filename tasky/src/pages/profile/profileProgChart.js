@@ -61,7 +61,7 @@ const ProgChart = (params) => {
   const chartData = data;
 
   return (
-    <CalContainer>
+    <CalContainer className={params.className}>
         <Chart data={chartData}>
           <PieSeries valueField="area" argumentField="country" />
             <ProfileTextTitle>Progress Chart</ProfileTextTitle>
