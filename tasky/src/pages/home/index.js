@@ -4,6 +4,8 @@ import ProjectCard from "../../components/ProjectCard/projectCard";
 import NewProjectCard from "../../components/ProjectCard/newProjectCard";
 import { getAllProjectsByUserId } from "../../controller/ProjectController";
 import CreateProjectModal from "../../components/ProjectModal/projectModal";
+import Joyride from 'react-joyride';
+
 
 const HomePage = (props) => {
 
@@ -21,16 +23,42 @@ const HomePage = (props) => {
     });
   }, [isOpen]);
 
+  const [steps] = useState([
+    {
+      target: ".start-component", 
+      content: "Welcome to your Home Page! This is your starting point to the app. you want to create / delete  and mennage your project? No problem! you can do it all from here!",
+      title:"This title is pretty self explained, don't you think?"
+    },
+    {
+      target: ".createProject-component", 
+      content: "Here In this create bottom you will be able to ... CREATE BOTTOM! Let's put the joke aside, by clicking on the above button the project creation window will open for you - you will choose a name for the project, you will be able to associate employees with it and many other spectacular options... try me!",
+      title:"Let's Create a Project!"
+    },
+    {
+      target: ".existingProjects-component", 
+      content: "You want to mennage them.. Go ahead! it is all yours!",
+      title:"Existing projects!"
+    },
+  ]);
+
   return (
     <div style={{ paddingTop: 20 }}>
+      {props.isOnboarding && (
+          <Joyride
+            steps={steps}
+            continuous={true}
+            showProgress={true}
+            showSkipButton={true}
+          />
+        )}
       <CreateProjectModal isOpen={isOpen} toggleModal={toggleModal} user={props.user}/>
-      <TitleContainer>
+      <TitleContainer className="start-component">
         <h1>Your recent projects</h1>
       </TitleContainer>
       <RecentProjectsContainer>
-        <NewProjectCard setOpen={toggleModal}/>
+        <NewProjectCard classNameCRT="createProject-component"  setOpen={toggleModal}/>
         {projects.map((project) => (
-          <ProjectCard key={project.projectId} project={project} />
+          <ProjectCard className="existingProjects-component" key={project.projectId} project={project} />
         ))}
       </RecentProjectsContainer>
     </div>

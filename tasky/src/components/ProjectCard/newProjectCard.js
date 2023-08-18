@@ -20,8 +20,8 @@ export default function NewProjectCard(props) {
             objectFit: 'cover', // Make the image cover the entire area
           }}
         />
-        <CardContent sx={contentStyles}>
-          <Typography variant="h6" gutterBottom>
+        <CardContent sx={contentStyles} >
+          <Typography className={props.classNameCRT} variant="h6" gutterBottom>
             Create a Project
           </Typography>     
             <div style={{ flex: 1 }} />
