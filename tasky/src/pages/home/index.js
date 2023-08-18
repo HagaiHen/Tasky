@@ -21,6 +21,10 @@ const HomePage = (props) => {
     });
   }, [isOpen]);
 
+  const hideProject = (projectId) => {
+    setProjects(projects.filter((project) => project.projectId !== projectId));
+  };
+
   const [steps] = useState([
     {
       target: ".start-component",
@@ -71,6 +75,7 @@ const HomePage = (props) => {
             project={project}
             setBacklogProject={props.setBacklogProject}
             handleNav={props.handleNav}
+            hideProject={hideProject}
           />
         )) : <div/>}
       </RecentProjectsContainer>

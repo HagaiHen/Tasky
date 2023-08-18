@@ -3,8 +3,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CustomDiv } from "./styles";
-import { CardHeader, CardMedia, Avatar, IconButton, CardActionArea } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { CardHeader, CardMedia, Avatar, CardActionArea } from "@mui/material";
+import CardOptions from "./cardOptions";
 import { getUser } from '../../controller/UserController' 
 
 
@@ -22,6 +22,10 @@ export default function ProjectCard(props) {
     props.handleNav("Backlog");
   };
 
+  const hide = () => {
+    props.hideProject(props.project.projectId);
+  };
+
   return (
     <Card
       sx={{ width: 300, height: 185, margin: 2, backgroundColor: "#d9d9d9" }}
@@ -34,9 +38,7 @@ export default function ProjectCard(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="project-settings" >
-            <MoreVertIcon />
-          </IconButton>
+          <CardOptions hide={hide}/>
         }
         title="last updated:"
         subheader={props.project.recentChange}
