@@ -81,32 +81,32 @@ const NavHeader = (props) => {
           <DDMenu setActivePage={setActivePage} />
         </NavItem>
       </HeaderContainer>
-      {(() => {
-        switch (activePage) {
-          case "Home":
-            return (
-              <Home
-                isOnboarding={isOnboarding}
-                user={props.user}
-                setBacklogProject={setBacklogProject}
-                handleNav={handleNavigation}
-                handleIsOnboarding={handleIsOnboarding}
-              />
-            );
-          case "Calendar":
-            return (
-              <CalendarPage isOnboarding={isOnboarding} user={props.user} />
-            );
-          case "Backlog":
-            return <Backlog isOnboarding={isOnboarding} user={props.user} project={backlogProject} />;
-          case "Profile":
-            return <ProfilePage user={props.user} />;
-          case "Settings":
-            return <h1>Settings Page</h1>;
-          default:
-            return <Home />;
-        }
-      })()}
+        {(() => {
+          switch (activePage) {
+            case "Home":
+              return (
+                <Home
+                  isOnboarding={isOnboarding}
+                  user={props.user}
+                  setBacklogProject={setBacklogProject}
+                  handleNav={handleNavigation}
+                  handleIsOnboarding={handleIsOnboarding}
+                />
+              );
+            case "Calendar":
+              return (
+                <CalendarPage isOnboarding={isOnboarding} user={props.user} />
+              );
+            case "Backlog":
+              return <Backlog isOnboarding={isOnboarding} user={props.user}/>;
+            case "Profile":
+              return <ProfilePage isOnboarding={isOnboarding} user={props.user}/>
+            case "Settings":
+              return <h1>Settings Page</h1>;
+            default:
+              return <Home />;
+          }
+        })()}
     </Container>
   );
 };
