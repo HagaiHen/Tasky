@@ -58,7 +58,6 @@ const NavHeader = (props) => {
             height={58}
             src="./Logo.svg"
             style={{ marginLeft: "15px", marginTop: "1.2%", cursor: "pointer" }}
-            // redirect to https://github.com/HagaiHen/Final-Project
             onClick={() =>
               window.open("https://github.com/HagaiHen/Final-Project", "_blank")
             }
@@ -98,7 +97,7 @@ const NavHeader = (props) => {
                 <CalendarPage isOnboarding={isOnboarding} user={props.user} />
               );
             case "Backlog":
-              return <Backlog isOnboarding={isOnboarding} user={props.user}/>;
+              return <Backlog isOnboarding={isOnboarding} user={props.user} project={backlogProject} />;
             case "Profile":
               return <ProfilePage isOnboarding={isOnboarding} user={props.user}/>
             case "Settings":
