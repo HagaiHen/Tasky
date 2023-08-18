@@ -17,24 +17,25 @@ import TitleInput from "../DescriptionInput/TitleInput";
 import Project from "../../model/project";
 import ContactMultiSelect from "../ContactListSearch/ContactMultiSelect";
 import { ContactsContextProvider } from "../ContactListSearch/ContactsContext";
-import { addUsersToProject, createProject } from "../../controller/ProjectController";
+import {
+  addUsersToProject,
+  createProject,
+} from "../../controller/ProjectController";
 
 export default function CreateProjectModal(props) {
-  const isOpen = props.isOpen
+  const isOpen = props.isOpen;
   const [project, setproject] = useState(new Project());
   const [approveColor, setApproveColor] = useState("red");
   const [selectedTeam, setselectedTeam] = useState([]);
 
-  const saveProjectHandler = async () =>  {
+  const saveProjectHandler = async () => {
     if (project.name.length > 0) {
       project.teamLeaderUid = props.user.uid;
       const projectId = await createProject(project);
       project.projectId = projectId;
-      addUsersToProject(project.projectId, selectedTeam);
-      // TODO: Save project to DB and render Home page or open backlog of the project
+      await addUsersToProject(project.projectId, selectedTeam);
       props.toggleModal();
-    }
-    else {
+    } else {
       alert("You have to enter a project name");
     }
   };
@@ -64,8 +65,7 @@ export default function CreateProjectModal(props) {
                 setproject(project);
                 if (project.name.length > 0) {
                   setApproveColor("green");
-                }
-                else {
+                } else {
                   setApproveColor("red");
                 }
               }}
@@ -73,12 +73,14 @@ export default function CreateProjectModal(props) {
             />
           </TitleInputContainer>
           <ContactsContextProvider>
-          <ContactMultiSelect
-            selectedValues={selectedTeam}
-            setSelectedValues={setselectedTeam}
-           />
+            <ContactMultiSelect
+              selectedValues={selectedTeam}
+              setSelectedValues={setselectedTeam}
+            />
           </ContactsContextProvider>
-          <div style={{ display: "flex", flexDirection: "row", marginTop: '6rem' }}>
+          <div
+            style={{ display: "flex", flexDirection: "row", marginTop: "6rem" }}
+          >
             <SaveProjectButton
               color={approveColor}
               onClick={saveProjectHandler} // TODO: save project

@@ -25,3 +25,14 @@ export const AVATAR_URLS = [
   'https://img.freepik.com/premium-vector/woman-avatar-profile-round-icon_24640-14047.jpg',
   'https://img.freepik.com/premium-vector/man-avatar-profile-round-icon_24640-14046.jpg'  
 ];
+
+export const MALE_AVATAR_URLS = [
+  'https://img.freepik.com/premium-vector/man-avatar-profile-round-icon_24640-14044.jpg',
+  'https://img.freepik.com/premium-vector/man-avatar-profile-round-icon_24640-14049.jpg',
+  'https://img.freepik.com/premium-vector/man-avatar-profile-round-icon_24640-14046.jpg'  
+];
+
+export const FEMALE_AVATAR_URLS = [
+  'https://img.freepik.com/premium-vector/woman-avatar-profile-round-icon_24640-14042.jpg',
+  'https://img.freepik.com/premium-vector/woman-avatar-profile-round-icon_24640-14047.jpg',
+]

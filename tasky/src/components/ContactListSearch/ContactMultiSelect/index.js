@@ -70,7 +70,7 @@ const ContactMultiSelect = (props) => {
         size="large"
       >
         {filteredContacts.map((user) => (
-          <Option key={user.uid} value={user.firstName + " " + user.lastName}>
+          <Option key={user.uid} value={user.email}>
             <Contact key={user.uid} user={user} />
           </Option>
         ))}
