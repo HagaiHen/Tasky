@@ -3,22 +3,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CustomDiv } from "./styles";
-import { CardHeader, CardMedia, Avatar, IconButton } from "@mui/material";
+import { CardHeader, CardMedia, Avatar, IconButton, CardActionArea } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { getUser } from '../../controller/UserController' 
-
-const dates = [
-  "September 14, 2016",
-  "March 5, 2020",
-  "June 20, 2019",
-  "December 2, 2018",
-  "August 10, 2015",
-  "January 30, 2017",
-  "November 8, 2022",
-  "April 18, 2014",
-  "July 25, 2021",
-  "October 12, 2013",
-];
 
 
 export default function ProjectCard(props) {
@@ -29,6 +16,11 @@ export default function ProjectCard(props) {
       setTeamLeader(user);
     });
   }, []);
+
+  const handleClick = () => {
+    props.setBacklogProject(props.project);
+    props.handleNav("Backlog");
+  };
 
   return (
     <Card
@@ -55,6 +47,7 @@ export default function ProjectCard(props) {
         image="/static/images/cards/paella.jpg"
         alt=""
       />
+      <CardActionArea onClick={handleClick}>
       <CardContent>
         <Typography variant="h5" component="div">
           {props.project.name}
@@ -68,6 +61,7 @@ export default function ProjectCard(props) {
           </Typography>
         </CustomDiv>
       </CardContent>
+      </CardActionArea>
     </Card>
   );
 }

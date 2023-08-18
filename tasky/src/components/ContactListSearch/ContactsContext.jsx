@@ -6,12 +6,16 @@ import { set } from 'date-fns';
 
 export const ContactsContext = createContext({});
 
-export function ContactsContextProvider({ children }) {
+export function ContactsContextProvider({ children, myuid }) {
     const [contacts, setContacts] = useState([]);
     const [search , setSearch] = useState("");
 
     async function loadSavedContacts() {
-        setContacts(await getAllUsers());
+        const users = await getAllUsers();
+        const newContacts = users.filter((item) => {
+            return item.uid !== myuid
+        });
+        setContacts(newContacts);
     }
 
     useEffect(() => {
@@ -27,7 +31,7 @@ export function ContactsContextProvider({ children }) {
 
     function deleteContact(contactId) {
         const newContacts = contacts.filter((item) => {
-        return item.id !== contactId
+        return item.uid !== contactId
         });
         setContacts(newContacts);
     }
@@ -50,5 +54,5 @@ export function ContactsContextProvider({ children }) {
 
 export function useContacts() {
     const context = useContext(ContactsContext);
-    return context
+    return context;
 }

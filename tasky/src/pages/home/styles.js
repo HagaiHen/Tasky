@@ -17,3 +17,9 @@ export const TitleContainer = styled.div`
   font-family: sans-serif;
   margin-right: 50%;
 `;
+
+export const Title = styled.h1`
+  margin-top: 1%;
+  margin-left: 20px;
+  font-family: sans-serif;
+`;

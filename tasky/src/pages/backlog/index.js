@@ -7,7 +7,7 @@ import { getAllProjectsByUserId } from "@/controller/ProjectController";
 
 const Backlog = (props) => {
   const [selectedSprint, setSelectedSprint] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(props.project? props.project : null);
   const [userProjects, setUserProjects] = useState([]);
 
   useEffect(() => {

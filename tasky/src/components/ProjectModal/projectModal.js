@@ -72,7 +72,7 @@ export default function CreateProjectModal(props) {
               isProject={true}
             />
           </TitleInputContainer>
-          <ContactsContextProvider>
+          <ContactsContextProvider myuid={props.user.uid}>
             <ContactMultiSelect
               selectedValues={selectedTeam}
               setSelectedValues={setselectedTeam}
