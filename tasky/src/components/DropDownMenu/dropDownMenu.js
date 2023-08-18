@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { DropDownContainer, ParamType } from "./styles";
 import { getUsersOfProject } from "@/controller/ProjectController";
+import { getAllSprints } from "@/controller/SprintController";
 
 const DropDownMenu = (props) => {
+  // console.log("props", props);
   const [assignees, setAssignees] = useState([]);
+  const [sprints, setSprints] = useState([]);
   const statusOptions = [
     { value: 0, label: "TO DO" },
     { value: 1, label: "SELECTED FOR DEVELOPMENT" },
@@ -23,6 +26,23 @@ const DropDownMenu = (props) => {
     };
     getAssignees();
   }, [props.projectId]);
+
+    useEffect(() => {
+    const getSprints = async () => {
+      if (!props.projectId) {
+        return;
+      }
+      const sprintslist = await getAllSprints(props.projectId);
+      const sprints = sprintslist.map(sprint => ({
+        value: sprint.sprintId,
+        label: sprint.sprintNumber === 0 ? "Backlog" : sprint.sprintNumber
+      }));
+      setSprints(sprints);
+      console.log("mapped2", sprints);
+    };
+    getSprints();getListOptions();
+  }, [props.projectId]);
+
   const getListOptions = () => {
     if (!props.title) {
       return [
@@ -36,7 +56,12 @@ const DropDownMenu = (props) => {
     }
     switch (props.title) {
       case "Assignee":
+        console.log("assignee2", assignees)
         return assignees;
+      case "Sprints":
+        console.log("sprints2", sprints);
+        return sprints;
+
       default:
         return [
           { value: 1, label: "1" },

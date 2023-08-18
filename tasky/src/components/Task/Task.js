@@ -16,6 +16,7 @@ import { getUser } from "@/controller/UserController";
 import {statusOptions} from "../../model/task";
 
 const Task = (props) => {
+  console.log("props task",props)
   const [isOpen, setIsOpen] = useState(false);
   const [assigneeName, setAssigneeName] = useState("");
   useEffect(()=>{

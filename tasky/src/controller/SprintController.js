@@ -9,7 +9,7 @@ export const createSprint = async (sprint) => {
 };
 
 export const getSprint = async (sprintId) => {
-  const sprint = await postMessage(`/sprint/getSprint/${sprintId}`).catch((err) => {
+  const sprint = await getMessage(`/sprint/getSprint/${sprintId}`).catch((err) => {
     alert("couldnt get sprint" + err.message);
     return false;
   });
