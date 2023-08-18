@@ -23,6 +23,7 @@ const ProfilePage = (props) => {
   const [events, setEvents] = useState([]);
   const [tasks , setTasks ] = useState([]);
   const uid = props.user.uid;
+  console.log("props", props);
   const [render, reRender] = useState(false);
   const [user, setUser] = useState(false);
   const [editMode, setEditMode] = useState(false); // Add this state
@@ -38,6 +39,7 @@ const ProfilePage = (props) => {
         const response = await getMessage(`event/getAllEventsByUID/${uid}`);
         const responseTasks = await getMessage(`task/getTaskByUid/${uid}`);
         console.log("responseTasks", responseTasks);
+        console.log("uid", uid);
         const currUser = await getUser(uid);
         console.log("currUser", currUser);
 

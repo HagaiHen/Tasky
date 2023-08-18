@@ -6,6 +6,7 @@ import Tasks from "@/components/Tasks/Tasks";
 import { getAllProjectsByUserId } from "@/controller/ProjectController";
 
 const Backlog = (props) => {
+  console.log("uid", props.user.uid);
   const [selectedSprint, setSelectedSprint] = useState(null);
   const [selectedProject, setSelectedProject] = useState(props.project? props.project : null);
   const [userProjects, setUserProjects] = useState([]);

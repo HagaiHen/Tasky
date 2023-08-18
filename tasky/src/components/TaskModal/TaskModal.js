@@ -28,9 +28,12 @@ import { createTask, updateTask } from "@/controller/TaskController";
 import Task from "@/model/task";
 import { getUser } from "@/controller/UserController";
 import {statusOptions} from "@/model/task";
+import { getSprint } from "@/controller/SprintController";
+
 
 
 const TaskModal = (props) => {
+  console.log("props7", props);
   const [params, setParams] = useState(
     props.task
       ? props.task.toJSON()
@@ -73,6 +76,7 @@ const TaskModal = (props) => {
   }, [props.project]);
   
   const [assignee, setAssignee] = useState({});
+  const [sprint, setSprint] = useState({});
   
   useEffect(() => {
     const getAssignee = async () => {
@@ -80,14 +84,51 @@ const TaskModal = (props) => {
         return;
       }
       const assignee = props.task.assigneeId;
+      const sprintId = props.task.sprintId;
       if (!assignee) {
         return;
       }
       const user = await getUser(assignee);
       setAssignee({ label: user.firstName, value: assignee });
+      const sprint = await getSprint(sprintId);
+      setSprint({ label: sprint.sprintNumber === 0 ? "Backlog" : sprint.sprintNumber, value: sprint.sprintId });
     };
     getAssignee();
   }, [props.task]);
+
+  // useEffect(() => {
+  //   const getSprint = async () => {
+  //     if (!props.task) {
+  //       return;
+  //     }
+  //     const sprintId = props.task.sprintId;
+  //     if (!sprintId) {
+  //       return;
+  //     }
+  //     const sprint = await getSprint(sprintId);
+  //     setSprint(sprint);
+  //     console.log("sprint:", sprint);
+  //   };
+  //   getSprint();
+  // }, [props.project]);
+
+  // useEffect(() => {
+  //   const getSprints = async () => {
+  //     if (!props.project) {
+  //       return;
+  //     }
+  //     const sprintslist = await getAllSprints(props.project.projectId);
+  //     const mappedSprints = sprintslist.map(sprint => ({
+  //       value: sprint.sprintId,
+  //       label: sprint.sprintNumber === 0 ? "Backlog" : sprint.sprintNumber
+  //     }));
+  //     setSprints(mappedSprints);
+  //     console.log("mapped2", sprints);
+  //   };
+  //   getSprints();
+  // }, [props.task]);
+
+
 
   const onCreateTask = async () => {
     const task = Task.fromJSON(params);
@@ -145,9 +186,20 @@ const TaskModal = (props) => {
               setParams({ ...params, description: e.target.value });
             }}
           />
-          <div style={{ overflow: "auto", height: "350px", width: "100%" }}>
-            <Comments />
-          </div>
+
+          <ProgressContainer color={props.priority}>
+            <ProgressTitle>SPRINT</ProgressTitle>
+            <ParamLine color={props.priority} />
+            <DropDownMenu
+              onChange={(option) => {
+                setParams({ ...params, sprintId: option.value });
+              }}
+              defaultValue={sprint} 
+              title="Sprints"
+              projectId={props.project?.projectId}
+            />
+          </ProgressContainer>
+
           <div style={{ display: "flex", flexDirection: "row" }}>
             <SaveTaskButton
               color={props.priority}
