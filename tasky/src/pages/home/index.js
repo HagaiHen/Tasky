@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { RecentProjectsContainer, TitleContainer, Title } from "./styles";
+import { RecentProjectsContainer, TitleContainer, Title, ContactContainer } from "./styles";
 import ProjectCard from "../../components/ProjectCard/projectCard";
 import NewProjectCard from "../../components/ProjectCard/newProjectCard";
 import { getAllProjectsByUserId } from "../../controller/ProjectController";
 import CreateProjectModal from "../../components/ProjectModal/projectModal";
+import ContactsList from "../../components/ContactListSearch/index" 
 import Joyride from "react-joyride";
 
 const HomePage = (props) => {
@@ -79,6 +80,13 @@ const HomePage = (props) => {
           />
         )) : <div/>}
       </RecentProjectsContainer>
+      <TitleContainer className="start-component">
+        <Title>Contacts</Title>
+      </TitleContainer>
+      <div style={{height: 20}}/>
+      <ContactContainer>
+      <ContactsList uid={props.user.uid}/>
+      </ContactContainer>
     </div>
   );
 };
