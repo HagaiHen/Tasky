@@ -45,7 +45,7 @@ const DropdownListItem = styled.div`
   text-align: center;
 `;
 
-function ProjectDropdown({ projects, onSelect ,className}) {
+function ProjectDropdown({ projects, onSelect ,className, project}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -54,6 +54,10 @@ function ProjectDropdown({ projects, onSelect ,className}) {
     setIsOpen(false);
     onSelect(project);
   };
+
+  if (project && project !== selectedProject) {
+    handleSelect(project);
+  }
 
   return (
     <DropdownContainer className={className}>

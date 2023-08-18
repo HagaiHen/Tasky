@@ -53,6 +53,7 @@ export const SprintHeaderContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 5px;
   align-items: center;
+  padding-top: 10px;
 `

@@ -51,6 +51,7 @@
     "react-datepicker": "^4.16.0",
     "react-firebase-hooks": "^5.1.1",
     "react-form-stepper": "^2.0.3",
+    "react-icons": "^4.10.1",
     "styled-react-modal": "^3.0.1"
   }
 }
