@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { RecentProjectsContainer, TitleContainer, Title, ContactContainer, VectorContainer } from "./styles";
+import {
+  RecentProjectsContainer,
+  TitleContainer,
+  Title,
+  ContactContainer,
+} from "./styles";
 import ProjectCard from "../../components/ProjectCard/projectCard";
 import NewProjectCard from "../../components/ProjectCard/newProjectCard";
 import { getAllProjectsByUserId } from "../../controller/ProjectController";
 import CreateProjectModal from "../../components/ProjectModal/projectModal";
-import ContactsList from "../../components/ContactListSearch/index" 
+import ContactsList from "../../components/ContactListSearch/index";
 import Joyride from "react-joyride";
+import BackgroundImage from "../../../public/background2.svg";
+import Image from "next/image";
 
 const HomePage = (props) => {
   const [isOpen, setOpen] = useState(false);
@@ -47,48 +54,70 @@ const HomePage = (props) => {
   ]);
 
   return (
-    <div style={{
-      paddingTop: 20,
-    }}>
-      {props.isOnboarding && (
-        <Joyride
-          steps={steps}
-          continuous={true}
-          showProgress={true}
-          showSkipButton={true}
+    <div>
+      <div
+        style={{
+          position: "fixed",
+          bottom: "8%",
+          right: '32%',
+          width: "70%",
+          height: "50%",
+        }}
+      >
+        <Image
+          src={BackgroundImage}
+          alt="Background Image"
         />
-      )}
-      <CreateProjectModal
-        isOpen={isOpen}
-        toggleModal={toggleModal}
-        user={props.user}
-      />
-      <TitleContainer className="start-component">
-        <Title>Recent projects</Title>
-      </TitleContainer>
-      <RecentProjectsContainer>
-        <NewProjectCard
-          classNameCRT="createProject-component"
-          setOpen={toggleModal}
-        />
-        {projects.length > 0 ? projects.map((project) => (
-          <ProjectCard
-            className="existingProjects-component"
-            key={project.projectId}
-            project={project}
-            setBacklogProject={props.setBacklogProject}
-            handleNav={props.handleNav}
-            hideProject={hideProject}
+      </div>
+      <div
+        style={{
+          paddingTop: 20,
+        }}
+      >
+        {props.isOnboarding && (
+          <Joyride
+            steps={steps}
+            continuous={true}
+            showProgress={true}
+            showSkipButton={true}
           />
-        )) : <div/>}
-      </RecentProjectsContainer>
-      <TitleContainer className="start-component">
-        <Title>Contacts</Title>
-      </TitleContainer>
-      <div style={{height: 20}}/>
-      <ContactContainer>
-      <ContactsList uid={props.user.uid}/>
-      </ContactContainer>
+        )}
+        <CreateProjectModal
+          isOpen={isOpen}
+          toggleModal={toggleModal}
+          user={props.user}
+        />
+        <TitleContainer className="start-component">
+          <Title>Recent projects</Title>
+        </TitleContainer>
+        <RecentProjectsContainer>
+          <NewProjectCard
+            classNameCRT="createProject-component"
+            setOpen={toggleModal}
+          />
+          {projects.length > 0 ? (
+            projects.map((project) => (
+              <ProjectCard
+                className="existingProjects-component"
+                key={project.projectId}
+                project={project}
+                setBacklogProject={props.setBacklogProject}
+                handleNav={props.handleNav}
+                hideProject={hideProject}
+              />
+            ))
+          ) : (
+            <div />
+          )}
+        </RecentProjectsContainer>
+        <TitleContainer className="start-component">
+          <Title>Contacts</Title>
+        </TitleContainer>
+        <div style={{ height: 15 }} />
+        <ContactContainer>
+          <ContactsList uid={props.user.uid} />
+        </ContactContainer>
+      </div>
     </div>
   );
 };

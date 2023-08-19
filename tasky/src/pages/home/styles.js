@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const RecentProjectsContainer = styled.div`
-  background-color: #4b4747;
   width: 100%;
   height: 45%;
   overflow-x: auto; /* Use "auto" instead of "scroll" for auto-scroll behavior */
@@ -25,7 +24,6 @@ export const Title = styled.h1`
 `;
 
 export const ContactContainer = styled.div`
-  background-color: #4b4747;
   width: 100%;
   height: 100%;
   overflow-x: auto; /* Use "auto" instead of "scroll" for auto-scroll behavior */
@@ -36,12 +34,9 @@ export const ContactContainer = styled.div`
   padding-left: 5rem;
 `;
 
-
-export const VectorContainer = styled.div`
-  width: 50%;
-  height: 100%;
-  overflow-x: auto; /* Use "auto" instead of "scroll" for auto-scroll behavior */
-  scroll-behavior: smooth;
-  display: grid;
-  justify-content: end;
+export const BackgroundContainer = styled.div`
+  background: ${(props) => props.imageUrl} right center / auto 80%
+    no-repeat; /* Zoom and position */
+  width: 100vw;
+  height: 100vh;
 `;
