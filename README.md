@@ -18,6 +18,10 @@ In addition, we wanted the possibility of easy communication between the project
 The coolest part of creating the above application was when we started using it ourselves for the purpose of streamlining construction and managing our events and tasks. While moving, we formed a QA mechanism ourselves in that any problem that one of us experienced while using the application ourselves, he immediately documented the malfunction and actually fixed the product during its construction.
 
 ## Our Team
+
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/790ae450-5133-4687-a205-2ad2f11bb118)
+
+
 First we chose the team members, after several years at the university you learn who you are comfortable working with, with whom you feel you can take your abilities to the limit and this is exactly the kind of team we aimed for.
 
 Of course, in order for a good team to realize its potential, it needs a good mentor. Someone the team knew they could communicate with in a way that they would understand each other and he knew how to point them in the best development direction. After three years at the university we knew exactly which lecturer we wanted to work with, and on this occasion we would like to say thank you for the help, support and guidance!
