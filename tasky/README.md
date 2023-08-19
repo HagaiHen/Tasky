@@ -44,22 +44,36 @@ Now, for more ditaled components Diagram:
 ![image](https://github.com/HagaiHen/Final-Project/assets/92790326/cfa435b7-dc93-4660-9dd0-2d3bf8edf07c)
 
 The [Homepage](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pages/home) calls some components such as:
-* [ProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard)
-* [NewProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard)
-* [CreateProjectModal](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectModal)
-* [ContactsList](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ContactListSearch)
+* [ProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard).
+* [NewProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard).
+* [CreateProjectModal](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectModal).
+* [ContactsList](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ContactListSearch).
 
 ### Calander
 ![image](https://github.com/HagaiHen/Final-Project/assets/92790326/d57dda02-a947-4709-80ca-e01a71e26587)
+
+The [Calander Page](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pages/calendar) calls some components such as:
+* [Calendar](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/Calendar).
+* [ProgChart](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProgChart).
+* [EventOps](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/EventOps).
+* [Scheduler](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/Scheduler).
+
 
 
 ### Backlog
 ![image](https://github.com/HagaiHen/Final-Project/assets/92790326/660a82b1-7334-4d60-8656-059fdf6b60f5)
 
+The [Backlog Page]() calls some components such as:
+* [SideBar](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/SideBar).
+* [Tasks](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/Tasks).
 
 ### Profile
-
 ![image](https://github.com/HagaiHen/Final-Project/assets/92790326/b4a7b97a-c84c-4c1a-8aa6-2e6af3258765)
+
+The [Profile Page](https://github.com/HagaiHen/Final-Project/blob/main/tasky/src/pages/backlog/index.js) calls some components such as:
+* [profileScheduler](https://github.com/HagaiHen/Final-Project/blob/main/tasky/src/pages/profile/profileScheduler.js#L96).
+* [ProgChart](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProgChart).
+
 
 
 
@@ -69,6 +83,7 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Good start point for react projects and ideas](https://reactjsexample.com/) - an great website for learning and developing react projects. 
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
