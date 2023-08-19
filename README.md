@@ -18,6 +18,13 @@ The goal of our project is to create a convenient platform (for companies or ind
 
 In addition, we wanted the possibility of easy communication between the project members - therefore we can create tasks for each other, associate each other with sprints and projects and a host of other features designed to increase cooperation between team members while streamlining tasks, work and overall ease of use.
 
+What sets our approach apart:
+
+1. We establish clear criteria to gauge the significance and urgency of each task.
+2. Recognizing these priorities allows for a more effective distribution of tasks among team members.
+3. Assigning specific tasks to individual team members enhances their engagement and ensures timely completion.
+4. Each member can schedule tasks on their calendar, promoting efficient time management.
+
 The coolest part of creating the above application was when we started using it ourselves for the purpose of streamlining construction and managing our events and tasks. While moving, we formed a QA mechanism ourselves in that any problem that one of us experienced while using the application ourselves, he immediately documented the malfunction and actually fixed the product during its construction.
 
 ## Our Team
