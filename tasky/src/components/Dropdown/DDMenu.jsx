@@ -24,10 +24,6 @@ const DDMenu = (props) => {
     console.log("You Pressed My Profile!");
     props.setActivePage('Profile'); // Sets the active page to 'Profile'
   }
-  const handleSettings = () =>{
-    console.log("You Pressed Settings!");
-    props.setActivePage('Settings'); // Sets the active page to 'Profile'
-  }
   const handleOtherUser = () =>{
     getAuth(app).signOut();
   }
@@ -51,12 +47,6 @@ const DDMenu = (props) => {
           onEnter = {()=>handleMyProfile()}
           >
             My Profile
-            </DropdownItem>
-          <DropdownItem
-            setActive={setActive}
-            onEnter={()=>handleSettings()}
-          >
-            Settings
           </DropdownItem>
           <DropdownItem  
             setActive={setActive}
