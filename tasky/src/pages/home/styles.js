@@ -35,3 +35,13 @@ export const ContactContainer = styled.div`
   justify-content: start;
   padding-left: 5rem;
 `;
+
+
+export const VectorContainer = styled.div`
+  width: 50%;
+  height: 100%;
+  overflow-x: auto; /* Use "auto" instead of "scroll" for auto-scroll behavior */
+  scroll-behavior: smooth;
+  display: grid;
+  justify-content: end;
+`;

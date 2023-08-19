@@ -42,6 +42,7 @@ export function ContactsContextProvider({ children, myuid }) {
 
     const filteredContacts = contacts.filter((user) => {
         const userFullName = user.firstName + " " + user.lastName;
+        console.log(search);
         return userFullName.toLowerCase().includes(search.toLowerCase());
     });
 

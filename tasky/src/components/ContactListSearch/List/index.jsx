@@ -12,7 +12,7 @@ export function List() {
     <section className={styles.container}>
         {filteredContacts.map((item)=>{
             return(
-                <Contact key={item.id} user={item} />
+                <Contact key={item.uid} user={item} />
             )
         })}
         {filteredContacts.length <= 0 && (
