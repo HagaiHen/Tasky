@@ -1,3 +1,8 @@
+# Tasky - Application
+
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/a99099e6-7f0b-42ad-a79e-3adc19c80db9)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -21,6 +26,28 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+
+## Application Structure
+
+The Controler of the pages transformation is the [Header.js](https://github.com/HagaiHen/Final-Project/blob/main/tasky/src/components/Header/Header.js), It is shows you all of the app's pages and you move from one page to another by clicking it (be aaware that by default the first page is the [Homepage](https://github.com/HagaiHen/Final-Project/blob/main/tasky/src/pages/home/index.js)).<br/>
+
+ The following is a structure diagram for the Website pages shift from the header:<br/>
+
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/d5139186-af49-4d78-b2ce-6f04bf7489be)
+
+<br/>
+
+Now, for more ditaled components Diagram:
+
+### Home
+
+### Calander
+
+### Backlog
+
+### Profile
+
 
 ## Learn More
 
