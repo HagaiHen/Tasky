@@ -41,6 +41,8 @@ The Controler of the pages transformation is the [Header.js](https://github.com/
 Now, for more ditaled components Diagram:
 
 ### Home
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/cfa435b7-dc93-4660-9dd0-2d3bf8edf07c)
+
 The [Homepage](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pages/home) calls some components such as:
 * [ProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard)
 * [NewProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard)
@@ -48,10 +50,17 @@ The [Homepage](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pag
 * [ContactsList](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ContactListSearch)
 
 ### Calander
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/d57dda02-a947-4709-80ca-e01a71e26587)
+
 
 ### Backlog
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/660a82b1-7334-4d60-8656-059fdf6b60f5)
+
 
 ### Profile
+
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/b4a7b97a-c84c-4c1a-8aa6-2e6af3258765)
+
 
 
 ## Learn More
