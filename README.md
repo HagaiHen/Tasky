@@ -13,14 +13,16 @@ On this note, we want to express our gratitude and appreciation towards the univ
 
 The goal of our project is to create a convenient platform (for companies or individuals) for managing tasks and events, but unlike the platforms that exist in the market today (for example Jira, Monday and more...) we aimed for the application to manage the tasks itself - that is, for each task we create, define the effort required, the business value and several other parameters, and when we want to choose which task to do now - the application will define for us the order of what should be done when.
 
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/0a74f5fa-6390-4a9e-95dc-d64e6b7e84c1)
+
+
 In addition, we wanted the possibility of easy communication between the project members - therefore we can create tasks for each other, associate each other with sprints and projects and a host of other features designed to increase cooperation between team members while streamlining tasks, work and overall ease of use.
 
 The coolest part of creating the above application was when we started using it ourselves for the purpose of streamlining construction and managing our events and tasks. While moving, we formed a QA mechanism ourselves in that any problem that one of us experienced while using the application ourselves, he immediately documented the malfunction and actually fixed the product during its construction.
 
 ## Our Team
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/790ae450-5133-4687-a205-2ad2f11bb118)
-
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/5960c402-7ff8-4f01-9019-9a563d5f3712)
 
 First we chose the team members, after several years at the university you learn who you are comfortable working with, with whom you feel you can take your abilities to the limit and this is exactly the kind of team we aimed for.
 
@@ -35,9 +37,8 @@ Of course, in order for a good team to realize its potential, it needs a good me
 3. [Bar Goldenberg](https://github.com/bargoldenberg) <br>
 4. [Elad Sezenayev](https://github.com/eladsez)
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/5960c402-7ff8-4f01-9019-9a563d5f3712)
 
-
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/790ae450-5133-4687-a205-2ad2f11bb118)
 
 ## Project Structure
 
