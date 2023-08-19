@@ -2,14 +2,18 @@ import { Contact } from "../Contact";
 import styles from "./list.module.scss";
 import { FaSadTear } from "react-icons/fa";
 import { useContacts } from "../ContactsContext";
+import { ListContainer } from "./styles";
 import { useState } from "react";
+
+
+// scrollable list container
 
 
 export function List() {
   const { search, onChangeSearch, filteredContacts } = useContacts();
 
   return (
-    <section className={styles.container}>
+    <ListContainer>
         {filteredContacts.map((item)=>{
             return(
                 <Contact key={item.uid} user={item} />
@@ -33,6 +37,6 @@ export function List() {
                 </div>
             </div>
         )}
-    </section>
+    </ListContainer>
     );
 }

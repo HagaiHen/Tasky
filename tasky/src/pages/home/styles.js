@@ -32,6 +32,7 @@ export const ContactContainer = styled.div`
   grid-auto-flow: column; /* Make it flow horizontally */
   justify-content: start;
   padding-left: 5rem;
+  zIndex: 5;
 `;
 
 export const BackgroundContainer = styled.div`

@@ -6,7 +6,7 @@ class Project {
     this.name = name;
     this.taskNum = taskNum;
     this.backlogId = backlogId;
-    this.recentChange = moment().format('YYYY-MM-DD HH:mm:ss');
+    this.recentChange = recentChange;
     this.sprintNum = sprintNum;
     this.teamLeaderUid = teamLeaderUid;
   }

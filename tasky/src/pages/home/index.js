@@ -54,7 +54,7 @@ const HomePage = (props) => {
   ]);
 
   return (
-    <div>
+    <div style={{zIndex: 1}}>
       <div
         style={{
           position: "fixed",
@@ -62,6 +62,7 @@ const HomePage = (props) => {
           right: '32%',
           width: "70%",
           height: "50%",
+          zIndex: -1,
         }}
       >
         <Image
