@@ -36,6 +36,15 @@ Of course, in order for a good team to realize its potential, it needs a good me
 
 
 ## Project Structure
+
+In order to create a better separation, possibility of maintenance and maintain scalability. We designed the project so that it can be divided into five layers, each independent and able to be handled and maintained by itself:
+1. The client's browser.
+2. The application server.
+3. API server.
+4. Firebase server.
+5. Algorithm server.
+
+   
 There are three milestones where the project passes:
 1. [Application server (Node JS & React)](https://github.com/HagaiHen/Final-Project/tree/main/tasky).
 2. [Node JS API server for communication with Firebase](https://github.com/SappirBo/Tasky-API-Server).
