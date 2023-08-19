@@ -25,6 +25,9 @@ What sets our approach apart:
 3. Assigning specific tasks to individual team members enhances their engagement and ensures timely completion.
 4. Each member can schedule tasks on their calendar, promoting efficient time management.
 
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/09975e02-e7dd-48bf-a353-eca031156dd9)
+
+
 The coolest part of creating the above application was when we started using it ourselves for the purpose of streamlining construction and managing our events and tasks. While moving, we formed a QA mechanism ourselves in that any problem that one of us experienced while using the application ourselves, he immediately documented the malfunction and actually fixed the product during its construction.
 
 ## Our Team
