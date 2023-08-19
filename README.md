@@ -61,6 +61,9 @@ There are three milestones where the project passes:
 
 
 ## How To Run Instructions  
+
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/fe92a17d-9315-4fd7-bdea-82eff9c6ce62)
+
 Instructions on how to start the development server is in the README inside of the tasky folder.
 
 
