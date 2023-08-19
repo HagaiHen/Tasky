@@ -8,6 +8,7 @@ export function ContactsList(props) {
     <ContactsContextProvider myuid={props.uid}>
       <main>
         <Search />
+        <div style={{ height: 5 }} />
         <List />
       </main>
     </ContactsContextProvider>
