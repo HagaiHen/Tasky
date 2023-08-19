@@ -1,6 +1,6 @@
 # Tasky - Final Project
 
-<img src="https://github.com/HagaiHen/Final-Project/blob/main/Logo.jpeg">
+![image](https://github.com/HagaiHen/Final-Project/assets/92790326/a99099e6-7f0b-42ad-a79e-3adc19c80db9)
 
 ## Project Overview
 As part of our degree in computer science and mathematics at Ariel University, we were asked to initiate, plan and create a graduation project which, on the one hand, would express our abilities that we have gained during our years of study and on the other hand, would bring with it a fragrance of innovation, conceptuality and interest.<br/> 
