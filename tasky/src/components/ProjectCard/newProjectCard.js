@@ -21,14 +21,9 @@ export default function NewProjectCard(props) {
           }}
         />
         <CardContent sx={contentStyles} >
-          <Typography className={props.classNameCRT} variant="h6" gutterBottom>
+          <Typography className={props.classNameCRT} variant="h6" fontWeight="bold" gutterBottom>
             Create a Project
           </Typography>     
-            <div style={{ flex: 1 }} />
-          <Typography variant="body2">
-            Looking to start a new project or join an existing one?
-            Click the button below to get started.
-          </Typography>
           <CustomDiv>
             {/* You can add buttons for 'Create Project' and 'Join Project' actions */}
           </CustomDiv>

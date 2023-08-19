@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RecentProjectsContainer, TitleContainer, Title, ContactContainer } from "./styles";
+import { RecentProjectsContainer, TitleContainer, Title, ContactContainer, VectorContainer } from "./styles";
 import ProjectCard from "../../components/ProjectCard/projectCard";
 import NewProjectCard from "../../components/ProjectCard/newProjectCard";
 import { getAllProjectsByUserId } from "../../controller/ProjectController";
@@ -47,7 +47,9 @@ const HomePage = (props) => {
   ]);
 
   return (
-    <div style={{ paddingTop: 20 }}>
+    <div style={{
+      paddingTop: 20,
+    }}>
       {props.isOnboarding && (
         <Joyride
           steps={steps}
@@ -90,5 +92,4 @@ const HomePage = (props) => {
     </div>
   );
 };
-
 export default HomePage;

@@ -15,6 +15,7 @@ import TaskModal from "../TaskModal/TaskModal";
 import { getAllTasks, getSortedList } from "@/controller/TaskController";
 import ProjectDropdown from "../ProjectDropdown/ProjectDropdown";
 import ErrorModal from "../ErrorModal/ErrorModal";
+import { ta } from "date-fns/locale";
 
 const getPriority = (task) => {
   const fib = [0, 2, 3, 5, 8, 13];
@@ -119,8 +120,10 @@ const Tasks = (props) => {
       setTasks(
         tasks.filter(
           (task) =>
-            task.description.includes(event.target.value) ||
-            task.description.toLowerCase().includes(event.target.value)
+            task.description.toLowerCase().includes(event.target.value.toLowerCase()) || 
+            task.title.toLowerCase().includes(event.target.value.toLowerCase()) ||
+            task.taskNum == event.target.value
+
         )
       );
     }
