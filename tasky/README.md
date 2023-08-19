@@ -41,6 +41,11 @@ The Controler of the pages transformation is the [Header.js](https://github.com/
 Now, for more ditaled components Diagram:
 
 ### Home
+The [Homepage](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pages/home) calls some components such as:
+* [ProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard)
+* [NewProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard)
+* [CreateProjectModal](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectModal)
+* [ContactsList](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ContactListSearch)
 
 ### Calander
 
