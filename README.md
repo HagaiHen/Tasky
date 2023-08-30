@@ -1,6 +1,7 @@
 # Tasky - Final Project
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/a99099e6-7f0b-42ad-a79e-3adc19c80db9)
+![1](https://github.com/HagaiHen/Final-Project/assets/76903853/5b37c1e2-559b-46d2-a4af-ec5d070b11ed)
+
 
 ## Project Overview
 As part of our degree in computer science and mathematics at Ariel University, we were asked to initiate, plan and create a graduation project which, on the one hand, would express our abilities that we have gained during our years of study and on the other hand, would bring with it a fragrance of innovation, conceptuality and interest.<br/> 
@@ -8,12 +9,12 @@ As part of our degree in computer science and mathematics at Ariel University, w
 On this note, we want to express our gratitude and appreciation towards the university for the tools and values it has given us.
 
 ## Tasky Overview
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/78191ae6-22aa-4974-b119-5f895d59dc1d)
+![2](https://github.com/HagaiHen/Final-Project/assets/76903853/424d1434-65c3-4bd9-a3f1-f9d80463ede0)
 
 
 The goal of our project is to create a convenient platform (for companies or individuals) for managing tasks and events, but unlike the platforms that exist in the market today (for example Jira, Monday and more...) we aimed for the application to manage the tasks itself - that is, for each task we create, define the effort required, the business value and several other parameters, and when we want to choose which task to do now - the application will define for us the order of what should be done when.
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/0a74f5fa-6390-4a9e-95dc-d64e6b7e84c1)
+![3](https://github.com/HagaiHen/Final-Project/assets/76903853/8435b430-243b-4a0e-97fa-771aa32828a3)
 
 
 In addition, we wanted the possibility of easy communication between the project members - therefore we can create tasks for each other, associate each other with sprints and projects and a host of other features designed to increase cooperation between team members while streamlining tasks, work and overall ease of use.
@@ -25,14 +26,14 @@ What sets our approach apart:
 3. Assigning specific tasks to individual team members enhances their engagement and ensures timely completion.
 4. Each member can schedule tasks on their calendar, promoting efficient time management.
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/09975e02-e7dd-48bf-a353-eca031156dd9)
+![4](https://github.com/HagaiHen/Final-Project/assets/76903853/706975af-ee02-4c6e-b490-955b9d5e3cd9)
 
 
 The coolest part of creating the above application was when we started using it ourselves for the purpose of streamlining construction and managing our events and tasks. While moving, we formed a QA mechanism ourselves in that any problem that one of us experienced while using the application ourselves, he immediately documented the malfunction and actually fixed the product during its construction.
 
 ## Our Team
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/5960c402-7ff8-4f01-9019-9a563d5f3712)
+![5](https://github.com/HagaiHen/Final-Project/assets/76903853/a599116d-83e9-4e36-8860-164115c9d7a9)
 
 First we chose the team members, after several years at the university you learn who you are comfortable working with, with whom you feel you can take your abilities to the limit and this is exactly the kind of team we aimed for.
 
@@ -48,7 +49,7 @@ Of course, in order for a good team to realize its potential, it needs a good me
 4. [Elad Sezenayev](https://github.com/eladsez)
 
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/790ae450-5133-4687-a205-2ad2f11bb118)
+![6](https://github.com/HagaiHen/Final-Project/assets/76903853/4b070ce4-b4ae-4b09-ba2b-6f98fef4c3c4)
 
 ## Project Structure
 
@@ -65,14 +66,14 @@ There are three milestones where the project passes:
 2. [Node JS API server for communication with Firebase](https://github.com/SappirBo/Tasky-API-Server).
 3. [Algorithm server (Python & Django)](https://github.com/HagaiHen/Final-Project/tree/main/Algo/Server).
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/60f607f1-7248-4d1f-84af-a198553b3d3b)
+![7](https://github.com/HagaiHen/Final-Project/assets/76903853/dbe10681-92ab-4927-9bd1-804e47e215b6)
 
 
 
 
 ## How To Run Instructions  
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/fe92a17d-9315-4fd7-bdea-82eff9c6ce62)
+![13](https://github.com/HagaiHen/Final-Project/assets/76903853/e29dd789-14f7-4d6f-9c0c-754590f505e1)
 
 Instructions on how to start the development server is in the README inside of the tasky folder.
 
