@@ -1,6 +1,6 @@
 # Tasky - Final Project
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/a99099e6-7f0b-42ad-a79e-3adc19c80db9)
+![image]([https://github.com/HagaiHen/Final-Project/assets/92790326/a99099e6-7f0b-42ad-a79e-3adc19c80db9](https://github-production-user-asset-6210df.s3.amazonaws.com/92790326/261790167-a99099e6-7f0b-42ad-a79e-3adc19c80db9.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230830T084214Z&X-Amz-Expires=300&X-Amz-Signature=a9bfae2eabe5deed390c81bfcebd33ef38c1bb6956e57084ab99246a80917645&X-Amz-SignedHeaders=host&actor_id=76903853&key_id=0&repo_id=586463530))
 
 ## Project Overview
 As part of our degree in computer science and mathematics at Ariel University, we were asked to initiate, plan and create a graduation project which, on the one hand, would express our abilities that we have gained during our years of study and on the other hand, would bring with it a fragrance of innovation, conceptuality and interest.<br/> 
