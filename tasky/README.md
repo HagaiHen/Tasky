@@ -1,6 +1,6 @@
 # Tasky - Application
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/a99099e6-7f0b-42ad-a79e-3adc19c80db9)
+![9](https://github.com/HagaiHen/Final-Project/assets/76903853/294035bf-e899-4ac1-b2c9-fd66ea3d24a5)
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -34,14 +34,14 @@ The Controler of the pages transformation is the [Header.js](https://github.com/
 
  The following is a structure diagram for the Website pages shift from the header:<br/>
 
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/d5139186-af49-4d78-b2ce-6f04bf7489be)
+![10](https://github.com/HagaiHen/Final-Project/assets/76903853/4caf25e0-d04b-4957-8699-83b80701e0ec)
 
 <br/>
 
 Now, for more ditaled components Diagram:
 
 ### Home
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/cfa435b7-dc93-4660-9dd0-2d3bf8edf07c)
+![11](https://github.com/HagaiHen/Final-Project/assets/76903853/b1232273-bf10-4542-baf7-5ee9d9697822)
 
 The [Homepage](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pages/home) calls some components such as:
 * [ProjectCard](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ProjectCard).
@@ -50,7 +50,7 @@ The [Homepage](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pag
 * [ContactsList](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/ContactListSearch).
 
 ### Calander
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/d57dda02-a947-4709-80ca-e01a71e26587)
+![12](https://github.com/HagaiHen/Final-Project/assets/76903853/ec5675c3-5e16-4a46-b076-01e8ad043b61)
 
 The [Calander Page](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/pages/calendar) calls some components such as:
 * [Calendar](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/Calendar).
@@ -61,14 +61,14 @@ The [Calander Page](https://github.com/HagaiHen/Final-Project/tree/main/tasky/sr
 
 
 ### Backlog
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/660a82b1-7334-4d60-8656-059fdf6b60f5)
+![13](https://github.com/HagaiHen/Final-Project/assets/76903853/667e557d-2a38-469d-b7bb-38d843204ac8)
 
 The [Backlog Page]() calls some components such as:
 * [SideBar](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/SideBar).
 * [Tasks](https://github.com/HagaiHen/Final-Project/tree/main/tasky/src/components/Tasks).
 
 ### Profile
-![image](https://github.com/HagaiHen/Final-Project/assets/92790326/b4a7b97a-c84c-4c1a-8aa6-2e6af3258765)
+![14](https://github.com/HagaiHen/Final-Project/assets/76903853/51386b41-ed4e-46b4-80ec-2f3c3f8cd997)
 
 The [Profile Page](https://github.com/HagaiHen/Final-Project/blob/main/tasky/src/pages/backlog/index.js) calls some components such as:
 * [profileScheduler](https://github.com/HagaiHen/Final-Project/blob/main/tasky/src/pages/profile/profileScheduler.js#L96).
