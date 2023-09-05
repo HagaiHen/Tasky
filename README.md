@@ -1,4 +1,4 @@
-# Tasky - Final Project
+# Tasky
 
 ![1](https://github.com/HagaiHen/Final-Project/assets/76903853/5b37c1e2-559b-46d2-a4af-ec5d070b11ed)
 
